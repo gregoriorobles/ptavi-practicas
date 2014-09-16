@@ -1,0 +1,152 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{amssymb} % Simbolos matematicos
+
+\newcommand{\finejercicio}{
+  \begin{footnotesize}
+    [Al terminar el ejercicio es recomendable hacer \texttt{commit} de los ficheros modificados]
+  \end{footnotesize}
+}
+
+\newcommand{\finpractica}{
+  \begin{footnotesize}
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+  \end{footnotesize}
+}
+
+\renewcommand{\finejercicio}{
+}
+
+
+\renewcommand{\finpractica}{
+}
+
+
+\ProcessOptions
+
+\begin{document}
+
+
+\title{Práctica 2 - Python avanzado}
+\author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
+\date{Versión 5.1 – 17.9.2014}
+
+
+\maketitle
+
+
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide y el seguimiento de la guía de estilo de Python.
+
+\section{Introducción}
+
+La programación orientada a objetos en un paradigma de programación muy utilizado en la actualidad y que conviene conocer para la realización de las prácticas de la asignatura. En esta práctica se pretenden ver los conceptos más importantes de este paradigma, implementando funcionalidad en Python.
+
+%Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitHub es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
+
+\section{Objetivos de la práctica}
+
+\begin{itemize}
+  \item Conocer y practicar la programación orientada a objetos (con conceptos como clase, objeto, herencia, instanciación).
+  \item Usar varios módulos Python, importando funcionalidad creada en otros módulos.
+  \item Conocer y seguir la guía de estilo de programación recomendada para Python.
+%  \item Utilizar el sistema de control de versiones git en GitHub.
+\end{itemize}
+
+\section{Conocimientos previos necesarios}
+
+\begin{enumerate}
+  \item Nociones de Python (las de la primera práctica)
+\end{enumerate}
+
+Tiempo estimado: 10 horas
+
+\section{Ejercicios}
+
+\begin{enumerate}
+
+  \item Crea en tu \texttt{home} en el laboratorio un directorio \texttt{ptavi} y dentro del mismo un subdirectorio \texttt{prac2}. Lo puedes hacer desde la \texttt{shell} siguiendo las siguientes instrucciones:
+%una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, crea un repositorio llamado \texttt{ptavi} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+
+%FIXME: Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio.  
+   \begin{verbatim}
+		$ mkdir -p ~/ptavi/prac2
+		$ cd ~/ptavi/prac2
+   \end{verbatim}
+%	Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando según vayas realizando los ejercicios a continuación. Recuerda que al final del todo tendrás que sincronizar también el repositorio en GitHub (con \texttt{push}).
+
+
+  \item Crea en el archivo \texttt{calc.py} un programa en Python que implemente una calculadora sencilla que permita sumar y restar. El programa deberá:
+  \begin{itemize}
+    \item Ser llamado de la siguiente manera por línea de instrucciones (shell):
+    \begin{verbatim}
+    $ python calc.py operando1 operación operando2
+    \end{verbatim}
+donde operación podrá ser \texttt{suma} o \texttt{resta}. Para tomar los parámetros del programa, se podrá hacer uso del módulo sys (\texttt{import sys}), en particular de la lista \texttt{sys.argv}. Se comprobará que los parámetros que el usuario pasa son numéricos (\texttt{integer} o \texttt{float}), imprimiendo \texttt{Error: Non numerical parameters} por pantalla en caso contrario.
+    \item Tener dos funciones (métodos): \texttt{sumar} y \texttt{restar}.
+    \item Imprimir el resultado por pantalla.
+  \end{itemize}
+
+
+\finejercicio
+
+  \item Crea en el archivo \texttt{calcoo.py} un programa Python que implemente la misma funcionalidad (y se ejecute de la misma manera) que \texttt{calc.py}, pero orientada a objetos. Para tal fin, crea un clase \texttt{Calculadora} (las mayúsculas son importantes), que tenga los métodos suma y resta (suma y resta han de devolver el resultado, pero no imprimirlo por pantalla). A su vez, el programa principal deberá tomar los parámetros que el usuario ha dado en la línea de comandos (con \texttt{sys.argv}), instanciar un objeto de la clase Calculadora, y llamar al método correspondiente e imprimir por pantalla el resultado.
+
+\finejercicio
+
+  \item Crea en el archivo \texttt{calcoohija.py} un programa Python que además de la misma funcionalidad de \texttt{calcoo.py}, pueda multiplicar y dividir. Para tal fin, crea un clase \texttt{CalculadoraHija} (las mayúsculas son importantes) que herede de \texttt{Calculadora}, y que además tenga los métodos multiplicar y dividir. En el caso de dividir, ha de capturar la excepción si \texttt{operando2} es cero, imprimiendo el mensaje de error por pantalla \texttt{Division by zero is not allowed}.
+El programa será llamado de la siguiente manera por línea de instrucciones (shell):
+    \begin{verbatim}
+    $ python calcoohija.py operando1 operación operando2
+    \end{verbatim}
+donde operación podrá ser \texttt{suma}, \texttt{resta}, \texttt{multiplica} o \texttt{divide}.
+
+\finejercicio
+
+  \item Crea el archivo \texttt{calcplus.py} que será llamado de la siguiente manera por línea de instrucciones (shell):
+    \begin{verbatim}
+    $ python calcplus.py fichero
+    \end{verbatim}
+donde fichero será un fichero de texto posiblemente multilínea con formato \texttt{CSV} (\texttt{comma-separated-value}), esto es, cada línea del mismo tendrá la siguiente forma:
+    \begin{verbatim}
+    operación,operando1,operando2,operando3,...,operandoN
+    \end{verbatim}
+
+	\texttt{calcplus.py} deberá tomar la operación línea a línea y realizarla de manera secuencial con todos los operandos, imprimiendo el resultado por pantalla. Así, para las siguientes líneas:
+    \begin{verbatim}
+    suma,1,2,3,4,5
+    resta,31,6,4,3,2,1
+    multiplica,1,3,5
+    divide,300,10,2
+    \end{verbatim}
+
+	el resultado que se imprimirá por pantalla será 15 en todos los casos. En el caso de que la operación sea de división y uno de los operandos sea cero, se imprimirá por pantalla \texttt{Division by zero is not allowed}. El fichero \texttt{calcplus.py} deberá hacer uso de la funcionalidad implementada en \texttt{calcoohija.py}.
+
+\finejercicio
+
+  \item Aunque el intérprete de Python admite ciertas libertades a la hora de programar, los programadores de Python con la finalidad de mejorar principalmente la legibilidad del código han acordado seguir una guía de estilo. Esta guía de estilo se encuentra en el \texttt{Python Enhancement Proposal 8} (PEP 8), y contiene instrucciones sobre cómo situar los espacios en blanco, cómo nombrar las variables, etc. Puedes encontrar la guía (original, en inglés, y una versión parcial en castellano) en el Moodle de la asignatura.
+
+  Existe un programa de ayuda de línea de comandos llamado \texttt{pep8} que te permite comprobar si se siguen la mayoría de las indicaciones de PEP8. Pásale la herramienta a tus programas de Python hasta que no dé ningún error.
+
+\finejercicio
+
+\finpractica
+
+\end{enumerate}
+
+\section{¿Qué deberías tener al finalizar la práctica?}
+
+La entrega de práctica se deberá hacer antes del lunes 29 de septiembre de 2014 a las 23:55. Para ello, se deberá contar a esa fecha con
+
+\begin{enumerate}
+  \item Un subdirectorio \texttt{prac2} dentro del directorio \texttt{ptavi} de tu \texttt{home} con:
+  \begin{itemize}
+    \item 4 módulos Python: calc.py, calcoo.py, calcoohija.py y calcplus.py.
+    \item 2 clases: Calculadora y CalculadoraHija.
+    \item Todo ello siguiendo la guía de estilo PEP8.
+  \end{itemize}
+\end{enumerate}
+
+\end{document}
