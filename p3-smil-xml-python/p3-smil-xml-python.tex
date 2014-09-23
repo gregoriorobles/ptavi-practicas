@@ -1,0 +1,197 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{amssymb} % Simbolos matematicos
+
+\newcommand{\finejercicio}{
+  \begin{footnotesize}
+    [Al terminar el ejercicio es recomendable hacer \texttt{commit} de los ficheros modificados]
+  \end{footnotesize}
+}
+
+\newcommand{\finpractica}{
+  \begin{footnotesize}
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+  \end{footnotesize}
+}
+
+%\renewcommand{\finejercicio}{}
+%\renewcommand{\finpractica}{}
+
+
+\ProcessOptions
+
+\begin{document}
+
+
+\title{Práctica 3 - SMIL, XML en Python (y git)}
+\author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
+\date{Versión 5.0 – 23.9.2014}
+
+
+\maketitle
+
+
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+
+\section{Introducción}
+
+Python ofrece una serie de bibliotecas para manipular ficheros en XML (como SMIL). En este ejercicio, veremos cómo utilizar la biblioteca SAX.
+
+Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitHub es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
+
+\section{Objetivos de la práctica}
+
+\begin{itemize}
+  \item Profundizar en el uso de SMIL y XML
+  \item Aprender a utilizar la biblioteca SAX para el manejo de XML, en particular con Python
+  \item Utilizar el sistema de control de versiones git en GitHub.
+\end{itemize}
+
+\section{Conocimientos previos necesarios}
+
+\begin{enumerate}
+  \item Nociones de Python (las de la primera práctica) y de orientación a objetos (la segunda práctica)
+  \item Nociones de XML y SMIL (las presentadas en clase de teoría)
+\end{enumerate}
+
+Tiempo estimado (para un alumno medio): 10 horas
+
+\section{Ejercicios}
+
+\begin{enumerate}
+
+  \item Descárgate e inspecciona el fichero \texttt{practica3-chistes.py} de Moodle. Verás que el fichero consta de tres partes:
+  \begin{itemize}
+    \item Importación de un método y una clase del módulo \texttt{xml.sax}. Nótese cómo la importación es ligeramente diferente a lo que hemos usado hasta ahora. Mediante esta forma incluimos el espacio de nombres de los módulos que importamos, por lo que no hace falta poner el nombre del módulo al llamar a las clases, métodos y variables de esos módulos que llamemos en nuestro programa.
+    \item La clase \texttt{ChistesHandler}, que hereda de la clase ContentHandler. Los métodos de esta clase serán llamados cuando se encuentre una etiqueta de inicio (\texttt{startElement}), una etiqueta de final (\texttt{endElement}) y cuando nos encontremos entre una etiqueta de inicio y final (\texttt{characters}). En este último caso, dependiendo de qué flag (\texttt{inPregunta} o \texttt{inRespuesta}) esté a uno, se irá almacenando la variable correspondiente.
+    \item Las instrucciones de ejecución: creación del \texttt{parser}, instanciación de la clase \texttt{ChistesHandler}, configuración del \texttt{parser} para que use el objeto instanciado y el parsing del fichero \texttt{chistes2.xml} que también encontrarás en Moodle.
+  \end{itemize}
+
+El script en Python proporcionado, una vez ha tomado el contenido de los elementos, los borra directamente. Modifícalo para que, antes de borrarlos, imprima por pantalla las preguntas, las respuestas y la calificación de cada uno de los chistes.
+
+%Nota: no hace falta incluir \texttt{practica3-chistes.py} ni \texttt{chistes2.xml} en el repositorio git, ya que este ejercicio es simplemente para familiarizarse con el uso de SAX.
+
+%\finejercicio
+
+  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, crea un repositorio llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+
+  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. 
+
+  Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando según vayas realizando los ejercicios a continuación. Recuerda que al final del todo tendrás que sincronizar también el repositorio en GitHub (con \texttt{push}).
+
+%\finejercicio
+
+  \item En el fichero \texttt{smallsmilhandler.py}, crea una clase llamada \texttt{SmallSMILHandler} que herede de la clase \texttt{ContentHandler}. Las etiquetas SMIL que deberá reconocer nuestra clase son las siguientes (se enumera junto con las etiquetas los atributos que se han de tener también en cuenta):
+  \begin{itemize}
+    \item root-layout (width, height, background-color)
+    \item region (id, top, bottom, left, right)
+    \item img (src, region, begin, dur)
+    \item audio (src, begin, dur)
+    \item textstream (src, region)
+  \end{itemize}
+	La clase \texttt{SmallSMILHandler} deberá tener, además, un método llamado \texttt{get\_tags} que devolverá una lista con las etiquetas encontradas, sus atributos y el contenido de los atributos. Piensa bien cómo ha de ser esta lista  - nótese que el orden de las etiquetas es importante y se ha de preservar, pero no es necesario que sea así con los atributos.
+	Una vez hayas acabado con este ejercicio, no olvides hacer \texttt{commit} del fichero \texttt{smallsmilhandler.py}.
+
+\finejercicio
+
+  \item Crea un programa principal, llamado \texttt{karaoke.py}, que haga uso de la clase \texttt{SmallSMILHandler}. Este programa deberá:
+  \begin{itemize}
+    \item Leer el fichero SMIL \texttt{karaoke.smil} que se puede encontrar en Moodle.
+    \item Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores ('\t') y sin espacios antes y después del signo igual, tal y como se muestra a continuación:
+\begin{verbatim}
+		Elemento1	Atributo11="Valor11"	 	Atributo12="Valor12"	...
+		Elemento2	Atributo21="Valor21"		Atributo22="Valor22"	...
+		…
+\end{verbatim}
+	Se valorará que la salida del programa siga al pie de la letra lo indicado. En la versión final a entregar, por tanto, no imprimas mensajes de trazas. Ejemplo de salida correcta:
+\begin{verbatim}
+		root-layout	width= "248"		height="300" 		background-color="blue"
+ 		region		id="a" 		top="20"	left="64"
+\end{verbatim}
+  \end{itemize}
+
+\finejercicio
+
+  \item Modifica el programa principal \texttt{karaoke.py} para que, a continuación del ejercicio 4, se descargue en local el contenido multimedia si éste es remoto. Para ello, se ha de utilizar la funcionalidad de la biblioteca \texttt{os}\footnote{La documentación en línea del módulo \texttt{os} de Python se encuentra en \url{http://docs.python.org/library/os.html}. Pierde unos minutos echándole un ojo, es una inversión para el futuro.}, que permite hacer llamadas a la \texttt{shell}, para hacer uso de la instrucción \texttt{wget}.
+   Para descargarnos por ejemplo \url{http://gsyc.es/logo.gif} procederíamos de la siguiente manera:
+\begin{verbatim}
+recurso = "http://gsyc.es/logo.gif"
+os.system("wget -q " + recurso)
+\end{verbatim}
+	Debido a la opción -q, \texttt{wget} no imprimirá por pantalla mensajes (ni siquiera de error).
+	Modifica el valor del atributo si el recurso es remoto indicando el nombre en local (lo que viene después de la última barra de la URL). Así, para \url{http://gsyc.es/logo.gif} ahora será \texttt{logo.gif}.
+
+
+\finejercicio
+
+  \item Modifica el programa principal \texttt{karaoke.py} para que toda la funcionalidad descrita en los ejercicios 4, 5 y 6 sea orientada a objetos, específicamente en una clase llamada \texttt{KaraokeLocal}. Esta clase deberá tener los siguientes métodos:
+  \begin{itemize}
+    \item Constructor: se le pasará como parámetro el fichero fuente SMIL que el usuario introduce por vía de comandos.  El constructor parseará el fichero SMIL y obtendrá las etiquetas (mediante \texttt{get\_tags} del objeto de tipo \texttt{SmallSMILHandler}).
+    \item \texttt{print\_list}, que imprimirá una lista (véase ejercicio 4).
+    \item \texttt{do\_local}, que incluya la funcionalidad para descargar los recursos remotos (véase ejercicio 5).
+  \end{itemize}
+
+  El programa principal, que vendrá al final del fichero con una sentencia \texttt{"\_\_main\_\_"},  solamente constará de lo siguiente:
+  \begin{itemize}
+    \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 6). 
+    \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}, y se llamará a sus métodos \texttt{print\_list}, \texttt{do\_local} y otra vez \texttt{print\_list}.
+   \end{itemize}
+Nótese que el programa sólo deberá imprimir por pantalla mediante el método \texttt{print\_list} y en las llamadas a \texttt{wget} en \texttt{do\_local}. El resto del programa, al entregar la práctica, no debería contener más prints.
+
+Modifica el programa principal \texttt{karaoke.py} para que permita al usuario indicar como argumento del programa el fichero SMIL fuente (que posiblemente contenga referencias a recursos remotos). La invocación del programa deberá ser de esta manera (¡\texttt{fichero\_fuente.smil} es un parámetro!):
+\begin{verbatim}
+$ python karaoke.py fichero_fuente.smil
+\end{verbatim}
+	En el caso de que el usuario no incluya los parámetros suficientes, el programa devolverá:
+\begin{verbatim}
+	      Usage: python karaoke.py src_file.smil
+\end{verbatim}
+		Una vez hayas acabado con este ejercicio, no olvides hacer add y commit del fichero \texttt{karaoke.py}.
+
+\finejercicio
+
+\finpractica
+
+\end{enumerate}
+
+\section{¿Qué deberías tener al finalizar la práctica?}
+
+La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a las 23:55. Para ello, se deberá contar a esa fecha con
+
+\begin{enumerate}
+  \item Un repositorio git con:
+  \begin{itemize}
+    \item 2 módulos Python (y únicamente estos dos ficheros):
+    \begin{itemize}
+      \item \texttt{smallsmilhandler.py}
+      \item \texttt{karaoke.py}
+    \end{itemize}
+    \item 2 clases:
+    \begin{itemize}
+      \item \texttt{SmallSMILHandler} (en \texttt{smallsmilhandler.py})
+      \item \texttt{KaraokeLocal} (en \texttt{karaoke.py})
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+Un repositorio git en GitHub. Se valorará que al menos haya seis commits realizados.
+
+Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr3.py que se puede encontrar en el Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+\begin{verbatim}
+	$ python check-pr3.py repo_git
+\end{verbatim}
+
+donde \texttt{repo\_git} es la dirección del repositorio de tu práctica en GitHub. El programa comprueba que se han entegrado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. Si la entrega se ha hecho correctamente, por pantalla aparecerá el siguiente mensaje:
+
+\begin{verbatim}
+Parece que la entrega se ha realizado bien. 
+
+La salida de pep8 es:
+\end{verbatim}
+
+Nota: si se pasa todos los tests de pep8, no se mostrará ninguna línea adicional; en caso contrario, se mostrarán los mensajes de error de pep8 correspondientes.
+
+\end{document}
