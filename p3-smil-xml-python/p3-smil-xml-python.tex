@@ -28,7 +28,7 @@
 
 \title{Práctica 3 - SMIL, XML en Python (y git)}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.01 – 2.10.2014}
+\date{Versión 5.02 – 2.10.2014}
 
 
 \maketitle
@@ -72,11 +72,14 @@ Tiempo estimado (para un alumno medio): 10 horas
 
 El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los elementos, los borra directamente. Modifícalo para que, antes de borrarlos, imprima por pantalla las preguntas, las respuestas y la calificación de cada uno de los chistes.
 
-%Nota: no hace falta incluir \texttt{practica3-chistes.py} ni \texttt{chistes2.xml} en el repositorio git, ya que este ejercicio es simplemente para familiarizarse con el uso de SAX.
+  \begin{footnotesize}
+    [No hace falta incluir \texttt{practica3-chistes.py} ni \texttt{chistes2.xml} en la entrega, ya que este ejercicio es simplemente para familiarizarse con el uso de SAX.]
+  \end{footnotesize}
+
 
 %\finejercicio
 
-  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, crea un repositorio llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub''.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
 
   Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. 
 
@@ -98,18 +101,23 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
   \item Crea un programa principal, llamado \texttt{karaoke.py}, que haga uso de la clase \texttt{SmallSMILHandler}. Este programa deberá:
   \begin{itemize}
-    \item Leer el fichero SMIL \texttt{karaoke.smil} que se puede encontrar en Moodle.
-    \item Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación:
+    \item Leer un fichero SMIL que se pase por línea de comandos. En caso de que no se especifique un fichero, muestre el error por pantalla \texttt{Usage: python karaoke.py file.smil}. 
+
+  Para realizar pruebas, se puede utilizar el fichero \texttt{karaoke.smil} que se puede encontrar en Moodle.
+
+    \item FIXME Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación:
 \begin{verbatim}
 		Elemento1	Atributo11="Valor11"	 	Atributo12="Valor12"	...
 		Elemento2	Atributo21="Valor21"		Atributo22="Valor22"	...
 		…
 \end{verbatim}
-	Se valorará que la salida del programa siga al pie de la letra lo indicado. En la versión final a entregar, por tanto, no imprimas mensajes de trazas. Ejemplo de salida correcta:
+	FIXME Se valorará que la salida del programa siga al pie de la letra lo indicado. En la versión final a entregar, por tanto, no imprimas mensajes de trazas. Ejemplo de salida correcta:
 \begin{verbatim}
 		root-layout	width= "248"		height="300" 		background-color="blue"
  		region		id="a" 		top="20"	left="64"
 \end{verbatim}
+
+
   \end{itemize}
 
 \finejercicio
@@ -135,19 +143,10 @@ os.system("wget -q " + recurso)
 
   El programa principal, que vendrá al final del fichero con una sentencia \texttt{"\_\_main\_\_"},  solamente constará de lo siguiente:
   \begin{itemize}
-    \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 5). 
+    \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 4). 
     \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}, y se llamará a sus métodos \texttt{print\_list}, \texttt{do\_local} y otra vez \texttt{print\_list}.
    \end{itemize}
-Nótese que el programa sólo deberá imprimir por pantalla mediante el método \texttt{print\_list} y en las llamadas a \texttt{wget} en \texttt{do\_local}. El resto del programa, al entregar la práctica, no debería contener más prints.
-
-Modifica el programa principal \texttt{karaoke.py} para que permita al usuario indicar como argumento del programa el fichero SMIL fuente (que posiblemente contenga referencias a recursos remotos). La invocación del programa deberá ser de esta manera\footnote{Date cuenta de que \texttt{fichero\_fuente.smil} es un parámetro que se ha de pasar por línea de comandos.}:
-\begin{verbatim}
-$ python karaoke.py fichero_fuente.smil
-\end{verbatim}
-	En el caso de que el usuario no incluya los parámetros suficientes, el programa devolverá:
-\begin{verbatim}
-	      Usage: python karaoke.py src_file.smil
-\end{verbatim}
+Nótese que el programa sólo deberá imprimir por pantalla mediante el método \texttt{print\_list} y en las llamadas a \texttt{wget} en \texttt{do\_local}. El resto del programa, al entregar la práctica, no ha de contener más \emph{prints}.
 
 \finejercicio
 
@@ -157,10 +156,11 @@ $ python karaoke.py fichero_fuente.smil
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a las 23:55. Para ello, se deberá contar a esa fecha con:
+La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
-  \item Un repositorio git en GitHub con:
+  \item Haber indicado en el Moodle cuál es tu nombre de usuario en GitHub.
+  \item Tener un repositorio git en GitHub con:
   \begin{itemize}
     \item 2 módulos Python (y únicamente estos dos ficheros):
     \begin{itemize}
@@ -177,7 +177,7 @@ La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a
 
 Se valorará que al menos haya seis commits realizados.
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr3.py que se puede encontrar en el Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr3.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
 	$ python check-pr3.py repo_git
 \end{verbatim}
