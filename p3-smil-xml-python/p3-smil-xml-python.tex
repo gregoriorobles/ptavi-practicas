@@ -28,7 +28,7 @@
 
 \title{Práctica 3 - SMIL, XML en Python (y git)}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.02 – 2.10.2014}
+\date{Versión 5.03 – 2.10.2014}
 
 
 \maketitle
@@ -66,7 +66,7 @@ Tiempo estimado (para un alumno medio): 10 horas
   \item Descárgate e inspecciona el fichero \texttt{practica3-chistes.py} de Moodle. Verás que el fichero consta de tres partes:
   \begin{itemize}
     \item Importación de un método y una clase del módulo \texttt{xml.sax}. Nótese cómo la importación es ligeramente diferente a lo que hemos usado hasta ahora. Mediante esta forma incluimos el espacio de nombres de los módulos que importamos, por lo que no hace falta poner el nombre del módulo al llamar en nuestro programa a las clases, métodos y variables de esos módulos.
-    \item La clase \texttt{ChistesHandler}, que hereda de la clase ContentHandler. Los métodos de esta clase son eventos que el \emph{parser} lanza cuando se encuentre una etiqueta de inicio (\texttt{startElement}), una etiqueta de final (\texttt{endElement}) o entre una etiqueta de inicio y final (\texttt{characters}). En este último caso, dependiendo de qué flag (\texttt{inPregunta} o \texttt{inRespuesta}) esté a uno, se irá almacenando el contenido en la variable correspondiente.
+    \item La clase \texttt{ChistesHandler}, que hereda de la clase ContentHandler. Los métodos de esta clase son eventos que el \emph{parser} lanza cuando se encuentre una etiqueta de inicio (\texttt{startElement}), una etiqueta de final (\texttt{endElement}) o entre una etiqueta de inicio y final (\texttt{characters}). En este último caso, dependiendo de qué \emph{flag} (\texttt{inPregunta} o \texttt{inRespuesta}) esté a uno, se irá almacenando el contenido en la variable correspondiente.
     \item Las instrucciones de ejecución: creación del \texttt{parser}, instanciación de la clase \texttt{ChistesHandler}, configuración del \texttt{parser} para que use \texttt{ChistesHandler} como manejador, y el \emph{parsing} del fichero \texttt{chistes2.xml} (fichero que también encontrarás en Moodle).
   \end{itemize}
 
@@ -79,9 +79,10 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
 %\finejercicio
 
-  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub''.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
 
-  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. 
+  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. Verás que todo repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
+y \texttt{README.md}, cuyo significado deberían haber explicado en clase.
 
   Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitHub (con \texttt{push}).
 
@@ -105,16 +106,16 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
   Para realizar pruebas, se puede utilizar el fichero \texttt{karaoke.smil} que se puede encontrar en Moodle.
 
-    \item FIXME Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación:
+    \item Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación\footnote{Fíjate en los tabuladores y los saltos de línea.}:
 \begin{verbatim}
-		Elemento1	Atributo11="Valor11"	 	Atributo12="Valor12"	...
-		Elemento2	Atributo21="Valor21"		Atributo22="Valor22"	...
+Elemento1\tAtributo11="Valor11"\tAtributo12="Valor12"\t...\n
+Elemento2\tAtributo21="Valor21"\tAtributo22="Valor22"\t...\n
 		…
 \end{verbatim}
-	FIXME Se valorará que la salida del programa siga al pie de la letra lo indicado. En la versión final a entregar, por tanto, no imprimas mensajes de trazas. Ejemplo de salida correcta:
+	Se valorará que la salida del programa siga al pie de la letra lo indicado. En la versión final a entregar, por tanto, no imprimas mensajes de trazas. Ejemplo de salida correcta:
 \begin{verbatim}
-		root-layout	width= "248"		height="300" 		background-color="blue"
- 		region		id="a" 		top="20"	left="64"
+root-layout\twidth= "248"\theight="300"\tbackground-color="blue"\n
+region\tid="a"\ttop="20"\tleft="64"\n
 \end{verbatim}
 
 
@@ -137,16 +138,16 @@ os.system("wget -q " + recurso)
   \item Modifica el programa principal \texttt{karaoke.py} para que toda la funcionalidad descrita en los ejercicios 3, 4 y 5 sea orientada a objetos, específicamente en una clase llamada \texttt{KaraokeLocal}. Esta clase deberá tener los siguientes métodos:
   \begin{itemize}
     \item Constructor: se le pasará como parámetro el fichero fuente SMIL que el usuario introduce por vía de comandos.  El constructor parseará el fichero SMIL y obtendrá las etiquetas (mediante \texttt{get\_tags} del objeto de tipo \texttt{SmallSMILHandler}).
-    \item \texttt{print\_list}, que imprimirá una lista (véase ejercicio 4).
+    \item \texttt{\_\_str\_\_}, que imprimirá una lista (como se hacía en el ejercicio 4).
     \item \texttt{do\_local}, que incluya la funcionalidad para descargar los recursos remotos (véase ejercicio 5).
   \end{itemize}
 
   El programa principal, que vendrá al final del fichero con una sentencia \texttt{"\_\_main\_\_"},  solamente constará de lo siguiente:
   \begin{itemize}
     \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 4). 
-    \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}, y se llamará a sus métodos \texttt{print\_list}, \texttt{do\_local} y otra vez \texttt{print\_list}.
+    \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}, se imprimirá, se llamará a \texttt{do\_local} y se imprimirá otra vez.
    \end{itemize}
-Nótese que el programa sólo deberá imprimir por pantalla mediante el método \texttt{print\_list} y en las llamadas a \texttt{wget} en \texttt{do\_local}. El resto del programa, al entregar la práctica, no ha de contener más \emph{prints}.
+Nótese que el programa sólo deberá imprimir por pantalla las salidas que se indican (básicamente, al hacer \emph{print} de la clase y en las llamadas a \texttt{wget} en \texttt{do\_local}). El resto del programa, al entregar la práctica, no ha de contener más \emph{prints}.
 
 \finejercicio
 
@@ -162,6 +163,7 @@ La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a
   \item Haber indicado en el Moodle cuál es tu nombre de usuario en GitHub.
   \item Tener un repositorio git en GitHub con:
   \begin{itemize}
+    \item Los ficheros \texttt{.gitignore}, \texttt{LICENSE} y \texttt{README.md} que hay en todo repositorio GitHub.
     \item 2 módulos Python (y únicamente estos dos ficheros):
     \begin{itemize}
       \item \texttt{smallsmilhandler.py}
@@ -175,21 +177,28 @@ La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a
   \end{itemize}
 \end{enumerate}
 
-Se valorará que al menos haya seis commits realizados.
+Se ha de tener en cuenta las siguientes consideraciones:
+\begin{itemize}
+  \item Se valorará que al menos haya seis commits realizados.
+  \item Se valorará que el código entregado siga la guía de estilo de Python (véase PEP8).
+  \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
+\end{itemize}
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr3.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
 	$ python check-pr3.py repo_git
 \end{verbatim}
 
-donde \texttt{repo\_git} es la dirección del repositorio de tu práctica en GitHub. El programa comprueba que se han entegrado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. Si la entrega se ha hecho correctamente, por pantalla aparecerá el siguiente mensaje:
+donde \texttt{repo\_git} es la dirección del repositorio de tu práctica en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
 
-\begin{verbatim}
-Parece que la entrega se ha realizado bien. 
+%Si la entrega se ha hecho correctamente, por pantalla aparecerá el siguiente mensaje:
 
-La salida de pep8 es:
-\end{verbatim}
+%\begin{verbatim}
+%Parece que la entrega se ha realizado bien. 
 
-Nota: si se pasa todos los tests de pep8, no se mostrará ninguna línea adicional; en caso contrario, se mostrarán los mensajes de error de pep8 correspondientes.
+%La salida de pep8 es:
+%\end{verbatim}
+
+%Nota: si se pasa todos los tests de pep8, no se mostrará ninguna línea adicional; en caso contrario, se mostrarán los mensajes de error de pep8 correspondientes.
 
 \end{document}
