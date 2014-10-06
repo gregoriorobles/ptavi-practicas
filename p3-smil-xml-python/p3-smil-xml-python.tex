@@ -28,7 +28,7 @@
 
 \title{Práctica 3 - SMIL, XML en Python (y git)}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.03 – 2.10.2014}
+\date{Versión 5.04 – 6.10.2014}
 
 
 \maketitle
@@ -79,10 +79,10 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
 %\finejercicio
 
-  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}. Al hacerlo, elige tener un README y añade un .gitignore (indica que va a ser un proyecto Python) y escoge una licencia (todas son de software libre; escoge la de Apache, por ejemplo).
 
-  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. Verás que todo repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
-y \texttt{README.md}, cuyo significado deberían haber explicado en clase.
+  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. Verás que el repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
+y \texttt{README.md}. Prueba a modificar el fichero README.md para ver los cambios en la página del repositorio en GitHub.
 
   Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitHub (con \texttt{push}).
 
@@ -96,7 +96,7 @@ y \texttt{README.md}, cuyo significado deberían haber explicado en clase.
     \item audio (src, begin, dur)
     \item textstream (src, region)
   \end{itemize}
-	La clase \texttt{SmallSMILHandler} deberá tener, además, un método llamado \texttt{get\_tags} que devolverá una lista con las etiquetas encontradas, sus atributos y el contenido de los atributos. Piensa bien cómo ha de ser esta lista  - nótese que el orden de las etiquetas es importante y se ha de preservar, pero no es necesario que sea así con los atributos.
+	La clase \texttt{SmallSMILHandler} deberá tener, además, un método llamado \texttt{get\_tags} que devolverá una lista con las etiquetas encontradas, sus atributos y el contenido de los atributos. Piensa bien cómo ha de ser esta lista  - nótese que el orden de las etiquetas es importante y se ha de preservar, pero no es necesario que sea así con los atributos. Puedes utilizar el fichero \texttt{karaoke.smil} que encontrarás en Moodle para ver qué pinta tiene un fichero en SMIL.
 
 \finejercicio
 
