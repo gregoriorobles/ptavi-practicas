@@ -1,0 +1,234 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{amssymb} % Simbolos matematicos
+
+\newcommand{\finejercicio}{
+  \begin{footnotesize}
+    [Al terminar el ejercicio es recomendable hacer \texttt{commit} de los ficheros modificados]
+  \end{footnotesize}
+}
+
+\newcommand{\finpractica}{
+  \begin{footnotesize}
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+  \end{footnotesize}
+}
+
+%\renewcommand{\finejercicio}{}
+%\renewcommand{\finpractica}{}
+
+
+\ProcessOptions
+
+\begin{document}
+
+
+\title{Práctica 4 - Python, sockets UDP y Registrar SIP}
+\author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
+\date{Versión 5.0 – 9.10.2014}
+
+
+\maketitle
+
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+
+\section{Introducción}
+
+\texttt{SocketServer}\footnote{\url{http://www.python.org/doc/2.5.2/lib/module-SocketServer.html}} es un módulo en Python que simplifica la tarea de implementar servicios en Internet. Aunque hay cuatro tipos diferentes de servidores básicos, nosotros en esta práctica utilizaremos solamente \texttt{UDPServer} que utiliza datagramas, son paquetes discretos que pueden llegar desordenados – incluso se pueden perder por el camino (nótese que esto es en contraposición con \texttt{TCPServer} que trabaja con flujos TCP). \texttt{UDPServer} trabaja de manera secuencial, lo que significa que las peticiones serán atendidas de una en una, por lo que tendrán que esperar si hay una petición en proceso.
+
+\section{Objetivos de la práctica}
+
+\begin{itemize}
+  \item Manejar SIP de manera sencilla.
+  \item Crear un esquema cliente-servidor en Python.
+\end{itemize}
+
+\section{Conocimientos previos necesarios}
+
+\begin{enumerate}
+  \item Nociones de Python (las de las primeras prácticas) y de orientación a objetos.
+  \item Nociones de SIP (las vistas en clase de teoría)
+\end{enumerate}
+
+Tiempo estimado (para un alumno medio): 10 horas
+
+\section{Ejercicios}
+
+\begin{enumerate}
+
+  \item FIXME: Fork del repositorio en GitHub.
+
+	Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
+
+
+
+  \item Estudia el código de un sencillo cliente UDP en \texttt{client.py}. Fíjate en que:
+  \begin{enumerate}
+    \item Importa el módulo \texttt{socket}.
+    \item Inicializa varias variables globales (al ser globales, están en mayúsculas).
+    \item Crea un \texttt{socket}.
+    \item Especifica opciones para el \texttt{socket}.
+    \item Se conecta con un servidor.
+    \item Envía por el \texttt{socket} con el método \texttt{send()} y lee del \texttt{socket} con \texttt{recv()}.
+    \item Al recibir con \texttt{recv()}, indicamos el valor del \emph{buffer} en bytes.
+    \item Cerramos la conexión con el método \texttt{shutdown()}.
+  \end{enumerate}
+
+
+  \item Estudia el código de \texttt{server.py}, que implementa un sencillo servidor de eco basado en UDP. Fíjate en que:
+  \begin{enumerate}
+    \item Importa el módulo \texttt{SocketServer}. Mira la documentación de Python para ver qué hace.
+    \item Tenemos una única clase que manejará las peticiones.
+    \item Esta clase hereda de una clase \texttt{DatagramRequestHandler} que hay en el módulo \texttt{Socket}.
+    \item La clase no tiene constructor \texttt{\_\_init\_\_}; utiliza el de la clase padre.
+    \item La clase sólo tiene un método, llamado \texttt{handle()}.
+    \item El método \texttt{handle()} se ejecuta cada vez que recibimos una petición al servidor.
+    \item \texttt{self.wfile} y \texttt{self.rfile} son los atributos que abstraen el \texttt{socket} (como si fuera un fichero):
+    \begin{itemize}
+      \item Podemos leer del mismo con \texttt{self.rfile.read()}.
+      \item Podemos escribir en el mismo con \texttt{self.wfile.write()}.
+    \end{itemize}
+    \item Un programa principal, donde se instancia la clase \texttt{EchoHandler}, indicando la IP y el puerto donde se deja al servidor escuchando en un bucle infinito.
+  \end{enumerate}
+
+  \item Cambia el script del cliente para que:
+  \begin{itemize}
+    \item Se le pase como parámetro al script la IP y el puerto del servidor, así como a continuación el mensaje que se ha de enviar. Así, para ejecutar el cliente, deberíamos hacer:
+    \begin{verbatim}
+	$ python client.py ip puerto linea
+    \end{verbatim}
+  Así, una llamada de ejemplo podría ser: 
+\begin{verbatim}
+python client.py 127.0.0.1 5060 eco eco, soy yo}.
+\end{verbatim}
+  \end{itemize}
+
+\finejercicio
+
+
+  \item Modifica el script del servidor para que:
+  \begin{itemize}
+    \item Imprima por pantalla y en un fichero la IP y el puerto del cliente (esta información viene en el atributo \texttt{client\_address} en forma de tupla).
+    \item Se le pase el puerto al que ha de escuchar como parámetro al script.
+  \end{itemize}
+
+\finejercicio
+
+  \item Modifica el cliente y el servidor para que el servidor sea un servidor \texttt{Registrar} SIP. Para eso, cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario. Cambia el nombre de la clase del servidor de EchoHandler a SIPRegisterHandler. La petición del cliente tendrá esta pinta:
+    \begin{verbatim}
+	REGISTER sip:luke@polismassa.com SIP/1.0\r\n\r\n
+    \end{verbatim}
+  El servidor deberá responder con un mensaje
+\begin{verbatim}
+SIP/1.0 200 OK\r\n\r\n
+\end{verbatim}
+  El cliente se deberá seguir ejecutándose desde línea de comando, ahora de la siguiente manera:
+    \begin{verbatim}
+		$ python client.py ip puerto register luke@polismassa.com
+    \end{verbatim}
+
+\finejercicio
+
+  \item Añade funcionalidad al cliente y al servidor para ofrecer la posibilidad a un usuario de darse de baja. Para ello, hay que añadir una cabecera \texttt{Expires} (cuyos valores vienen dados en segundos). En caso de que el valor de la cabecera \texttt{Expires} sea 0, el usuario será borrado del diccionario de registro; en cualquier otro caso, el valor de \texttt{Expires} dará el tiempo de expiración en el servidor. En este ejercicio no hace falta considerar  funcionalidad de servidor para cuando el registro de un cliente caduca. La petición del cliente tendrá una pinta parecida a ésta:
+  \begin{verbatim}
+REGISTER sip:luke@polismassa.com SIP/1.0\r\n
+Expires: 0\r\n\r\n
+  \end{verbatim}
+El servidor deberá borrar al usuario del diccionario y responder con un
+\begin{verbatim}
+SIP/1.0 200 OK\r\n\r\n
+\end{verbatim}
+El cliente se deberá seguir ejecutando desde línea de comando, ahora de la siguiente manera:
+\begin{verbatim}
+$ python client.py localhost 2500 register luke@polismassa.com 3600
+\end{verbatim}
+	donde 3600 es un ejemplo del tiempo de expiración y dará el valor de la cabecera \texttt{Expires}.
+En caso de que no se introduzcan los valores necesarios, se imprimirá el siguiente mensaje:
+\begin{verbatim}
+Usage: client.py ip puerto register sip_address expires_value
+\end{verbatim}
+  El servidor ha de prever que alguien se pueda dar de baja cuando su tiempo de expiración ya haya pasado; en ese caso, responderá con un 
+\begin{verbatim}
+SIP/1.0 410 Gone\r\n\r\n
+\end{verbatim}
+
+\finejercicio
+
+  \item  Modifica el servidor para añadir el método \texttt{register2file()} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.txt} lo siguiente: en una primera línea los campos separados por tabuladores, y en sucesivas líneas los valores de cada uno de los usuarios registrados, siguiendo el siguiente formato:
+\begin{verbatim}
+		User \t IP \t Expires
+		luke@polismassa.com \t localhost \t 2013-10-23 10:37:12
+		papa@darthwader.com \t localhost \t 2013-10-23 10:21:15
+\end{verbatim}
+	Para los formatos de tiempo, se recomienda utilizar el módulo time, en particular:
+\texttt{time()}, que devuelve los segundos desde el 1 de enero de 1970,
+\texttt{gmtime()}, que toma los segundos desde el 1 de enero de 1970 y te lo devuelve en una tupla,
+y \texttt{strptime()}, que representa el tiempo en un string.
+	Así, 
+
+		\texttt{time.strftime('\%Y-\%m-\%d \%H:\%M:\%S', time.gmtime(time.time()))}
+
+	devolverá un string con la hora GMT actual. Y
+
+		\texttt{time.strftime('\%Y-\%m-\%d \%H:\%M:\%S', time.gmtime(1233213))}
+
+	devolverá un string con la hora GMT del segundo 1.233.213 desde el 1 de enero de 1970.
+En este ejercicio, se ha de implementar funcionalidad para que el servidor \texttt{Registrar} gestione la caducidad de los usuarios registrados.
+
+\finejercicio
+
+  \item Realiza una captura con \texttt{wireshark} (interfaz \texttt{lo}) con las siguientes interacciones:
+  \begin{enumerate}
+    \item El cliente \texttt{marty.mcfly@sk8ing.com} se registra. Tiempo de expiración: 5.
+    \item El cliente \texttt{doc@delorean.com} se registra. Tiempo de expiración: 3600.
+    \item (Se dejan pasar unos segundos, más de cinco).
+    \item El cliente \texttt{doc@delorean.com} se da de baja.
+    \item El cliente \texttt{marty.mcfly@sk8ing.com} se da de baja.
+  \end{enumerate}
+	Investiga tu captura. Comprueba, en particular, que puedes ver el intercambio de mensajes y que todo va en texto claro por la red. Guarda la captura como \texttt{register.libpcap} y no te olvides añadir el fichero al repositorio.
+
+\finejercicio
+
+\finpractica
+
+\end{enumerate}
+
+\section{¿Qué deberías tener al finalizar la práctica?}
+
+La entrega de práctica se deberá hacer antes del lunes 27 de octubre de 2014 a las 23:55. Para entonces, se debe: 
+
+\begin{enumerate}
+  \item Tener un repositorio git en GitHub con:
+  \begin{itemize}
+    \item 2 módulos Python y la captura realizada con \texttt{wireshark} (y únicamente estos tres ficheros):
+    \begin{itemize}
+      \item \texttt{server.py}
+      \item \texttt{client.py}
+      \item \texttt{register.libpcap}
+    \end{itemize}
+    \item 1 clase \texttt{SIPRegisterHandler} (en \texttt{server.py}) con los métodos:
+    \begin{enumerate}
+      \item \texttt{handle}
+      \item \texttt{register2file}
+    \end{enumerate}
+  \end{itemize}
+\end{enumerate}
+
+Se ha de tener en cuenta las siguientes consideraciones:
+\begin{itemize}
+  \item Se valorará que al menos haya siete commits realizados.
+  \item Se valorará que el código entregado siga la guía de estilo de Python (véase PEP8).
+  \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
+\end{itemize}
+
+Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr4.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+\begin{verbatim}
+	$ python check-pr3.py repo_git
+\end{verbatim}
+
+donde \texttt{repo\_git} es la dirección del repositorio de tu práctica en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
+
+\end{document}
