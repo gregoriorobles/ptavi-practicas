@@ -28,7 +28,7 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0 – 9.10.2014}
+\date{Versión 5.0.1 – 9.10.2014}
 
 
 \maketitle
@@ -59,7 +59,7 @@ Tiempo estimado (para un alumno medio): 10 horas
 
 \begin{enumerate}
 
-  \item Con el navegador, dirígete al repositorio \texttt{ptavi-prac4} en la cuenta del progesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-prac4}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación. Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
+  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del progesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación. Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
 
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
@@ -210,7 +210,7 @@ La entrega de práctica se deberá hacer antes del lunes 27 de octubre de 2014 a
       \item \texttt{handle}
       \item \texttt{register2file}
     \end{enumerate}
-    \item 5 ficheros adicionales: README.md, LICENSE, check-prac4.py, .gitignore y .git.
+    \item 5 ficheros adicionales: README.md, LICENSE, check-p4.py, .gitignore y .git.
   \end{itemize}
 \end{enumerate}
 
@@ -221,11 +221,12 @@ Se ha de tener en cuenta las siguientes consideraciones:
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
 \end{itemize}
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa check-pr4.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+Se puede comprobar la correcta entrega de la práctica utilizando el programa check-p4.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-prac4.py repo_git
+	$ python check-p4.py login_lab
 \end{verbatim}
 
-donde \texttt{repo\_git} es la dirección del repositorio de tu práctica en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
+
+donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8.
 
 \end{document}
