@@ -59,7 +59,9 @@ Tiempo estimado (para un alumno medio): 10 horas
 
 \begin{enumerate}
 
-  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del progesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación. Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
+  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
+
+  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub, aunque si quieres que tus compañeros de equipo puedan ver el código antes, se recomienda hacerlo con anterioridad.
 
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
@@ -92,13 +94,13 @@ Tiempo estimado (para un alumno medio): 10 horas
 
   \item Cambia el script del cliente para que:
   \begin{itemize}
-    \item Se le pase como parámetro al script la IP y el puerto del servidor, así como a continuación el mensaje que se ha de enviar. Así, para ejecutar el cliente, deberíamos hacer:
+    \item Se pase como parámetro al script la IP y el puerto del servidor, así como a continuación el mensaje que se ha de enviar. Así, para ejecutar el cliente, deberíamos hacer:
     \begin{verbatim}
 	$ python client.py ip puerto linea
     \end{verbatim}
-  Así, una llamada de ejemplo podría ser: 
+  Una llamada de ejemplo podría ser: 
 \begin{verbatim}
-python client.py 127.0.0.1 5060 eco eco, soy yo}.
+python client.py 127.0.0.1 5060 eco eco, soy yo
 \end{verbatim}
   \end{itemize}
 
@@ -107,17 +109,17 @@ python client.py 127.0.0.1 5060 eco eco, soy yo}.
 
   \item Modifica el script del servidor para que:
   \begin{itemize}
-    \item Imprima por pantalla y en un fichero la IP y el puerto del cliente (esta información viene en el atributo \texttt{client\_address} en forma de tupla).
-    \item Se le pase el puerto al que ha de escuchar como parámetro al script.
+    \item Imprima por pantalla la IP y el puerto del cliente (esta información viene en el atributo \texttt{client\_address} en forma de tupla\footnote{Las tuplas son listas especiales, ya que son inmutables. Se definen con paréntesis, no con corchetes.}).
+    \item Se pase el puerto al que ha de escuchar como parámetro al script.
   \end{itemize}
 
 \finejercicio
 
-  \item Modifica el cliente y el servidor para que el servidor sea un servidor \texttt{Registrar} SIP. Para eso, cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario. Cambia el nombre de la clase del servidor de EchoHandler a SIPRegisterHandler. La petición del cliente tendrá esta pinta:
+  \item Modifica los scripts anteriores para tener un cliente que envíe mensajes de registro SIP y un servidor \texttt{Registrar} SIP. Cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario. Cambia el nombre de la clase del servidor de \texttt{EchoHandler} a \texttt{SIPRegisterHandler}. La petición SIP del cliente tendrá esta pinta:
     \begin{verbatim}
-	REGISTER sip:luke@polismassa.com SIP/1.0\r\n\r\n
+REGISTER sip:luke@polismassa.com SIP/1.0\r\n\r\n
     \end{verbatim}
-  El servidor deberá responder con un mensaje
+  El servidor deberá responder con un mensaje de este estilo:
 \begin{verbatim}
 SIP/1.0 200 OK\r\n\r\n
 \end{verbatim}
@@ -128,7 +130,7 @@ SIP/1.0 200 OK\r\n\r\n
 
 \finejercicio
 
-  \item Añade funcionalidad al cliente y al servidor para ofrecer la posibilidad a un usuario de darse de baja. Para ello, hay que añadir una cabecera \texttt{Expires} (cuyos valores vienen dados en segundos). En caso de que el valor de la cabecera \texttt{Expires} sea 0, el usuario será borrado del diccionario de registro; en cualquier otro caso, el valor de \texttt{Expires} dará el tiempo de expiración en el servidor. En este ejercicio no hace falta considerar  funcionalidad de servidor para cuando el registro de un cliente caduca. La petición del cliente tendrá una pinta parecida a ésta:
+  \item Añade funcionalidad al cliente y al servidor para ofrecer la posibilidad de darse de baja a un usuario. Para ello, hay que añadir una cabecera \texttt{Expires} (cuyos valores vienen dados en segundos). En caso de que el valor de la cabecera \texttt{Expires} sea 0, el usuario será borrado del diccionario de registro; en cualquier otro caso, siempre que el tiempo sea positivo, el valor de \texttt{Expires} será el tiempo de expiración en el servidor. En este ejercicio no hace falta considerar funcionalidad de servidor para cuando el registro de un cliente caduca. La petición del cliente tendrá una pinta parecida a ésta:
   \begin{verbatim}
 REGISTER sip:luke@polismassa.com SIP/1.0\r\n
 Expires: 0\r\n\r\n
@@ -141,7 +143,7 @@ El cliente se deberá seguir ejecutando desde línea de comando, ahora de la sig
 \begin{verbatim}
 $ python client.py localhost 2500 register luke@polismassa.com 3600
 \end{verbatim}
-	donde 3600 es un ejemplo del tiempo de expiración y dará el valor de la cabecera \texttt{Expires}.
+	donde 3600 es un ejemplo del tiempo de expiración y será el valor de la cabecera \texttt{Expires}.
 En caso de que no se introduzcan los valores necesarios, se imprimirá el siguiente mensaje:
 \begin{verbatim}
 Usage: client.py ip puerto register sip_address expires_value
@@ -153,7 +155,7 @@ SIP/1.0 410 Gone\r\n\r\n
 
 \finejercicio
 
-  \item  Modifica el servidor para añadir el método \texttt{register2file()} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.txt} lo siguiente: en una primera línea los campos separados por tabuladores, y en sucesivas líneas los valores de cada uno de los usuarios registrados, siguiendo el siguiente formato:
+  \item  Modifica el servidor para añadir el método \texttt{register2file} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.txt} lo siguiente: en una primera línea los campos separados por tabuladores, y en sucesivas líneas los valores de cada uno de los usuarios registrados, siguiendo el siguiente formato\footnote{Los espacios antes y después de los tabuladores son para mejorar la visualización del guión de prácticas, por lo que no deberían incluirse en el fichero}:
 \begin{verbatim}
 		User \t IP \t Expires
 		luke@polismassa.com \t localhost \t 2013-10-23 10:37:12
@@ -184,7 +186,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
     \item El cliente \texttt{doc@delorean.com} se da de baja.
     \item El cliente \texttt{marty.mcfly@sk8ing.com} se da de baja.
   \end{enumerate}
-	Investiga tu captura. Comprueba, en particular, que puedes ver el intercambio de mensajes y que todo va en texto claro por la red. Guarda la captura como \texttt{register.libpcap} y no te olvides añadir el fichero al repositorio.
+	Investiga tu captura. Comprueba, en particular, que puedes ver el intercambio de mensajes y que todo va en texto claro por la red. Guarda la captura como \texttt{register.libpcap} y añádela al repositorio.
 
 \finejercicio
 
@@ -210,7 +212,7 @@ La entrega de práctica se deberá hacer antes del lunes 27 de octubre de 2014 a
       \item \texttt{handle}
       \item \texttt{register2file}
     \end{enumerate}
-    \item 5 ficheros adicionales: README.md, LICENSE, check-p4.py, .gitignore y .git.
+    \item 4 ficheros adicionales (además de .git): README.md, LICENSE, check-p4.py y .gitignore.
   \end{itemize}
 \end{enumerate}
 
@@ -219,6 +221,8 @@ Se ha de tener en cuenta las siguientes consideraciones:
   \item Se valorará que al menos haya diez commits realizados.
   \item Se valorará que el código entregado siga la guía de estilo de Python (véase PEP8).
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
+  \item Se valorará que el equipo al que pertenece el alumno siga la guía de estilo
+de Python, tenga código legible y bien estructurado.
 \end{itemize}
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa check-p4.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
@@ -228,5 +232,9 @@ Se puede comprobar la correcta entrega de la práctica utilizando el programa ch
 
 
 donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8.
+
+\vspace{1cm}
+
+\footnotesize{Para el final: Si a estas alturas todavía tienes ganas, puedes indicar en el Moodle el tiempo que te ha llevado realizar esta práctica. Esto nos sirve a los profesores para hacernos una idea del esfuerzo que os lleva. ¡Gracias!}
 
 \end{document}
