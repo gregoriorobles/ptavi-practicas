@@ -28,7 +28,7 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0.3 – 16.10.2014}
+\date{Versión 5.0.4 – 20.10.2014}
 
 
 \maketitle
@@ -66,7 +66,7 @@ Tiempo estimado (para un alumno medio): 10 horas
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
     \item Importa el módulo \texttt{socket}.
-    \item Inicializa varias variables globales (al ser globales, están en mayúsculas).
+    \item Inicializa varias \emph{variables} constantes (al ser constantes, están en mayúsculas).
     \item Crea un \texttt{socket}.
     \item Especifica opciones para el \texttt{socket}.
     \item Se conecta con un servidor.
@@ -147,10 +147,6 @@ $ python client.py localhost 2500 register luke@polismassa.com 3600
 En caso de que no se introduzcan los valores necesarios, se imprimirá el siguiente mensaje:
 \begin{verbatim}
 Usage: client.py ip puerto register sip_address expires_value
-\end{verbatim}
-  El servidor ha de prever que alguien se pueda dar de baja cuando su tiempo de expiración ya haya pasado; en ese caso, responderá con un 
-\begin{verbatim}
-SIP/1.0 410 Gone\r\n\r\n
 \end{verbatim}
 
 \finejercicio
