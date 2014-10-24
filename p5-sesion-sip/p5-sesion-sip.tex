@@ -33,7 +33,7 @@
 
 \maketitle
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. 
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta 0,7 puntos. Para las instrucciones de entrega, mira al final del documento. 
 
 \section{Introducción}
 
@@ -71,12 +71,12 @@ Tiempo estimado (para un alumno medio): 8 horas
 
   \item Con el navegador, dirígete al repositorio \texttt{ptavi-p5} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p5}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
-  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que las demás, se recomienda hacerlo al final.
+  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
 
 
 \subsection*{Análisis de una sesión SIP}
 
-Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark} (desde la shell \texttt{\$ wireshark sip.cap.gz}; recuerda que puedes utilizar el tabulador en la shell para autocompletar). Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
+Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz}; recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
 
   \item Observa que las tramas capturadas corresponden a una mini-sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
   \begin{itemize}
@@ -196,7 +196,7 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
   \begin{itemize}
     \item ¿Por qué aparece una instrucción SIP del tipo \texttt{REGISTER}?
     \item ¿En qué trama sucede esto?
-    \item ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión, en el ejercicio 9)?
+    \item ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión)?
   \end{itemize}
 
   \finejercicio
@@ -238,7 +238,7 @@ La entrega de práctica se deberá hacer antes del lunes 10 de noviembre de 2014
   \item Tener un repositorio git en GitHub con:
   \begin{enumerate}
     \item Un archivo de texto con los comentarios a los ejercicios en \texttt{p5.txt}.
-    \item Un archivo con una captura filtrada en \texttt{sip.libpcap} (véanse ejercicios 18 a 20).
+    \item Un archivo con una captura filtrada en \texttt{sip.libpcap}.
     \item Un test de \texttt{Moodle} rellenado sobre la práctica 5. Este test tendrá preguntas relacionadas con los ejercicios que se han realizado y tiene un tiempo de realización de 20 minutos.
   \end{enumerate}
 \end{itemize}
@@ -249,7 +249,7 @@ Se ha de tener en cuenta las siguientes consideraciones:
   \item Se valorará que la captura esté bien filtrada y sólo contenga los paquetes que se indican en el guión.
 \end{itemize}
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p5.py}, bajándoselo de \texttt{Moodle}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p5.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
 	$ python check-p5.py login_lab
 \end{verbatim}
