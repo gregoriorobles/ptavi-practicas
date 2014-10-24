@@ -28,7 +28,7 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0.3 – 16.10.2014}
+\date{Versión 5.0.5 – 20.10.2014}
 
 
 \maketitle
@@ -66,13 +66,13 @@ Tiempo estimado (para un alumno medio): 10 horas
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
     \item Importa el módulo \texttt{socket}.
-    \item Inicializa varias variables globales (al ser globales, están en mayúsculas).
+    \item Inicializa varias \emph{variables} constantes (al ser constantes, están en mayúsculas).
     \item Crea un \texttt{socket}.
     \item Especifica opciones para el \texttt{socket}.
     \item Se conecta con un servidor.
     \item Envía por el \texttt{socket} con el método \texttt{send()} y lee del \texttt{socket} con \texttt{recv()}.
     \item Al recibir con \texttt{recv()}, indicamos el valor del \emph{buffer} en bytes.
-    \item Cerramos la conexión con el método \texttt{shutdown()}.
+    \item Cerramos la conexión con el método \texttt{close()}.
   \end{enumerate}
 
 
@@ -117,11 +117,11 @@ python client.py 127.0.0.1 5060 eco eco, soy yo
 
   \item Modifica los \emph{scripts} anteriores para tener un cliente que envíe mensajes de registro SIP y un servidor \texttt{Registrar} SIP. Cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario. Cambia el nombre de la clase del servidor de \texttt{EchoHandler} a \texttt{SIPRegisterHandler}. La petición SIP del cliente tendrá esta pinta:
     \begin{verbatim}
-REGISTER sip:luke@polismassa.com SIP/1.0\r\n\r\n
+REGISTER sip:luke@polismassa.com SIP/2.0\r\n\r\n
     \end{verbatim}
   El servidor deberá responder con un mensaje de este estilo:
 \begin{verbatim}
-SIP/1.0 200 OK\r\n\r\n
+SIP/2.0 200 OK\r\n\r\n
 \end{verbatim}
   El cliente se deberá seguir ejecutándose desde línea de comando, ahora de la siguiente manera:
     \begin{verbatim}
@@ -132,12 +132,12 @@ SIP/1.0 200 OK\r\n\r\n
 
   \item Añade funcionalidad al cliente y al servidor para ofrecer la posibilidad de darse de baja a un usuario. Para ello, hay que añadir una cabecera \texttt{Expires} (cuyos valores vienen dados en segundos). En caso de que el valor de la cabecera \texttt{Expires} sea 0, el usuario será borrado del diccionario de registro; en cualquier otro caso, siempre que el tiempo sea positivo, el valor de \texttt{Expires} será el tiempo de expiración en el servidor. En este ejercicio no hace falta considerar funcionalidad de servidor para cuando el registro de un cliente caduca. La petición del cliente tendrá una pinta parecida a ésta:
   \begin{verbatim}
-REGISTER sip:luke@polismassa.com SIP/1.0\r\n
+REGISTER sip:luke@polismassa.com SIP/2.0\r\n
 Expires: 0\r\n\r\n
   \end{verbatim}
 El servidor deberá borrar al usuario del diccionario y responder con un
 \begin{verbatim}
-SIP/1.0 200 OK\r\n\r\n
+SIP/2.0 200 OK\r\n\r\n
 \end{verbatim}
 El cliente se deberá seguir ejecutando desde línea de comando, ahora de la siguiente manera:
 \begin{verbatim}
@@ -147,10 +147,6 @@ $ python client.py localhost 2500 register luke@polismassa.com 3600
 En caso de que no se introduzcan los valores necesarios, se imprimirá el siguiente mensaje:
 \begin{verbatim}
 Usage: client.py ip puerto register sip_address expires_value
-\end{verbatim}
-  El servidor ha de prever que alguien se pueda dar de baja cuando su tiempo de expiración ya haya pasado; en ese caso, responderá con un 
-\begin{verbatim}
-SIP/1.0 410 Gone\r\n\r\n
 \end{verbatim}
 
 \finejercicio
