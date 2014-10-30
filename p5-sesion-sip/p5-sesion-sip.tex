@@ -28,7 +28,7 @@
 
 \title{Práctica 5 - Sesión SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0 – 25.10.2014}
+\date{Versión 5.0.1 – 30.10.2014}
 
 
 \maketitle
@@ -78,7 +78,7 @@ Tiempo estimado (para un alumno medio): 8 horas
 
 Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz}; recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
 
-  \item Observa que las tramas capturadas corresponden a una mini-sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
+  \item Observa que las tramas capturadas corresponden a una sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
   \begin{itemize}
     \item ¿Cuántos paquetes componen la captura?
     \item ¿Cuánto tiempo dura la captura?
@@ -91,52 +91,51 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
     \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos?
   \end{itemize}
 
-  \item Observa por encima el flujo de tramas en el menú de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entre medias. 
-
+  \item Observa por encima el flujo de tramas en el menú de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias. 
   \begin{itemize}
-    \item Filtra por \texttt{sip} para conocer cuándo se envían paquetes con SIP. ¿En qué segundos tienen lugar?
-    \item Y los paquetes con RTP, ¿entre qué segundos se envían?
+    \item Filtra por \texttt{sip} para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos?
+    \item Y los paquetes con RTP, ¿cuándo se envían?
   \end{itemize}
 
   \finejercicio
 
-  \item Analiza las primeras cuatro tramas de la captura, que ocurren nada más arrancar Ekiga. 
+  \item Analiza las primeras cuatro tramas de la captura nada más arrancar Ekiga. 
   \begin{itemize}
     \item ¿Qué servicio es el utilizado en estas tramas?
     \item ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 
     \item ¿Qué dirección IP (de \texttt{ekiga.net}) devuelve el servicio de nombres? 
-    \item ¿Qué pasa en el caso de \texttt{35.162.64.86.in-addr.arpa}?
+    \item ¿Por qué se pide también para \texttt{35.162.64.86.in-addr.arpa}?
   \end{itemize}
 
-  \item A continuación, hay más de una docena de tramas TCP/HTTP. Observa que la secuencia es similar a la que vimos en una práctica anterior cuando vimos las tramas que genera un navegador web cuando hace peticiones a servidores web. 
+  \item A continuación, hay más de una docena de tramas TCP/HTTP.
   \begin{itemize}
-    \item ¿Qué URL se pide? 
+    \item ¿Podrías decir la URL que se está pidiendo? 
     \item ¿Qué \texttt{user agent} (UA) la está pidiendo? 
-    \item ¿Qué devuelve el servidor? 
-    \item Si lanzamos el navegador web, por ejemplo, \texttt{Mozilla Firefox}, y apuntamos a la URL, ¿qué recibimos? Entonces, ¿qué IP es la que podemos ver en la captura? 
+    \item ¿Qué devuelve el servidor?
+    \item Si lanzamos el navegador web, por ejemplo, \texttt{Mozilla Firefox}, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor? 
   \end{itemize}
 
-  \item Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN. Busca en la Wikipedia de qué tipo de protocolo se trata. 
+  \item Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
   \begin{itemize}
-    \item ¿Por qué crees que se hace uso de este protocolo en esta captura? 
-    \item ¿Estamos tras un \texttt{full-cone NAT}? (en el diagrama de la Wikipedia verás el algoritmo que se sigue)
+    \item ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia.
+    \item ¿Estamos tras un \texttt{NAT}?
   \end{itemize}
 
-  \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor Registrar. El Registrar guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
+  \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor \texttt{Registrar}. El \texttt{Registrar} guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
   \begin{itemize}
     \item ¿Qué dirección IP tiene el servidor \texttt{Registrar}?
     \item ¿A qué puerto (del servidor \texttt{Registrar}) se envían los paquetes SIP?
     \item ¿Qué método SIP utiliza el UA para registrarse?
-    \item Además de REGISTER, existen otras instrucciones SIP, ¿qué instrucciones SIP entiende el UA?
+    \item Además de \texttt{REGISTER}, ¿qué instrucciones SIP entiende el UA?
   \end{itemize}
 
   \finejercicio
 
-  \item Como hemos visto, una de las instrucciones SIP es la de registro. Volviendo a la trama 46 y siguientes:
+  \item Fijémonos en las tramas siguientes a la número 46:
   \begin{itemize}
     \item ¿Se registra con éxito en el primer intento? 
     \item ¿Cómo sabemos si el registro se ha realizado correctamente o no? 
-    \item ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro?
+    \item ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro? (fíjate en el tamaño de los paquetes y mira a qué se debe el cambio)
     \item ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
   \end{itemize}
 
@@ -189,7 +188,7 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
   \begin{itemize}
     \item ¿Qué método SIP se utiliza?
     \item ¿En qué trama(s)?
-    \item ¿Por qué se envía varias veces?
+    \item ¿Por qué crees que se envía varias veces?
   \end{itemize}
 
   \item Finalmente, se cierra la aplicación de VozIP.
@@ -205,7 +204,7 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
 
 Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qxip.net}. Tendrás que dar de alta una cuenta en \texttt{www.ekiga.net} con el navegador. Recuerda también que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberás crearte una cuenta en \texttt{ekiga.net} y darte de alta la lanzar la aplicación.
 
-  \item Observa las diferencias entre el entorno del laboratorio y el del ejercicio anterior al inicializar la conversación:
+  \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
   \begin{itemize}
     \item ¿Es necesario el uso de DNS y STUN? ¿Por qué?
     \item ¿Son diferentes el registro y la descripción de la sesión?
@@ -222,7 +221,7 @@ Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999
 
   \finejercicio
 
-  \item Filtra por los paquetes SIP de la captura y guarda únicamente los paquetes SIP como sip.libpcap. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás guardarlo en un archivo de nombre \texttt{sip.libpcap} y añadirlo al repositorio.
+  \item Filtra por los paquetes SIP de la captura y guarda {\bf únicamente} los paquetes SIP como sip.libpcap. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás guardarlo en un archivo de nombre \texttt{p5.libpcap} y añadirlo al repositorio.
 
   \finejercicio
   
@@ -238,7 +237,7 @@ La entrega de práctica se deberá hacer antes del lunes 10 de noviembre de 2014
   \item Tener un repositorio git en GitHub con:
   \begin{enumerate}
     \item Un archivo de texto con los comentarios a los ejercicios en \texttt{p5.txt}.
-    \item Un archivo con una captura filtrada en \texttt{sip.libpcap}.
+    \item Un archivo con una captura filtrada en \texttt{p5.libpcap}.
     \item Un test de \texttt{Moodle} rellenado sobre la práctica 5. Este test tendrá preguntas relacionadas con los ejercicios que se han realizado y tiene un tiempo de realización de 20 minutos.
   \end{enumerate}
 \end{itemize}
