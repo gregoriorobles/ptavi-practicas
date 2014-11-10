@@ -13,7 +13,7 @@
 
 \newcommand{\finpractica}{
   \begin{footnotesize}
-    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+    [Al terminar la prÃ¡ctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
   \end{footnotesize}
 }
 
@@ -26,37 +26,37 @@
 \begin{document}
 
 
-\title{Práctica 5 - Sesión SIP}
-\author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0.2 - 31.10.2014}
+\title{PrÃ¡ctica 5 - SesiÃ³n SIP}
+\author{Protocolos para la TransmisiÃ³n de Audio y VÃ­deo en Internet}
+\date{VersiÃ³n 5.0.2 - 31.10.2014}
 
 
 \maketitle
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta 0,7 puntos. Para las instrucciones de entrega, mira al final del documento. 
+Nota: Esta prÃ¡ctica se puede entregar para su evaluaciÃ³n como parte de la nota de prÃ¡cticas, pudiendo obtener el estudiante hasta 0,7 puntos. Para las instrucciones de entrega, mira al final del documento. 
 
-\section{Introducción}
+\section{IntroducciÃ³n}
 
-El protocolo de iniciación de sesión (SIP) es un protocolo que se limita solamente al establecimiento y control de una sesión (RFC 3550). Los detalles del intercambio de datos, como por ejemplo la codificación o decodificación del audio/vídeo, no son controlados por SIP sino que se llevan a cabo por otros protocolos (por ejemplo, RTP). Los principales objetivos de SIP son:
+El protocolo de iniciaciÃ³n de sesiÃ³n (SIP) es un protocolo que se limita solamente al establecimiento y control de una sesiÃ³n (RFC 3550). Los detalles del intercambio de datos, como por ejemplo la codificaciÃ³n o decodificaciÃ³n del audio/vÃ­deo, no son controlados por SIP sino que se llevan a cabo por otros protocolos (por ejemplo, RTP). Los principales objetivos de SIP son:
 
 \begin{itemize}
-  \item SIP permite el establecimiento de una localización de usuario (o sea, traducir de un nombre de usuario a su dirección de red actual)
-  \item SIP provee funcionalidad para la negociación de las características de una sesión, de manera que los participantes en una sesión pueden consensuar características soportadas por todos ellos.
-  \item SIP es un mecanismo para la gestión de llamadas, por ejemplo para añadir, eliminar o transferir participantes
-  \item SIP permite la modificación de características de la sesión durante su transcurso.
+  \item SIP permite el establecimiento de una localizaciÃ³n de usuario (o sea, traducir de un nombre de usuario a su direcciÃ³n de red actual)
+  \item SIP provee funcionalidad para la negociaciÃ³n de las caracterÃ­sticas de una sesiÃ³n, de manera que los participantes en una sesiÃ³n pueden consensuar caracterÃ­sticas soportadas por todos ellos.
+  \item SIP es un mecanismo para la gestiÃ³n de llamadas, por ejemplo para aÃ±adir, eliminar o transferir participantes
+  \item SIP permite la modificaciÃ³n de caracterÃ­sticas de la sesiÃ³n durante su transcurso.
 \end{itemize}
 
-\section{Objetivos de la práctica}
+\section{Objetivos de la prÃ¡ctica}
 
 \begin{enumerate}
-  \item Conocer el protocolo SIP y otros protocolos utilizados en una sesión con \texttt{Ekiga}.
-  \item Profundizar en el uso de \texttt{Wireshark}: análisis, captura y filtrado.
+  \item Conocer el protocolo SIP y otros protocolos utilizados en una sesiÃ³n con \texttt{Ekiga}.
+  \item Profundizar en el uso de \texttt{Wireshark}: anÃ¡lisis, captura y filtrado.
 \end{enumerate}
 
 \section{Conocimientos previos necesarios}
 
 \begin{itemize}
-  \item Nociones de SIP y RTP (las de clase de teoría)
+  \item Nociones de SIP y RTP (las de clase de teorÃ­a)
   \item Funcionamiento de \texttt{Wireshark}.
 \end{itemize}
 
@@ -67,161 +67,161 @@ Tiempo estimado (para un alumno medio): 8 horas
 
 \begin{enumerate}
 
-\subsection*{Creación de repositorio para la práctica}
+\subsection*{CreaciÃ³n de repositorio para la prÃ¡ctica}
 
-  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p5} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p5}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
+  \item Con el navegador, dirÃ­gete al repositorio \texttt{ptavi-p5} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p5}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
 
-  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
+  Como tarde al final de la prÃ¡ctica, deberÃ¡s realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta prÃ¡ctica, al contrario que con las demÃ¡s, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
 
 
-\subsection*{Análisis de una sesión SIP}
+\subsection*{AnÃ¡lisis de una sesiÃ³n SIP}
 
-Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
+Se ha capturado una sesiÃ³n SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guiÃ³n en el fichero \texttt{p5.txt} que encontrarÃ¡s tambiÃ©n en el repositorio. 
 
-  \item Observa que las tramas capturadas corresponden a una sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
+  \item Observa que las tramas capturadas corresponden a una sesiÃ³n SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
   \begin{itemize}
-    \item ¿Cuántos paquetes componen la captura?
-    \item ¿Cuánto tiempo dura la captura?
-    \item ¿Qué IP tiene la máquina donde se ha efectuado la captura? ¿Se trata de una IP pública o de una IP privada? ¿Por qué lo sabes?
+    \item Â¿CuÃ¡ntos paquetes componen la captura?
+    \item Â¿CuÃ¡nto tiempo dura la captura?
+    \item Â¿QuÃ© IP tiene la mÃ¡quina donde se ha efectuado la captura? Â¿Se trata de una IP pÃºblica o de una IP privada? Â¿Por quÃ© lo sabes?
   \end{itemize}
 
-  \item Antes de analizar las tramas, mira las estadísticas generales que aparecen en el menú de \texttt{Statistics}. En el apartado de jerarquía de protocolos (\texttt{Protocol Hierarchy}) se puede ver el porcentaje del tráfico correspondiente al protocolo TCP y UDP.
+  \item Antes de analizar las tramas, mira las estadÃ­sticas generales que aparecen en el menÃº de \texttt{Statistics}. En el apartado de jerarquÃ­a de protocolos (\texttt{Protocol Hierarchy}) se puede ver el porcentaje del trÃ¡fico correspondiente al protocolo TCP y UDP.
   \begin{itemize}
-    \item ¿Cuál de los dos es mayor? ¿Es esto consistente con una aplicación que transmite en tiempo real? 
-    \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos?
+    \item Â¿CuÃ¡l de los dos es mayor? Â¿Es esto consistente con una aplicaciÃ³n que transmite en tiempo real? 
+    \item Â¿QuÃ© otros protocolos podemos ver en la jerarquÃ­a de protocolos?
   \end{itemize}
 
-  \item Observa por encima el flujo de tramas en el menú de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias. 
+  \item Observa por encima el flujo de tramas en el menÃº de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicializaciÃ³n (registro) de la aplicaciÃ³n hasta su finalizaciÃ³n, con una llamada entremedias. 
   \begin{itemize}
-    \item Filtra por \texttt{sip} para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos?
-    \item Y los paquetes con RTP, ¿cuándo se envían?
+    \item Filtra por \texttt{sip} para conocer cuÃ¡ndo se envÃ­an paquetes SIP. Â¿En quÃ© segundos tienen lugar esos envÃ­os?
+    \item Y los paquetes con RTP, Â¿cuÃ¡ndo se envÃ­an?
   \end{itemize}
 
   \finejercicio
 
-  \item Analiza las primeras cuatro tramas de la captura nada más arrancar Ekiga. 
+  \item Analiza las primeras cuatro tramas de la captura nada mÃ¡s arrancar Ekiga. 
   \begin{itemize}
-    \item ¿Qué servicio es el utilizado en estas tramas?
-    \item ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 
-    \item ¿Qué dirección IP (de \texttt{ekiga.net}) devuelve el servicio de nombres? 
-    \item ¿Por qué se pide también para \texttt{35.162.64.86.in-addr.arpa}?
+    \item Â¿QuÃ© servicio es el utilizado en estas tramas?
+    \item Â¿CuÃ¡l es la direcciÃ³n IP del servidor de nombres del ordenador que ha lanzado Ekiga? 
+    \item Â¿QuÃ© direcciÃ³n IP (de \texttt{ekiga.net}) devuelve el servicio de nombres? 
+    \item Â¿Por quÃ© se pide tambiÃ©n para \texttt{35.162.64.86.in-addr.arpa}?
   \end{itemize}
 
-  \item A continuación, hay más de una docena de tramas TCP/HTTP.
+  \item A continuaciÃ³n, hay mÃ¡s de una docena de tramas TCP/HTTP.
   \begin{itemize}
-    \item ¿Podrías decir la URL que se está pidiendo? 
-    \item ¿Qué \texttt{user agent} (UA) la está pidiendo? 
-    \item ¿Qué devuelve el servidor?
-    \item Si lanzamos el navegador web, por ejemplo, \texttt{Mozilla Firefox}, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor? 
+    \item Â¿PodrÃ­as decir la URL que se estÃ¡ pidiendo? 
+    \item Â¿QuÃ© \texttt{user agent} (UA) la estÃ¡ pidiendo? 
+    \item Â¿QuÃ© devuelve el servidor?
+    \item Si lanzamos el navegador web, por ejemplo, \texttt{Mozilla Firefox}, y vamos a la misma URL, Â¿quÃ© recibimos? Â¿QuÃ© es, entonces, lo que estÃ¡ respondiendo el servidor? 
   \end{itemize}
 
   \item Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
   \begin{itemize}
-    \item ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia.
-    \item ¿Estamos tras un \texttt{NAT}?
+    \item Â¿Por quÃ© crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia.
+    \item Â¿Estamos tras un \texttt{NAT}?
   \end{itemize}
 
-  \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor \texttt{Registrar}. El \texttt{Registrar} guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
+  \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la direcciÃ³n IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localizaciÃ³n en un servidor \texttt{Registrar}. El \texttt{Registrar} guarda informaciÃ³n sobre los usuarios en un servidor de localizaciÃ³n que puede ser utilizado para localizar usuarios.
   \begin{itemize}
-    \item ¿Qué dirección IP tiene el servidor \texttt{Registrar}?
-    \item ¿A qué puerto (del servidor \texttt{Registrar}) se envían los paquetes SIP?
-    \item ¿Qué método SIP utiliza el UA para registrarse?
-    \item Además de \texttt{REGISTER}, ¿qué instrucciones SIP entiende el UA?
+    \item Â¿QuÃ© direcciÃ³n IP tiene el servidor \texttt{Registrar}?
+    \item Â¿A quÃ© puerto (del servidor \texttt{Registrar}) se envÃ­an los paquetes SIP?
+    \item Â¿QuÃ© mÃ©todo SIP utiliza el UA para registrarse?
+    \item AdemÃ¡s de \texttt{REGISTER}, Â¿quÃ© instrucciones SIP entiende el UA?
   \end{itemize}
 
   \finejercicio
 
-  \item Fijémonos en las tramas siguientes a la número 46:
+  \item FijÃ©monos en las tramas siguientes a la nÃºmero 46:
   \begin{itemize}
-    \item ¿Se registra con éxito en el primer intento? 
-    \item ¿Cómo sabemos si el registro se ha realizado correctamente o no? 
-    \item ¿Podrías identificar las diferencias entre el primer intento y el segundo de registro? (fíjate en el tamaño de los paquetes y mira a qué se debe el cambio)
-    \item ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
+    \item Â¿Se registra con Ã©xito en el primer intento? 
+    \item Â¿CÃ³mo sabemos si el registro se ha realizado correctamente o no? 
+    \item Â¿PodrÃ­as identificar las diferencias entre el primer intento y el segundo de registro? (fÃ­jate en el tamaÃ±o de los paquetes y mira a quÃ© se debe el cambio)
+    \item Â¿CuÃ¡nto es el valor del tiempo de expiraciÃ³n de la sesiÃ³n? Indica las unidades.
   \end{itemize}
 
 
-  \item Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la dirección \texttt{sip:500@ekiga.net}. Veamos el \texttt{INVITE} de cerca.
+  \item Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la direcciÃ³n \texttt{sip:500@ekiga.net}. Veamos el \texttt{INVITE} de cerca.
   \begin{itemize}
-    \item ¿Puede verse el nombre del que efectúa la llamada, así como su dirección SIP?
-    \item ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
-    \item ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
-    \item ¿En qué se diferencia el segundo \texttt{INVITE} más abajo del primero? ¿A qué crees que se debe esto?
+    \item Â¿Puede verse el nombre del que efectÃºa la llamada, asÃ­ como su direcciÃ³n SIP?
+    \item Â¿QuÃ© es lo que contiene el cuerpo de la trama? Â¿En quÃ© formato/protocolo estÃ¡?
+    \item Â¿Tiene Ã©xito el primer intento? Â¿CÃ³mo lo sabes?
+    \item Â¿En quÃ© se diferencia el segundo \texttt{INVITE} mÃ¡s abajo del primero? Â¿A quÃ© crees que se debe esto?
   \end{itemize}
 
   \item Una vez conectado, estudia el intercambio de tramas. 
   \begin{itemize}
-    \item ¿Qué protocolo(s) se utiliza(n)? ¿Para qué sirven estos protocolos?
-    \item ¿Cuál es el tamaño de paquete de los mismos?
-    \item ¿Se utilizan bits de \texttt{padding}?
-    \item ¿Cuál es la periodicidad de los paquetes que se envían?
-    \item ¿Cuántos bits/segundo estamos enviando?
+    \item Â¿QuÃ© protocolo(s) se utiliza(n)? Â¿Para quÃ© sirven estos protocolos?
+    \item Â¿CuÃ¡l es el tamaÃ±o de paquete de los mismos?
+    \item Â¿Se utilizan bits de \texttt{padding}?
+    \item Â¿CuÃ¡l es la periodicidad de los paquetes que se envÃ­an?
+    \item Â¿CuÃ¡ntos bits/segundo estamos enviando?
   \end{itemize}
 
   \finejercicio
 
-  \item Vamos a ver más a fondo el intercambio RTP. En \texttt{Telephony} hay una opción RTP. Empecemos mirando los flujos RTP.
+  \item Vamos a ver mÃ¡s a fondo el intercambio RTP. En \texttt{Telephony} hay una opciÃ³n RTP. Empecemos mirando los flujos RTP.
   \begin{itemize}
-    \item ¿Cuántos flujos hay? ¿por qué?
-    \item ¿Cuántos paquetes se pierden?
-    \item ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el valor de \texttt{delta}?
-    \item ¿Cuáles son los valores de \texttt{jitter} (medio y máximo)? ¿Qué quiere decir eso? ¿Estamos ante una conversación de calidad?
+    \item Â¿CuÃ¡ntos flujos hay? Â¿por quÃ©?
+    \item Â¿CuÃ¡ntos paquetes se pierden?
+    \item Â¿CuÃ¡l es el valor mÃ¡ximo del delta? Â¿Y quÃ© es lo que significa el valor de \texttt{delta}?
+    \item Â¿CuÃ¡les son los valores de \texttt{jitter} (medio y mÃ¡ximo)? Â¿QuÃ© quiere decir eso? Â¿Estamos ante una conversaciÃ³n de calidad?
   \end{itemize}
 
   \item Elige un paquete RTP de audio. Analiza el flujo de audio en \texttt{Telephony -> RTP -> Stream Analysis}.
   \begin{itemize}
-    \item ¿Cuánto valen el \texttt{delta} y el \texttt{jitter} para el primer paquete que ha llegado?
-    \item ¿Podemos saber si éste es el primer paquete que nos han enviado?
-    \item Los valores de \texttt{jitter} son menores de 10ms hasta un paquete dado. ¿Cuál?
-    \item ¿A qué se debe el cambio tan brusco del \texttt{jitter}?
-    \item ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué? 
-    \item ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de \texttt{jitter}?
+    \item Â¿CuÃ¡nto valen el \texttt{delta} y el \texttt{jitter} para el primer paquete que ha llegado?
+    \item Â¿Podemos saber si Ã©ste es el primer paquete que nos han enviado?
+    \item Los valores de \texttt{jitter} son menores de 10ms hasta un paquete dado. Â¿CuÃ¡l?
+    \item Â¿A quÃ© se debe el cambio tan brusco del \texttt{jitter}?
+    \item Â¿Es comparable este cambio con el tiempo desde la recepciÃ³n del paquete anterior? Â¿Por quÃ©? 
+    \item Â¿CuÃ¡l es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de \texttt{jitter}?
   \end{itemize}
 
-  \item En \texttt{Telephony} selecciona el menú \texttt{VoIP calls}. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón \texttt{Graph}.
+  \item En \texttt{Telephony} selecciona el menÃº \texttt{VoIP calls}. VerÃ¡s que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botÃ³n \texttt{Graph}.
   \begin{itemize}
-    \item ¿Cuánto dura la conversación?
-    \item ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
+    \item Â¿CuÃ¡nto dura la conversaciÃ³n?
+    \item Â¿CuÃ¡les son sus SSRC? Â¿Por quÃ© hay varios SSRCs? Â¿Hay CSRCs?
   \end{itemize}
 
 
-  \item Identifica la trama donde se finaliza la conversación. 
+  \item Identifica la trama donde se finaliza la conversaciÃ³n. 
   \begin{itemize}
-    \item ¿Qué método SIP se utiliza?
-    \item ¿En qué trama(s)?
-    \item ¿Por qué crees que se envía varias veces?
+    \item Â¿QuÃ© mÃ©todo SIP se utiliza?
+    \item Â¿En quÃ© trama(s)?
+    \item Â¿Por quÃ© crees que se envÃ­a varias veces?
   \end{itemize}
 
-  \item Finalmente, se cierra la aplicación de VozIP.
+  \item Finalmente, se cierra la aplicaciÃ³n de VozIP.
   \begin{itemize}
-    \item ¿Por qué aparece una instrucción SIP del tipo \texttt{REGISTER}?
-    \item ¿En qué trama sucede esto?
-    \item ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión)?
+    \item Â¿Por quÃ© aparece una instrucciÃ³n SIP del tipo \texttt{REGISTER}?
+    \item Â¿En quÃ© trama sucede esto?
+    \item Â¿En quÃ© se diferencia con la instrucciÃ³n que se utilizÃ³ con anterioridad (al principio de la sesiÃ³n)?
   \end{itemize}
 
   \finejercicio
 
-\subsection*{Captura de una sesión SIP}
+\subsection*{Captura de una sesiÃ³n SIP}
 
-Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qxip.net}. Tendrás que dar de alta una cuenta en \texttt{www.ekiga.net} con el navegador. Recuerda también que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberás crearte una cuenta en \texttt{ekiga.net} y darte de alta la lanzar la aplicación.
+Captura una sesiÃ³n SIP de una conversaciÃ³n con el nÃºmero SIP \texttt{sip:9999@qxip.net}. TendrÃ¡s que dar de alta una cuenta en \texttt{www.ekiga.net} con el navegador. Recuerda tambiÃ©n que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberÃ¡s crearte una cuenta en \texttt{ekiga.net} y darte de alta la lanzar la aplicaciÃ³n.
 
-  \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
+  \item Observa las diferencias en el inicio de la conversaciÃ³n entre el entorno del laboratorio y el del ejercicio anterior:
   \begin{itemize}
-    \item ¿Es necesario el uso de DNS y STUN? ¿Por qué?
-    \item ¿Son diferentes el registro y la descripción de la sesión?
+    \item Â¿Es necesario el uso de DNS y STUN? Â¿Por quÃ©?
+    \item Â¿Son diferentes el registro y la descripciÃ³n de la sesiÃ³n?
   \end{itemize}
 
-  \item Identifica las diferencias existentes entre esta conversación y la conversación anterior:
+  \item Identifica las diferencias existentes entre esta conversaciÃ³n y la conversaciÃ³n anterior:
   \begin{itemize}
-    \item ¿Cuántos flujos tenemos?
-    \item ¿Cuál es su periodicidad?
-    \item ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
-    \item ¿Podrías reproducir la conversación desde \texttt{Wireshark}? ¿Cómo? Comprueba que poniendo un valor demasiado pequeño para el \texttt{buffer} de \texttt{jitter}, la conversación puede no tener la calidad necesaria.
-    \item ¿Sabrías decir qué tipo de servicio ofrece \texttt{sip:9999@qxip.net}?
+    \item Â¿CuÃ¡ntos flujos tenemos?
+    \item Â¿CuÃ¡l es su periodicidad?
+    \item Â¿CuÃ¡nto es el valor mÃ¡ximo del delta y los valores medios y mÃ¡ximo del jitter?
+    \item Â¿PodrÃ­as reproducir la conversaciÃ³n desde \texttt{Wireshark}? Â¿CÃ³mo? Comprueba que poniendo un valor demasiado pequeÃ±o para el \texttt{buffer} de \texttt{jitter}, la conversaciÃ³n puede no tener la calidad necesaria.
+    \item Â¿SabrÃ­as decir quÃ© tipo de servicio ofrece \texttt{sip:9999@qxip.net}?
   \end{itemize}
 
   \finejercicio
 
-  \item Filtra por los paquetes SIP de la captura y guarda {\bf únicamente} los paquetes SIP como sip.libpcap. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás guardarlo en un archivo de nombre \texttt{p5.libpcap} y añadirlo al repositorio.
+  \item Filtra por los paquetes SIP de la captura y guarda {\bf Ãºnicamente} los paquetes SIP como p5.libpcap. Abre el fichero guardado para cerciorarte de que lo has hecho bien. DeberÃ¡s guardarlo en un archivo de nombre \texttt{p5.libpcap} y aÃ±adirlo al repositorio.
 
   \finejercicio
   
@@ -231,35 +231,35 @@ Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qx
 
 \section{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 10 de noviembre de 2014 a las 23:55. Para entonces, se debe: 
+La entrega de prÃ¡ctica se deberÃ¡ hacer antes del lunes 10 de noviembre de 2014 a las 23:55. Para entonces, se debe: 
 
 \begin{itemize}
   \item Tener un repositorio git en GitHub con:
   \begin{enumerate}
     \item Un archivo de texto con los comentarios a los ejercicios en \texttt{p5.txt}.
     \item Un archivo con una captura filtrada en \texttt{p5.libpcap}.
-    \item Un test de \texttt{Moodle} rellenado sobre la práctica 5. Este test tendrá preguntas relacionadas con los ejercicios que se han realizado y tiene un tiempo de realización de 20 minutos.
-    \item 4 ficheros adicionales (además de \texttt{.git}): \texttt{README.md}, \texttt{LICENSE}, \texttt{check-p5.py} y \texttt{.gitignore}.
+    \item Un test de \texttt{Moodle} rellenado sobre la prÃ¡ctica 5. Este test tendrÃ¡ preguntas relacionadas con los ejercicios que se han realizado y tiene un tiempo de realizaciÃ³n de 20 minutos.
+    \item 4 ficheros adicionales (ademÃ¡s de \texttt{.git}): \texttt{README.md}, \texttt{LICENSE}, \texttt{check-p5.py} y \texttt{.gitignore}.
   \end{enumerate}
 \end{itemize}
 
 Se ha de tener en cuenta las siguientes consideraciones:
 \begin{itemize}
-  \item Se valorará que al menos haya diez \texttt{commits} realizados en al menos dos días diferentes
-  \item Se valorará que la captura esté bien filtrada y sólo contenga los paquetes que se indican en el guión.
+  \item Se valorarÃ¡ que al menos haya diez \texttt{commits} realizados en al menos dos dÃ­as diferentes
+  \item Se valorarÃ¡ que la captura estÃ© bien filtrada y sÃ³lo contenga los paquetes que se indican en el guiÃ³n.
 \end{itemize}
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p5.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+Se puede comprobar la correcta entrega de la prÃ¡ctica utilizando el programa \texttt{check-p5.py}. Este programa se ejecuta desde la lÃ­nea de comandos de la siguiente manera:
 \begin{verbatim}
 	$ python check-p5.py login_lab
 \end{verbatim}
 
 
-donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos).
+donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sÃ³lo esos).
 
 
 \vspace{1cm}
 
-\footnotesize{Para el final: Si a estas alturas todavía tienes ganas, puedes indicar en el Moodle el tiempo que te ha llevado realizar esta práctica. Esto te lleva menos de un minuto y nos sirve a los profesores para hacernos una idea del esfuerzo que os lleva. ¡Gracias!}
+\footnotesize{Para el final: Si a estas alturas todavÃ­a tienes ganas, puedes indicar en el Moodle el tiempo que te ha llevado realizar esta prÃ¡ctica. Esto te lleva menos de un minuto y nos sirve a los profesores para hacernos una idea del esfuerzo que os lleva. Â¡Gracias!}
 
 \end{document}
