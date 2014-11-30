@@ -37,9 +37,10 @@
 \begin{document}
 
 \title{Protocolos para la Transmisión de Audio y Vídeo por Internet\\ 
+\ \\ 
 Práctica Final \\
-(Versión final v5.0, 30.11.2014) \\
-\ \\
+(Versión v5.0, 30.11.2014) % \\
+%\ \\
 %\footnotesize{Nota: Es probable que el guión de la práctica final varíe en las
 %próximas semanas, principalmente durante los primeros días, añadiendo puntualizaciones y aclaraciones.}
 }
@@ -580,6 +581,10 @@ Este mecanismo sólo hace falta implementarlo para el método REGISTER.
 \newpage
 \section{Preguntas frecuentes}
 
+A continuación, se presentan una serie de preguntas frecuentes que los estudiantes
+suelen tener al realizar la práctica. Por favor, lee esta sección antes de realizar
+cualquier pregunta en el foro.
+
 \begin{itemize}
 
 \item ¿Tengo que crear un UA integrado?
@@ -590,13 +595,13 @@ Para la práctica básica no hace falta. Se puede lanzar el UAC y el UAS desde d
 
 En la práctica básica, esperaremos a que se termine de enviar la canción. Una vez que se haya terminado el envío, se puede enviar el BYE.
 
-\item En el método BYE e INVITE tenemos que poner la dirección del receptor, ¿también tenemos que sacarla del XML?
+\item En los métodos INVITE y BYE tenemos que poner la dirección del receptor, ¿también tenemos que sacarla del XML?
 
 No, la dirección del receptor es un parámetro que le pasamos a uaclient.py cuando lo ejecutamos desde la \emph{shell}.
 
 \item Me gustaría preguntar si va a ser posible presentar la práctica final en nuestros propios ordenadores.
 
-La práctica ha de funcionar en los ordenadores docentes. Si además funciona
+La práctica ha de funcionar en los ordenadores de los laboratorios docentes, porque es la única manera que tenemos de comprobar que funciona bien. Si además funciona
 en otros entornos, \emph{ferpecto}.
 
 \item ¿Quién tiene que enviar el fichero MP3 por RTP? ¿El que envía la invitación, el invitado, o los dos?
@@ -628,13 +633,13 @@ Para ''solucionarlo'' en las preferencias de Wireshark en el protocolo en cuesti
 
 \item ¿Cómo utilizo vlc para escuchar lo que me llega?
 
-Tendrías que ejecutar algo parecido a lo siguiente (con su IP y puerto correspondiente, los que pongo aquí son sólo una IP y un puerto de ejemplo), redireccionando la salida de error a la papelera:
+Tendrías que ejecutar algo parecido a lo siguiente (con su IP y puerto correspondiente, los que pongo aquí son sólo una IP y un puerto de ejemplo), redireccionando la salida de error a la papelera\footnote{Según la versión de cvlc puede que haga falta o no la @ en el comando.}:
 
-cvlc rtp://@127.0.0.1:23032 
+cvlc rtp://@127.0.0.1:23032 2$>$ /dev/null
 
 \item Como requisito avanzado, si quiero integrar vlc en el programa Python, se me imprimen algunas instrucciones (creo que de error) del VLC por pantalla, y finalmente las demás instrucciones del VLC.
 
-Tendrías que ejecutar algo parecido a lo siguiente (con su IP y puerto correspondiente), redireccionando la salida de error a la papelera:
+Tendrías que ejecutar algo parecido a lo siguiente (con su IP y puerto correspondiente), redireccionando la salida de error a la papelera\footnote{Según la versión de cvlc puede que haga falta o no la @ en el comando.}:
 
 cvlc rtp://@127.0.0.1:23032 2$>$ /dev/null
 
