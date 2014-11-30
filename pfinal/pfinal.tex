@@ -92,16 +92,17 @@ Se proporciona un script de comprobación de entrega correcta, \emph{check-pfina
 La entrega de práctica se deberá hacer antes del {\bf día límite de entrega a las 23:55}\footnote{El día límite en esta versión del documento todavía no se conoce.}. Para entonces, se debe tener un repositorio git en GitHub con los siguientes archivos:
 
 \begin{enumerate}
-  \item uaclient.py
-  \item uaserver.py
-  \item proxy\_registrar.py
-  \item ua1.xml (con un ejemplo de fichero de configuración del UA)
-  \item ua2.xml (con otro ejemplo de fichero de configuración del UA)
-  \item pr.xml (con un ejemplo de fichero de configuración del proxy/registrar)
-  \item llamada.libpcap
-  \item error.libpcap
+  \item uaclient.py (cliente del UA)
+  \item uaserver.py (servidor del UA)
+  \item proxy\_registrar.py (servidor que hace funciones de \texttt{proxy} y \texttt{Registrar})
+  \item ua1.xml (fichero de configuración del UA)
+  \item ua2.xml (fichero de configuración del UA)
+  \item pr.xml (fichero de configuración del proxy/registrar)
+  \item llamada.libpcap (captura de una llamada exitosa)
+  \item error.libpcap (captura de una llamada con error)
   \item avanzadas.txt (fichero opcional, sólo necesario en caso de realizar algún requisito avanzado)
   \item passwords.txt (fichero opcional, sólo necesario en caso de realizar el requisito avanzado de registro seguro)
+  \item Otros: README.md, .gitignore, .git, check-pfinal.py, cancion.mp3, mp32rtp
 \end{enumerate}
 
 Otras consideraciones:
