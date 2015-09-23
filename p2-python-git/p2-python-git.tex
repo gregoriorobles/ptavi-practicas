@@ -32,7 +32,7 @@
 
 \title{Práctica 2 - Python avanzado}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.1 – 17.9.2014}
+\date{Versión 6.0 – 23.9.2015}
 
 
 \maketitle
@@ -51,8 +51,8 @@ La programación orientada a objetos en un paradigma de programación muy utiliz
 \begin{itemize}
   \item Conocer y practicar la programación orientada a objetos (con conceptos como clase, objeto, herencia, instanciación).
   \item Usar varios módulos Python, importando funcionalidad creada en otros módulos.
-  \item Conocer y seguir la guía de estilo de programación recomendada para Python.
-%  \item Utilizar el sistema de control de versiones git en GitHub.
+  \item Conocer y seguir la guía de estilo de programación recomendada para Python (ver PEP8 y PEP257).
+  \item Utilizar el sistema de control de versiones git en GitHub.
 \end{itemize}
 
 \section{Conocimientos previos necesarios}
@@ -67,20 +67,15 @@ Tiempo estimado: 10 horas
 
 \begin{enumerate}
 
-  \item Crea en tu \texttt{home} en el laboratorio un directorio \texttt{ptavi} y dentro del mismo un subdirectorio \texttt{prac2}. Lo puedes hacer desde la \texttt{shell} siguiendo las siguientes instrucciones:
-%una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, crea un repositorio llamado \texttt{ptavi} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}.
+  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}.
+  
+    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p2} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p2}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
-%FIXME: Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio.  
-   \begin{verbatim}
-		$ mkdir -p ~/ptavi/prac2
-		$ cd ~/ptavi/prac2
-   \end{verbatim}
-%	Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando según vayas realizando los ejercicios a continuación. Recuerda que al final del todo tendrás que sincronizar también el repositorio en GitHub (con \texttt{push}).
+  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
 
-
-  \item Crea en el archivo \texttt{calc.py} un programa en Python que implemente una calculadora sencilla que permita sumar y restar. El programa deberá:
+  \item Investiga el archivo \texttt{calc.py}. Comprueba que en él se implementa una calculadora sencilla que permite sumar y restar. El programa tiene las siguientes características:
   \begin{itemize}
-    \item Ser llamado de la siguiente manera por línea de instrucciones (shell):
+    \item Ha de ser llamado de la siguiente manera por línea de instrucciones (shell):
     \begin{verbatim}
     $ python calc.py operando1 operación operando2
     \end{verbatim}
@@ -89,8 +84,6 @@ donde operación podrá ser \texttt{suma} o \texttt{resta}. Para tomar los pará
     \item Imprimir el resultado por pantalla.
   \end{itemize}
 
-
-\finejercicio
 
   \item Crea en el archivo \texttt{calcoo.py} un programa Python que implemente la misma funcionalidad (y se ejecute de la misma manera) que \texttt{calc.py}, pero orientada a objetos. Para tal fin, crea un clase \texttt{Calculadora} (las mayúsculas son importantes), que tenga los métodos suma y resta (suma y resta han de devolver el resultado, pero no imprimirlo por pantalla). A su vez, el programa principal deberá tomar los parámetros que el usuario ha dado en la línea de comandos (con \texttt{sys.argv}), instanciar un objeto de la clase Calculadora, y llamar al método correspondiente e imprimir por pantalla el resultado.
 
@@ -138,15 +131,31 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 29 de septiembre de 2014 a las 23:55. Para ello, se deberá contar a esa fecha con
+La entrega de práctica se deberá hacer antes del lunes 5 de octubre de 2015 a las 23:55. Para ello, se deberá contar a esa fecha con
+
 
 \begin{enumerate}
-  \item Un subdirectorio \texttt{prac2} dentro del directorio \texttt{ptavi} de tu \texttt{home} con:
+  \item Tener un repositorio git en GitHub con:
   \begin{itemize}
-    \item 4 módulos Python: calc.py, calcoo.py, calcoohija.py y calcplus.py.
-    \item 2 clases: Calculadora y CalculadoraHija.
-    \item Todo ello siguiendo la guía de estilo PEP8.
+      \item 4 módulos Python: calc.py, calcoo.py, calcoohija.py y calcplus.py.
+      \item 2 clases: Calculadora y CalculadoraHija.
+      \item Todo ello siguiendo la guía de estilo PEP8.
   \end{itemize}
 \end{enumerate}
+
+
+Se han de tener en cuenta las siguientes consideraciones:
+\begin{itemize}
+  \item Se valorará que al menos haya diez \texttt{commits} realizados.
+  \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
+  \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
+\end{itemize}
+
+Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p2.py}, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+\begin{verbatim}
+	$ python check-p2.py login_lab
+\end{verbatim}
+
+donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
 
 \end{document}
