@@ -17,12 +17,11 @@
   \end{footnotesize}
 }
 
-\renewcommand{\finejercicio}{
-}
-
-
-\renewcommand{\finpractica}{
-}
+%\renewcommand{\finejercicio}{
+%}
+%
+%\renewcommand{\finpractica}{
+%}
 
 
 \ProcessOptions
@@ -51,14 +50,14 @@ La programación orientada a objetos en un paradigma de programación muy utiliz
 \begin{itemize}
   \item Conocer y practicar la programación orientada a objetos (con conceptos como clase, objeto, herencia, instanciación).
   \item Usar varios módulos Python, importando funcionalidad creada en otros módulos.
-  \item Conocer y seguir la guía de estilo de programación recomendada para Python (ver PEP8 y PEP257).
+  \item Conocer y seguir la guía de estilo de programación recomendada para Python (ver PEP8).
   \item Utilizar el sistema de control de versiones git en GitHub.
 \end{itemize}
 
 \section{Conocimientos previos necesarios}
 
 \begin{enumerate}
-  \item Nociones de Python (las de la primera práctica)
+  \item Nociones de Python3 (las de la primera práctica)
 \end{enumerate}
 
 Tiempo estimado: 10 horas
@@ -115,14 +114,23 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
     divide,300,10,2
     \end{verbatim}
 
-	el resultado que se imprimirá por pantalla será 15 en todos los casos. En el caso de que la operación sea de división y uno de los operandos sea cero, se imprimirá por pantalla \texttt{Division by zero is not allowed}. El fichero \texttt{calcplus.py} deberá hacer uso de la funcionalidad implementada en \texttt{calcoohija.py}.
+	el resultado que se imprimirá por pantalla será, para el ejemplo que se da, 15 en todos los casos. En el caso de que la operación sea de división y uno de los operandos sea cero, se imprimirá por pantalla \texttt{Division by zero is not allowed}. El fichero \texttt{calcplus.py} deberá hacer uso de la funcionalidad implementada en \texttt{calcoohija.py}.
+
+\finejercicio
+
+  \item Crea el archivo \texttt{calcplusplus.py} que será llamado de la siguiente manera por línea de instrucciones (shell):
+    \begin{verbatim}
+    $ python calcplusplus.py fichero
+    \end{verbatim}
+
+  \texttt{calcplusplus.py} ha de tener la misma funcionalidad que \texttt{calcplus.py} (ver ejercicio anterior), pero deberá hacer uso del módulo \texttt{csv} de Python3\footnote{https://docs.python.org/3.1/library/csv.html} y de la sentencia \texttt{with} de Python.
 
 \finejercicio
 
   \item Aunque el intérprete de Python admite ciertas libertades a la hora de programar, los programadores de Python con la finalidad de mejorar principalmente la legibilidad del código han acordado seguir una guía de estilo. Esta guía de estilo se encuentra en el \texttt{Python Enhancement Proposal 8} (PEP 8), y contiene instrucciones sobre cómo situar los espacios en blanco, cómo nombrar las variables, etc. Puedes encontrar la guía (original, en inglés, y una versión parcial en castellano) en el Moodle de la asignatura.
 
   Existe un programa de ayuda de línea de comandos llamado \texttt{pep8} que te permite comprobar si se siguen la mayoría de las indicaciones de PEP8. Pásale la herramienta a tus programas de Python hasta que no dé ningún error.
-
+  
 \finejercicio
 
 \finpractica
@@ -137,8 +145,8 @@ La entrega de práctica se deberá hacer antes del lunes 5 de octubre de 2015 a 
 \begin{enumerate}
   \item Tener un repositorio git en GitHub con:
   \begin{itemize}
-      \item 4 módulos Python: calc.py, calcoo.py, calcoohija.py y calcplus.py.
-      \item 2 clases: Calculadora y CalculadoraHija.
+      \item 5 módulos Python: \texttt{calc.py}, \texttt{calcoo.py}, \texttt{calcoohija.py}, \texttt{calcplus.py}, \texttt{calcplusplus.py}.
+      \item 2 clases: \texttt{Calculadora} y \texttt{CalculadoraHija}.
       \item Todo ello siguiendo la guía de estilo PEP8.
   \end{itemize}
 \end{enumerate}
@@ -147,15 +155,15 @@ La entrega de práctica se deberá hacer antes del lunes 5 de octubre de 2015 a 
 Se han de tener en cuenta las siguientes consideraciones:
 \begin{itemize}
   \item Se valorará que al menos haya diez \texttt{commits} realizados.
-  \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
+  \item Se valorará que el código entregado siga la guía de estilo de Python (véase PEP8).
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
 \end{itemize}
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p2.py}, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p2.py} incluido en el repositorio de la práctica. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p2.py login_lab
+	$ python check-p2.py login_github
 \end{verbatim}
 
-donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
+donde \texttt{login\_github} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
 
 \end{document}
