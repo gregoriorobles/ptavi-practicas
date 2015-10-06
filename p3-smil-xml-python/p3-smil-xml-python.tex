@@ -26,9 +26,9 @@
 \begin{document}
 
 
-\title{Práctica 3 - SMIL, XML en Python (y git)}
+\title{Práctica 3 - SMIL, XML en Python}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.06 – 10.10.2014}
+\date{Versión 6.0 – 6.10.2015}
 
 
 \maketitle
@@ -79,9 +79,9 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
 %\finejercicio
 
-  \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}. Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}. Al hacerlo, elige tener un README y añade un .gitignore (indica que va a ser un proyecto Python) y escoge una licencia (todas son de software libre; escoge la de Apache, por ejemplo).
+  \item Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}. Al hacerlo, elige tener un README y añade un .gitignore (indica que va a ser un proyecto Python) y escoge una licencia (todas son de software libre; escoge la de Apache, por ejemplo).
 
-  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub introduciendo la instrucción de shell que podrás encontrar en la página de tu repositorio. Verás que el repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
+  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub. Verás que el repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
 y \texttt{README.md}. Prueba a modificar el fichero README.md para ver los cambios en la página del repositorio en GitHub.
 
   Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitHub (con \texttt{push}).
@@ -102,7 +102,7 @@ y \texttt{README.md}. Prueba a modificar el fichero README.md para ver los cambi
 
   \item Crea un programa principal, llamado \texttt{karaoke.py}, que haga uso de la clase \texttt{SmallSMILHandler}. Este programa deberá:
   \begin{itemize}
-    \item Leer un fichero SMIL que se pase por línea de comandos. En caso de que no se especifique un fichero, muestre el error por pantalla \texttt{Usage: python karaoke.py file.smil}. 
+    \item Leer un fichero SMIL que se pase por línea de comandos. En caso de que no se especifique un fichero, muestre el error por pantalla \texttt{Usage: python3 karaoke.py file.smil}. 
 
   Para realizar pruebas, se puede utilizar el fichero \texttt{karaoke.smil} que se puede encontrar en Moodle.
 
@@ -118,36 +118,36 @@ root-layout\twidth="248"\theight="300"\tbackground-color="blue"\n
 region\tid="a"\ttop="20"\tleft="64"\n
 \end{verbatim}
 
+    \item Crear un fichero de las etiquetas en formato JSON. Puedes utilizar para ello la biblioteca \texttt{json} de Python 3. El JSON creado deberá permitir regenerar fácilmente la estructura del fichero SMIL original. El nombre del fichero ha de ser el mismo que el del SMIL, simplemente modificando la extensión a \texttt{.json}. Así, si el fichero de entrada es \texttt{karaoke.smil}, el fichero JSON será \texttt{karaoke.json}.
 
   \end{itemize}
 
 \finejercicio
 
-  \item Modifica el programa principal \texttt{karaoke.py} para que se descargue en local el contenido multimedia referenciado en el SMIL y que sea remoto. De esta manera, si el atributo \texttt{src} tiene como valor un elemento en remoto (o sea, que empiece por \texttt{http://}), se deberá descargar ese elemento en local. Para ello, se ha de utilizar la funcionalidad de la biblioteca \texttt{os}\footnote{La documentación en línea del módulo \texttt{os} de Python se encuentra en \url{http://docs.python.org/library/os.html}. Pierde unos minutos echándole un ojo, es una inversión para el futuro.}, que permite hacer llamadas a la \texttt{shell}, para hacer uso de la instrucción \texttt{wget}.
-   Para descargarnos por ejemplo \url{http://gsyc.es/logo.gif} procederíamos de la siguiente manera:
-\begin{verbatim}
-recurso = "http://gsyc.es/logo.gif"
-os.system("wget -q " + recurso)
-\end{verbatim}
-	Debido a la opción -q (de \emph{quiet}), \texttt{wget} no imprimirá por pantalla mensajes (ni siquiera de error).
-	Modifica el valor del atributo si el recurso es remoto indicando el nombre en local (lo que viene después de la última barra de la URL). Así, para \url{http://gsyc.es/logo.gif} ahora será \texttt{logo.gif}.
+  \item Modifica el programa principal \texttt{karaoke.py} para que se descargue en local el contenido multimedia referenciado en el SMIL que sea remoto. De esta manera, si el atributo \texttt{src} tiene como valor un elemento en remoto (o sea, que empiece por \texttt{http://}), se deberá descargar ese elemento en local. Para descargarnos por ejemplo \url{http://gsyc.es/logo.gif}, utilizaremos funcionalidad de la biblioteca de Python 3 \texttt{urllib}. Modifica el valor del atributo si el recurso es remoto indicando el nombre en local (lo que viene después de la última barra de la URL). Así, para \url{http://gsyc.es/logo.gif} ahora será \texttt{logo.gif}.
 
 
 \finejercicio
 
   \item Modifica el programa principal \texttt{karaoke.py} para que toda la funcionalidad descrita en los ejercicios 3, 4 y 5 sea orientada a objetos, específicamente en una clase llamada \texttt{KaraokeLocal}. Esta clase deberá tener los siguientes métodos:
   \begin{itemize}
-    \item Constructor: se le pasará como parámetro el fichero fuente SMIL que el usuario introduce por vía de comandos.  El constructor parseará el fichero SMIL y obtendrá las etiquetas (mediante \texttt{get\_tags} del objeto de tipo \texttt{SmallSMILHandler}).
+    \item Inicializador: se le pasará como parámetro el fichero fuente SMIL que el usuario introduce por vía de comandos.  El constructor parseará el fichero SMIL y obtendrá las etiquetas (mediante \texttt{get\_tags} del objeto de tipo \texttt{SmallSMILHandler}).
     \item \texttt{\_\_str\_\_}, que a partir de la lista de etiquetas y atributos, devolverá un string listo para ser imprimido como se hacía en el ejercicio 4.
+    \item \texttt{to\_json}, que a partir de la lista de etiquetas y atributos, guardará un fichero en formato JSON tal y como se hacía en el ejercicio 4. Este método tendrá dos atributos: el nombre del fichero SMIL original y el nombre del fichero JSON resultante. Si el nombre del fichero JSON resultante se obviara en la llamada al método, el fichero JSON resultante ha de tener el mismo nombre que el SMIL original, pero con extensión \texttt{.json}.
     \item \texttt{do\_local}, que incluya la funcionalidad para descargar los recursos remotos (véase ejercicio 5).
   \end{itemize}
 
-  El programa principal, que vendrá al final del fichero con una sentencia \texttt{"\_\_main\_\_"},  solamente constará de lo siguiente:
-  \begin{itemize}
+  El programa principal, que vendrá al final del fichero con una sentencia \texttt{"\_\_main\_\_"}, constará de lo siguiente:
+  \begin{enumerate}
     \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 4). 
-    \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}, se imprimirá la instancia\footnote{Se ha de tener en cuenta que cuando se imprime la variable de instanciación, se llama al método \_\_str\_\_ de la clase.}, se llamará a \texttt{do\_local} y se imprimirá otra vez la instancia.
-   \end{itemize}
-Nótese que el programa sólo deberá imprimir por pantalla las salidas que se indican (básicamente, al hacer \emph{print} de la clase y, si acaso, en las llamadas a \texttt{wget} en \texttt{do\_local}). El resto del programa, al entregar la práctica, no ha de contener trazas (o sea, más \emph{prints}).
+    \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}
+    \item Se imprimirá el objeto\footnote{Se ha de tener en cuenta que cuando se imprime el objeto, se llama al método \_\_str\_\_ de la clase.}
+    \item Se llamará a \texttt{do\_json} pasándole sólo un parámetro (o sea, el fichero JSON resultante se deberá llamar como el fichero SMIL, pero con extensión diferente)
+    \item Se llamará a \texttt{do\_local}
+    \item Se llamará a \texttt{do\_json} (en este caso, el fichero JSON resultante se deberá llamar local.json)
+    \item Y se imprimirá otra vez el objeto.
+   \end{enumerate}
+Nótese que el programa sólo deberá imprimir por pantalla las salidas que se indican (básicamente, al hacer \emph{print} de la clase). El resto del programa, al entregar la práctica, no ha de contener trazas (o sea, más \emph{prints}).
 
 \finejercicio
 
@@ -157,13 +157,12 @@ Nótese que el programa sólo deberá imprimir por pantalla las salidas que se i
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 13 de octubre de 2014 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 19 de octubre de 2015 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
-  \item Haber indicado en el Moodle cuál es tu nombre de usuario en GitHub.
   \item Tener un repositorio git en GitHub con:
   \begin{itemize}
-    \item Los ficheros \texttt{.gitignore}, \texttt{LICENSE} y \texttt{README.md} que hay en todo repositorio GitHub.
+    \item Los ficheros \texttt{.gitignore}, \texttt{LICENSE} y \texttt{README.md} que hay en (casi) todo repositorio GitHub.
     \item 2 módulos Python (y únicamente estos dos ficheros):
     \begin{itemize}
       \item \texttt{smallsmilhandler.py}
@@ -186,10 +185,10 @@ Se ha de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa check-p3.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p3.py login_lab
+	$ python check-p3.py login
 \end{verbatim}
 
-donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
+donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
 
 %Si la entrega se ha hecho correctamente, por pantalla aparecerá el siguiente mensaje:
 
