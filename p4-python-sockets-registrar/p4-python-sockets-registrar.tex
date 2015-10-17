@@ -28,12 +28,12 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0.5 – 20.10.2014}
+\date{Versión 6.0 – 16.10.2015}
 
 
 \maketitle
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta 0,7 puntos. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
 
 \section{Introducción}
 
@@ -59,7 +59,7 @@ Tiempo estimado (para un alumno medio): 10 horas
 
 \begin{enumerate}
 
-  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
+  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (haciendo commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
   Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub, aunque si quieres que tus compañeros de equipo puedan ver el código antes, se recomienda hacerlo con anterioridad.
 
@@ -78,9 +78,9 @@ Tiempo estimado (para un alumno medio): 10 horas
 
   \item Estudia el código de \texttt{server.py}, que implementa un sencillo servidor de eco basado en UDP. Fíjate en que:
   \begin{enumerate}
-    \item Importa el módulo \texttt{SocketServer}\footnote{\url{http://www.python.org/doc/2.5.2/lib/module-SocketServer.html}}.
+    \item Importa el módulo \texttt{socketserver}\footnote{\url{https://docs.python.org/3/library/socketserver.html}}.
     \item Tenemos una única clase que manejará las peticiones.
-    \item Esta clase hereda de una clase \texttt{DatagramRequestHandler} que hay en el módulo \texttt{Socket}.
+    \item Esta clase hereda de una clase \texttt{DatagramRequestHandler} que hay en el módulo \ texttt{socket}.
     \item La clase no tiene constructor \texttt{\_\_init\_\_}; utiliza el de la clase padre.
     \item La clase sólo tiene un método, llamado \texttt{handle()}.
     \item El método \texttt{handle()} se ejecuta cada vez que recibimos una petición al servidor.
@@ -151,11 +151,15 @@ Usage: client.py ip puerto register sip_address expires_value
 
 \finejercicio
 
-  \item  Modifica el servidor para añadir el método \texttt{register2file} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.txt} lo siguiente: en una primera línea los campos separados por tabuladores, y en sucesivas líneas los valores de cada uno de los usuarios registrados, siguiendo el siguiente formato\footnote{Los espacios antes y después de los tabuladores son para mejorar la visualización del guión de prácticas, por lo que no deberían incluirse en el fichero}:
+  \item  Modifica el servidor para añadir el método \texttt{register2file} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de registro. A continuación, se puede ver un ejemplo:
 \begin{verbatim}
-		User \t IP \t Expires
-		luke@polismassa.com \t localhost \t 2013-10-23 10:37:12
-		papa@darthwader.com \t localhost \t 2013-10-23 10:21:15
+{
+  ["luke@polismassa.com":
+        {"address": "localhost",
+         "registered": "2013-10-23 10:37:12"
+        }
+  ]
+}
 \end{verbatim}
 	Para los formatos de tiempo, se recomienda utilizar el módulo time, en particular:
 \texttt{time()}, que devuelve los segundos desde el 1 de enero de 1970,
@@ -197,7 +201,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 27 de octubre de 2014 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 2 de noviembre de 2015 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitHub con:
@@ -217,7 +221,7 @@ La entrega de práctica se deberá hacer antes del lunes 27 de octubre de 2014 a
   \end{itemize}
 \end{enumerate}
 
-Se ha de tener en cuenta las siguientes consideraciones:
+Se han de tener en cuenta las siguientes consideraciones:
 \begin{itemize}
   \item Se valorará que al menos haya diez \texttt{commits} realizados.
   \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
@@ -228,11 +232,11 @@ de Python, tenga código legible y bien estructurado.
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p4.py}, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p4.py login_lab
+	$ python check-p4.py login
 \end{verbatim}
 
 
-donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
+donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
 
 \vspace{1cm}
 
