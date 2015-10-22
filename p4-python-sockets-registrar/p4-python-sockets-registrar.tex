@@ -28,7 +28,7 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 6.1 – 21.10.2015}
+\date{Versión 6.1.1 – 22.10.2015}
 
 
 \maketitle
@@ -150,14 +150,14 @@ Usage: client.py ip puerto register sip_address expires_value
 
 \finejercicio
 
-  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de registro. A continuación, se puede ver un ejemplo:
+  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de expiración. A continuación, se puede ver un ejemplo:
 \begin{verbatim}
 [
     [
         "luke@polismassa.com",
         {
             "address": "localhost",
-            "registered": "2013-10-23 10:37:12"
+            "expires": "2013-10-23 10:37:12 +0000"
         }
     ]
 ]
@@ -180,7 +180,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \finejercicio
 
-  \item Modifica el servidor, añadiendo el método \texttt{json2registered}, para que cuando se lance, compruebe si hay un fichero llamado \texttt{registered.json}. Si existe, se leerá su contenido y se usará como diccionario de usuarios registrados. Si da un error, el servidor se ejecutará como si el fichero JSON no existiera.
+  \item Modifica el servidor, añadiendo el método \texttt{json2registered}, para que cuando se lance, compruebe si hay un fichero llamado \texttt{registered.json}. Si existe, se leerá su contenido y se usará como diccionario de usuarios registrados. Si da \emph{cualquier} error al leer el fichero, el servidor se ejecutará como si el fichero JSON no existiera.
 
 \finejercicio
 
