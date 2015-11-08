@@ -54,7 +54,7 @@
 
 \title{Práctica 6 - Sesión SIP \emph{peer-to-peer}}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 5.0 – 14.11.2014}
+\date{Versión 6.0 – 8.11.2015}
 
 %\author{Gregorio Robles y Jesús M. González Barahona \\
 %  grex@gsyc.urjc.es \\
@@ -79,7 +79,9 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 
 Esta práctica tiene como objetivo implementar dos programas Python,
 de manera que se pueda realizar una sesión SIP como la que se
-muestra en la figura:
+muestra en la figura\footnote{Nota que en la figura los métodos SIP están en 
+mayúsculas para mejorar su lectura; en tu implementación deberían seguir el 
+estándar con sólo la primera letra mayúscula}:
 
 \begin{center}
 \includegraphics{figs/sip-invite.png}
@@ -111,9 +113,9 @@ Tiempo estimado: 10 horas
 
 \section*{Creación de repositorio para la práctica}
 
- Con el navegador, dirígete al repositorio \texttt{ptavi-p6} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p6}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
+Con el navegador, dirígete al repositorio \texttt{ptavi-p6} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p6}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
 
-  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
+ Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
 
 
 \section*{Parte cliente}
@@ -137,19 +139,12 @@ Por ejemplo:
   $ python client.py BYE robin@193.147.73.20:5555
 \end{verbatim}
 
-En caso de no introducir el número de parámetros correctos o de error en los mismos, el programa debería imprimir:
+En caso de no introducir el número de parámetros correctos o de error en los mismos, el programa debería imprimir siempre por pantalla:
 \begin{verbatim}
   Usage: python client.py method receiver@IP:SIPport
 \end{verbatim}
 
-En caso de que se intentara establecer una conexión con un puerto no abierto
-(p.ej. porque el servidor no haya sido lanzado), se capturará la excepción y, antes de finalizar el programa, se imprimirá por pantalla un texto como el siguiente 
-(nótese que la IP y el puerto serán el de cada caso):
-\begin{verbatim}
-  Error: No server listening at 193.147.73.20 port 5555
-\end{verbatim}
-
-\subsection*{Métodos}
+\subsection*{Peticiones SIP}
 
   \begin{itemize}
     \item INVITE sip:receptor@IP SIP/2.0
@@ -160,7 +155,7 @@ En caso de que se intentara establecer una conexión con un puerto no abierto
     \item ACK sip:receptor@IP SIP/2.0
 
     Método de asentimiento. No se pasará al programa \texttt{client.py} como parámetro desde
-la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ringing} y \texttt{200 OK} de la parte servidora tras hacerle un INVITE.
+la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ring} y \texttt{200 OK} de la parte servidora tras hacerle un INVITE.
 
     \item BYE sip:receptor@IP SIP/2.0
 
@@ -181,12 +176,12 @@ Por ejemplo:
   $ python server.py 127.0.0.1 5555 cancion.mp3
 \end{verbatim}
 
-En caso de no introducir el número de parámetros correctos o de error en los mismos (se habrá de comprobar si existe el fichero de audio), el programa debería imprimir:
+En caso de no introducir el número de parámetros correctos o de error en los mismos (se ha de comprobar si existe el fichero de audio), el programa debería imprimir:
 \begin{verbatim}
   Usage: python server.py IP port audio_file
 \end{verbatim}
 
-En caso contrario, el servidor imprimirá por pantalla:
+En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
 \begin{verbatim}
   Listening...
 \end{verbatim}
@@ -194,14 +189,14 @@ En caso contrario, el servidor imprimirá por pantalla:
 \subsection*{Códigos de respuesta}
 
    \begin{itemize}
-     \item SIP/2.0 100 Trying: al recibir un INVITE.
-     \item SIP/2.0 180 Ringing: al recibir un INVITE.
-     \item SIP/2.0 200 OK: en caso de éxito.
-     \item SIP/2.0 400 Bad Request: si no se entiende la petición, por ejemplo, el método enviado.
-     \item SIP/2.0 405 Method Not Allowed: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
+     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 180 Ring}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 200 OK}: en caso de éxito.
+     \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
+     \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
 
-Nota: Para simplificar la práctica, se puede enviar en un único mensaje la respuesta SIP/2.0.
+Nota: Para simplificar la práctica, se enviará en un único mensaje la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ring} y \texttt{SIP/2.0 200 OK}.
 
 \subsection*{Envío RTP}
 
@@ -234,7 +229,7 @@ no sean las ``correctas" y nos dé un error. Tenlo en cuenta.}:
   os.system(aEjecutar)
 \end{verbatim}
 
-Nótese que \texttt{fichero\_audio} es uno de los parámetros que se le pasa al servidor al ejecutarse. {\bf Como en esta práctica no se hace uso de SDP para 
+Nótese que \texttt{fichero\_audio} es uno de los parámetros que se le pasa al servidor al ejecutarse. {\bf Nota: Como en esta práctica no se hace uso de SDP para 
 describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como
 destino del envío}.
 
@@ -245,7 +240,7 @@ establecimiento de llamada, el envío RTP de audio y la finalización de
 la llamada. 
 
 La captura original se filtrará para que sólo incluya los paquetes
-SIP y los dos primeros y dos últimos paquetes RTP con audio.
+SIP y los tres primeros y tres últimos paquetes RTP con audio.
 
 La captura filtrada resultante se guardará en el fichero \texttt{invite.libpcap}
 y se subirá al repositorio.
@@ -253,7 +248,7 @@ y se subirá al repositorio.
 
 \section*{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 24 de noviembre de 2014 a las 23:55. Para entonces, se debe tener un repositorio git en GitHub con: 
+La entrega de práctica se deberá hacer antes del lunes 30 de noviembre de 2015 a las 23:55. Para entonces, se debe tener un repositorio git en GitHub con: 
 
     \begin{itemize}
         \item 2 módulos Python y la captura realizada con \texttt{wireshark}:
@@ -271,17 +266,15 @@ Se han de tener en cuenta las siguientes consideraciones:
   \item Se valorará que la captura esté bien filtrada y sólo contenga los paquetes que se indican en el guión.
   \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
-  \item Se valorará que el equipo al que pertenece el alumno siga la guía de estilo
-de Python, tenga código legible y bien estructurado.
 \end{itemize}
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p6.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-  $ python check-p6.py login_lab
+  $ python check-p6.py login_githbu
 \end{verbatim}
 
 
-donde \texttt{login\_lab} es tu nombre de usuario en los laboratorios docentes de Linux del GSyC. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos).
+donde \texttt{login\_github} es tu nombre de usuario en GitHub.
 
 
 \vspace{1cm}
