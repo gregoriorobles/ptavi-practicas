@@ -39,7 +39,7 @@
 \title{Protocolos para la Transmisión de Audio y Vídeo por Internet\\ 
 \ \\ 
 Práctica Final \\
-(Versión v5.0.1, 9.1.2015) % \\
+(Versión v6.0, 7.11.2015) % \\
 %\ \\
 %\footnotesize{Nota: Es probable que el guión de la práctica final varíe en las
 %próximas semanas, principalmente durante los primeros días, añadiendo puntualizaciones y aclaraciones.}
@@ -87,22 +87,19 @@ Tiempo estimado: 25 horas
 
 Con el navegador, dirígete al repositorio \texttt{ptavi-pfinal} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-pfinal}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
 
-Se proporciona un script de comprobación de entrega correcta, \emph{check-pfinal.py}. Es responsabilidad del alumno comprobar la correcta entrega mediante este script.
-
-La entrega de práctica se deberá hacer antes del {\bf día límite de entrega a las 23:55}\footnote{El día límite en esta versión del documento todavía no se conoce.}. Para entonces, se debe tener un repositorio git en GitHub con los siguientes archivos:
+La entrega de práctica se deberá hacer antes del {\bf 14.1 a las 12:00}. Para entonces, se debe tener un repositorio git en GitHub con los siguientes archivos:
 
 \begin{enumerate}
-  \item uaclient.py (cliente del UA)
-  \item uaserver.py (servidor del UA)
-  \item proxy\_registrar.py (servidor que hace funciones de \texttt{proxy} y \texttt{Registrar})
-  \item ua1.xml (fichero de configuración del UA)
-  \item ua2.xml (fichero de configuración del UA)
-  \item pr.xml (fichero de configuración del proxy/registrar)
-  \item llamada.libpcap (captura de una llamada exitosa)
-  \item error.libpcap (captura de una llamada con error)
-  \item avanzadas.txt (fichero opcional, sólo necesario en caso de realizar algún requisito avanzado)
-  \item passwords.txt (fichero opcional, sólo necesario en caso de realizar el requisito avanzado de registro seguro)
-  \item Otros: README.md, .gitignore, .git, check-pfinal.py, cancion.mp3, mp32rtp
+  \item \texttt{uaclient.py} (cliente del UA)
+  \item \texttt{uaserver.py} (servidor del UA)
+  \item \texttt{proxy\_registrar.py} (servidor que hace funciones de \texttt{proxy} y \texttt{Registrar})
+  \item \texttt{ua1.xml} (fichero de configuración del UA)
+  \item \texttt{ua2.xml} (fichero de configuración del UA)
+  \item \texttt{pr.xml} (fichero de configuración del proxy/registrar)
+  \item \texttt{llamada.libpcap} (captura de una llamada exitosa)
+  \item \texttt{error.libpcap} (captura de una llamada con error)
+  \item \texttt{avanzadas.txt} (fichero opcional, sólo necesario en caso de realizar algún requisito avanzado)
+  \item Otros: \texttt{README.md}, \texttt{.gitignore}, \texttt{.git}, \texttt{check-pfinal.py}, \texttt{cancion.mp3}, \texttt{mp32rtp}
 \end{enumerate}
 
 Otras consideraciones:
@@ -115,10 +112,10 @@ convenciones indicadas en este documento, en particular que el intercambio
 de mensajes, los parámetros de los programas y los mensajes en el fichero de \emph{log} sean los
 que especifican. En la \texttt{shell} pueden incluirse las trazas que el alumno desee y en el formato que le parezca más conveniente.
   \item Se valorará que las capturas estén bien filtradas y sólo contengan los paquetes que se indican en el guión.
-  \item Se valorará que el equipo al que pertenece el alumno siga la guía de estilo
-de Python, tenga código legible y bien estructurado.
-  \item Se valorará que el cliente y el servidor funcione con los miembros del equipo. Sólo en los casos en los que se realizan requisitos avanzados incompatibles, esta consideración no se tendrá en cuenta.
-  \item Se pasará un programa anti-copia a las prácticas entregadas.
+  \item Se valorará que el cliente y el servidor siga el estándar SIP (o en su caso, las simplificaciones propias de esta práctica) al pie de la letra.
+  \item Se proporciona un script de comprobación de entrega correcta, \emph{check-pfinal.py}. Es responsabilidad del alumno comprobar la correcta entrega mediante este script.
+
+  \item Se pasará un programa anti-copia a las prácticas entregadas. El alumno es responsable de su código y saber explicarlo y defenderlo.
 \end{itemize}
 
 
@@ -130,7 +127,7 @@ Cada \emph{User Agent} deberá constar de una parte cliente y otra servidora, qu
 
 La configuración del \emph{User Agent} estará almacenada en un fichero
 con formato XML válido, que seguirá 
-la sintaxis que se describe en el  siguiente DTD\footnote{Se puede profundizar en la sintaxis de las DTD en: http://www.javadabbadoo.org/apendice/dtd/sintaxis/index.html}:
+la sintaxis que se describe en la siguiente DTD\footnote{Se puede profundizar en la sintaxis de las DTD en: http://www.mundolinux.info/sintaxis-de-las-dtd.htm}:
 
 \begin{verbatim}
 <!ELEMENT config (account, uaserver, rtpaudio, regproxy, log, audio)>
@@ -154,12 +151,12 @@ la sintaxis que se describe en el  siguiente DTD\footnote{Se puede profundizar e
 donde los elementos son los siguientes:
 
 \begin{itemize}
-  \item account: Cuenta del usuario, con su nombre y opcionalmente su contraseña.
-  \item uaserver: Lugar de escucha de la parte servidora del \emph{User Agent}, indicando su dirección IP (opcional, en caso de no estar indicada se utilizará 127.0.0.1) y el puerto.
-  \item rtpaudio: Puerto de recepción para el audio RTP.
-  \item regproxy: Parámetros de localización del servidor Proxy/Registrar: IP y puerto.
-  \item log: Localización (\emph{path}) del fichero de log del \emph{User Agent}.
-  \item audio: Localización (\emph{path}) del fichero MP3.
+  \item \texttt{account}: Cuenta del usuario, con su nombre y su contraseña.
+  \item \texttt{uaserver}: Lugar de escucha de la parte servidora del \emph{User Agent}, indicando su dirección IP (opcional, en caso de no estar indicada se utilizará 127.0.0.1) y el puerto.
+  \item \texttt{rtpaudio}: Puerto de recepción para el audio RTP.
+  \item \texttt{regproxy}: Parámetros de localización del servidor Proxy/Registrar: IP y puerto.
+  \item \texttt{log}: Localización (\emph{path}) del fichero de log del \emph{User Agent}.
+  \item \texttt{audio}: Localización (\emph{path}) del fichero MP3.
 \end{itemize}
 
 \subsection{Log}
@@ -192,14 +189,14 @@ un espacio en blanco y luego una de las siguientes. Un ejemplo de un fichero que
 \begin{footnotesize}
 \begin{verbatim}
 ...
-20101018152045 Starting...
-20101018153012 Sent to 127.0.0.1:5555: REGISTER sip:leonard@bigbang.org:1234 SIP/2.0 [...]
-20101018153017 Received from 127.0.0.1:5555: 200 OK [...]
-20101018153036 Sent to 127.0.0.1:5555: INVITE penny@girlnextdoor.com [...]
+20151118152045 Starting...
+20151118153012 Sent to 127.0.0.1:5555: REGISTER sip:leonard@bigbang.org:1234 SIP/2.0 [...]
+20151118153017 Received from 127.0.0.1:5555: 200 OK [...]
+20151118153036 Sent to 127.0.0.1:5555: INVITE penny@girlnextdoor.com [...]
 ...
-20101018160035 Sent to 127.0.0.1:5555: BYE [...]
-20101018160035 Received from 127.0.0.1:5555: 200 OK [...]
-20101018160112 Finishing.
+20151118160035 Sent to 127.0.0.1:5555: BYE [...]
+20151118160035 Received from 127.0.0.1:5555: 200 OK [...]
+20151118160112 Finishing.
 \end{verbatim}
 \end{footnotesize}
 
@@ -259,6 +256,14 @@ REGISTER sip:leonard@bigbang.org:1234 SIP/2.0
 Expires: 3600
 \end{verbatim}
 
+    Cuando se hace la petición en respuesta a un \texttt{401 Unauthorized}, en las cabeceras del REGISTER ha de incluirse, además de la cabecera con el tiempo de expiración, una cabecera con la información de autenticación.
+
+\begin{verbatim}
+REGISTER sip:leonard@bigbang.org:1234 SIP/2.0
+Expires: 3600
+FIXME
+\end{verbatim}
+
 
     \item INVITE sip:receptor SIP/2.0
 
@@ -292,7 +297,7 @@ Nótese que en el ejmplo anterior 34543 es el puerto donde esperamos que el otro
 
     \item ACK sip:receptor SIP/2.0
 
-    Método de asentimiento. No se pasará al programa uaclient.py como parámetro, ya que se enviará una vez se hayan recibido las respuestas \emph{100 Trying}, \emph{180 Ringing} y \emph{200 OK} de la parte servidora tras hacerle un INVITE.
+    Método de asentimiento. No se pasará al programa uaclient.py como parámetro, ya que se enviará una vez se hayan recibido las respuestas \emph{100 Trying}, \emph{180 Ring} y \emph{200 OK} de la parte servidora tras hacerle un INVITE.
 
     \item BYE sip:receptor SIP/2.0
 
@@ -334,12 +339,23 @@ en el archivo de \emph{log} en el formato especificado con anterioridad.
 Los códigos de respuesta que el UA maneja han de ser, al menos, los siguientes:
 
    \begin{itemize}
-     \item SIP/2.0 100 Trying: al recibir un INVITE.
-     \item SIP/2.0 180 Ringing: al recibir un INVITE.
-     \item SIP/2.0 200 OK: Deberá incluir SDP en el cuerpo (con su correspondiente cabecera de Content-Type).
-     \item SIP/2.0 400 Bad Request: si la petición está mal formada.
-     \item SIP/2.0 405 Method Not Allowed: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
+     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 180 Ring}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 200 OK}: Deberá incluir SDP en el cuerpo (con su correspondiente cabecera de Content-Type).
+     \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
+     \item \texttt{SIP/2.0 401 Unauthorized}: FIXME
+     \item \texttt{SIP/2.0 404 User Not Found}: FIXME
+     \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
+   
+Implementar el mecanismo de registro que se utiliza en SIP en Ekiga (véase práctica 5 o Wikipedia\footnote{http://en.wikipedia.org/wiki/Cryptographic\_nonce}).
+
+El mecanismo de registro seguro parte de la asunción que el usuario tiene una cuenta en el servidor registrar. Así, Se detallará un archivo de texto que tendrá en cada línea la dirección de la cuenta y la contraseña (en claro). 
+
+En el lado del User Agent, hará uso de la contraseña especificada en el archivo de configuración.
+
+
+Este mecanismo sólo hace falta implementarlo para el método REGISTER.
 
 \subsubsection{Envío RTP}
 
@@ -434,7 +450,7 @@ de respuesta:
 
    \begin{itemize}
      \item SIP/2.0 100 Trying: al recibir un INVITE.
-     \item SIP/2.0 180 Ringing: al recibir un INVITE.
+     \item SIP/2.0 180 Ring: al recibir un INVITE.
      \item SIP/2.0 200 OK: deberá incluir SDP en el cuerpo (y su correspondiente cabecera).
      \item SIP/2.0 400 Bad Request: si la petición está mal formada.
      \item SIP/2.0 404 User Not Found: usuario no registrado
@@ -549,34 +565,6 @@ El hilo principal debe ser consciente de que hay otro hilo ejecutándose. Así, 
   {\bf Forma de entrega:} En el fichero ``avanzadas.txt'' se ha de indicar en una línea: ``Hilos para el envío de audio vía RTP''.
 
   {\bf Puntuación máxima:} 0.7
-
-
-\subsection*{Mecanismo de registro seguro}
-
-Tiene como objetivo implementar el mecanismo de registro que se utiliza en SIP en Ekiga (véase práctica 5 o Wikipedia\footnote{http://en.wikipedia.org/wiki/Cryptographic\_nonce}).
-
-El mecanismo de registro seguro parte de la asunción que el usuario tiene una cuenta en el servidor registrar. Así, Se detallará un archivo de texto que tendrá en cada línea la dirección de la cuenta y la contraseña (en claro). 
-
-En el lado del User Agent, hará uso de la contraseña especificada en el archivo de configuración.
-
-Nótese que este requisito adicional tiene como efecto que el atributo \emph{passwd} del elemento \emph{account} en el XML de configuración del \emph{User Agent} deberá ser ahora obligatorio.
-
-Asimismo, debería existir un fichero llamado passwords.txt donde el servidor guarde en cada línea el nombre de su cuenta y la contraseña de los usuarios registrados. La estructura del fichero passwords.txt será como la del siguiente fichero de ejemplo:
-
-\begin{footnotesize}
-\begin{verbatim}
-leonard@bigbang.org 123caramba
-penny@girlnextdoor.com caramba123
-\end{verbatim}
-\end{footnotesize}
-
-
-Este mecanismo sólo hace falta implementarlo para el método REGISTER.
-
-  {\bf Forma de entrega:} En el fichero ``avanzadas.txt'' se ha de indicar en una línea: ``Mecanismo de registro seguro''.
-
-  {\bf Puntuación máxima:} 1.0
-
 
 
 \newpage
