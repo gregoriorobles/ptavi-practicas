@@ -31,7 +31,7 @@
 
 \title{Práctica 2 - Python avanzado}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 6.0 – 23.9.2015}
+\date{Versión 7.0 – 15.9.2016}
 
 
 \maketitle
@@ -67,16 +67,16 @@ Tiempo estimado: 10 horas
 \begin{enumerate}
 
   \item Crea una cuenta en GitHub (\url{http://www.github.com}). Una vez tengas una cuenta, has de indicar tu nombre de usuario en GitHub en el formulario en Moodle\footnote{Busca por ``Indica tu cuenta en GitHub'' en Moodle y allí vete a la pestaña ``Añadir entrada'' para encontrar el formulario.}.
-  
+
     \item Con el navegador, dirígete al repositorio \texttt{ptavi-p2} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p2}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
   Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
 
   \item Investiga el archivo \texttt{calc.py}. Comprueba que en él se implementa una calculadora sencilla que permite sumar y restar. El programa tiene las siguientes características:
   \begin{itemize}
-    \item Ha de ser llamado de la siguiente manera por línea de instrucciones (shell):
+    \item Ha de ser llamado de la siguiente manera por línea de instrucciones (\emph{shell}):
     \begin{verbatim}
-    $ python calc.py operando1 operación operando2
+    $ python3 calc.py operando1 operación operando2
     \end{verbatim}
 donde operación podrá ser \texttt{suma} o \texttt{resta}. Para tomar los parámetros del programa, se podrá hacer uso del módulo sys (\texttt{import sys}), en particular de la lista \texttt{sys.argv}. Se comprobará que los parámetros que el usuario pasa son numéricos (\texttt{integer} o \texttt{float}), imprimiendo \texttt{Error: Non numerical parameters} por pantalla en caso contrario.
     \item Tener dos funciones (métodos): \texttt{sumar} y \texttt{restar}.
@@ -88,10 +88,10 @@ donde operación podrá ser \texttt{suma} o \texttt{resta}. Para tomar los pará
 
 \finejercicio
 
-  \item Crea en el archivo \texttt{calcoohija.py} un programa Python que además de la misma funcionalidad de \texttt{calcoo.py}, pueda multiplicar y dividir. Para tal fin, crea un clase \texttt{CalculadoraHija} (las mayúsculas son importantes) que herede de \texttt{Calculadora}, y que además tenga los métodos multiplicar y dividir. En el caso de dividir, ha de capturar la excepción si \texttt{operando2} es cero, imprimiendo el mensaje de error por pantalla \texttt{Division by zero is not allowed}.
+  \item Crea en el archivo \texttt{calcoohija.py} un programa Python que además de la misma funcionalidad de \texttt{calcoo.py}, pueda multiplicar y dividir. Para tal fin, crea un clase \texttt{CalculadoraHija} (las mayúsculas son importantes) que herede de \texttt{Calculadora}, y que además tenga los métodos multiplicar y dividir. En el caso de dividir, ha de capturar la excepción si \texttt{operando2} es cero, imprimiendo el siguiente mensaje de error por pantalla \texttt{Division by zero is not allowed}.
 El programa será llamado de la siguiente manera por línea de instrucciones (shell):
     \begin{verbatim}
-    $ python calcoohija.py operando1 operación operando2
+    $ python3 calcoohija.py operando1 operación operando2
     \end{verbatim}
 donde operación podrá ser \texttt{suma}, \texttt{resta}, \texttt{multiplica} o \texttt{divide}.
 
@@ -99,7 +99,7 @@ donde operación podrá ser \texttt{suma}, \texttt{resta}, \texttt{multiplica} o
 
   \item Crea el archivo \texttt{calcplus.py} que será llamado de la siguiente manera por línea de instrucciones (shell):
     \begin{verbatim}
-    $ python calcplus.py fichero
+    $ python3 calcplus.py fichero
     \end{verbatim}
 donde fichero será un fichero de texto posiblemente multilínea con formato \texttt{CSV} (\texttt{comma-separated-value}), esto es, cada línea del mismo tendrá la siguiente forma:
     \begin{verbatim}
@@ -120,7 +120,7 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
 
   \item Crea el archivo \texttt{calcplusplus.py} que será llamado de la siguiente manera por línea de instrucciones (shell):
     \begin{verbatim}
-    $ python calcplusplus.py fichero
+    $ python3 calcplusplus.py fichero
     \end{verbatim}
 
   \texttt{calcplusplus.py} ha de tener la misma funcionalidad que \texttt{calcplus.py} (ver ejercicio anterior), pero deberá hacer uso del módulo \texttt{csv} de Python3\footnote{https://docs.python.org/3.1/library/csv.html} y de la sentencia \texttt{with} de Python.
@@ -130,7 +130,7 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
   \item Aunque el intérprete de Python admite ciertas libertades a la hora de programar, los programadores de Python con la finalidad de mejorar principalmente la legibilidad del código han acordado seguir una guía de estilo. Esta guía de estilo se encuentra en el \texttt{Python Enhancement Proposal 8} (PEP 8), y contiene instrucciones sobre cómo situar los espacios en blanco, cómo nombrar las variables, etc. Puedes encontrar la guía (original, en inglés, y una versión parcial en castellano) en el Moodle de la asignatura.
 
   Existe un programa de ayuda de línea de comandos llamado \texttt{pep8} que te permite comprobar si se siguen la mayoría de las indicaciones de PEP8. Pásale la herramienta a tus programas de Python hasta que no dé ningún error.
-  
+
 \finejercicio
 
 \finpractica
@@ -139,7 +139,7 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 5 de octubre de 2015 a las 23:55. Para ello, se deberá contar a esa fecha con
+La entrega de práctica se deberá hacer antes del lunes 26 de septiembre de 2016 a las 23:55. Para ello, se deberá contar a esa fecha con
 
 
 \begin{enumerate}
@@ -161,7 +161,7 @@ Se han de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p2.py} incluido en el repositorio de la práctica. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p2.py login_github
+	$ python3 check-p2.py login_github
 \end{verbatim}
 
 donde \texttt{login\_github} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
