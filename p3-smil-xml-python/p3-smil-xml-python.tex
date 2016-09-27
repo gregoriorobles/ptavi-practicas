@@ -28,7 +28,7 @@
 
 \title{Práctica 3 - SMIL, XML en Python}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 6.0 – 6.10.2015}
+\date{Versión 7.0 – 28.9.2016}
 
 
 \maketitle
@@ -79,10 +79,7 @@ El \emph{script} en Python proporcionado, una vez ha tomado el contenido de los 
 
 %\finejercicio
 
-  \item Crea un repositorio en GitHub llamado \texttt{ptavi-p3} siguiendo las instrucciones en \url{https://help.github.com/articles/create-a-repo}. Al hacerlo, elige tener un README y añade un .gitignore (indica que va a ser un proyecto Python) y escoge una licencia (todas son de software libre; escoge la de Apache, por ejemplo).
-
-  Dentro de tu home en el laboratorio, clona tu repositorio de GitHub. Verás que el repositorio GitHub contiene ya varios ficheros: \texttt{.gitignore}, \texttt{LICENSE}
-y \texttt{README.md}. Prueba a modificar el fichero README.md para ver los cambios en la página del repositorio en GitHub.
+    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p3} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p3}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos.
 
   Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitHub (con \texttt{push}).
 
@@ -141,13 +138,13 @@ region\tid="a"\ttop="20"\tleft="64"\n
   \begin{enumerate}
     \item Comprobará que no hay errores en la invocación por parte del usuario (véase ejercicio 4). 
     \item Se instanciará un objeto de la clase \texttt{KaraokeLocal}
-    \item Se imprimirá el objeto\footnote{Se ha de tener en cuenta que cuando se imprime el objeto, se llama al método \_\_str\_\_ de la clase.}
+    \item Se imprimirá el objeto\footnote{Se ha de tener en cuenta que cuando se imprime el objeto, se llama al método \_\_str\_\_ del objeto.}
     \item Se llamará a \texttt{do\_json} pasándole sólo un parámetro (o sea, el fichero JSON resultante se deberá llamar como el fichero SMIL, pero con extensión diferente)
     \item Se llamará a \texttt{do\_local}
     \item Se llamará a \texttt{do\_json} (en este caso, el fichero JSON resultante se deberá llamar local.json)
     \item Y se imprimirá otra vez el objeto.
    \end{enumerate}
-Nótese que el programa sólo deberá imprimir por pantalla las salidas que se indican (básicamente, al hacer \emph{print} de la clase). El resto del programa, al entregar la práctica, no ha de contener trazas (o sea, más \emph{prints}).
+Nótese que el programa sólo deberá imprimir por pantalla las salidas que se indican (básicamente, al hacer \emph{print} del objeto). El resto del programa, al entregar la práctica, no ha de contener trazas (o sea, más \emph{prints}).
 
 \finejercicio
 
@@ -157,7 +154,7 @@ Nótese que el programa sólo deberá imprimir por pantalla las salidas que se i
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 19 de octubre de 2015 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 10 de octubre de 2016 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitHub con:
@@ -185,7 +182,7 @@ Se ha de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa check-p3.py, bajándoselo de Moodle. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p3.py login
+	$ python3 check-p3.py login
 \end{verbatim}
 
 donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
