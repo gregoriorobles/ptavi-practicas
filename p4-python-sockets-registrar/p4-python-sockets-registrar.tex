@@ -28,12 +28,12 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 6.1.1 – 22.10.2015}
+\date{Versión 7.0 – 14.10.2016}
 
 
 \maketitle
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta 0,7 puntos. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
 
 \section{Introducción}
 
@@ -95,11 +95,11 @@ Tiempo estimado (para un alumno medio): 10 horas
   \begin{itemize}
     \item Se pase como parámetro al \emph{script} la IP y el puerto del servidor, así como a continuación el mensaje que se ha de enviar. Nota que la \emph{shell} el mensaje a enviar nos lo dará como \texttt{string} y que tendremos que transformarlo en una secuencia de bytes. Para ejecutar el cliente, deberíamos hacer:
     \begin{verbatim}
-	$ python client.py ip puerto linea
+	$ python3 client.py ip puerto linea
     \end{verbatim}
   Una ejemplo de llamada sería: 
 \begin{verbatim}
-python client.py 127.0.0.1 5060 eco eco, soy yo
+python3 client.py 127.0.0.1 5060 eco eco, soy yo
 \end{verbatim}
   \end{itemize}
 
@@ -124,7 +124,7 @@ SIP/2.0 200 OK\r\n\r\n
 \end{verbatim}
   El cliente se deberá seguir ejecutándose desde línea de comando, ahora de la siguiente manera:
     \begin{verbatim}
-		$ python client.py ip puerto register luke@polismassa.com
+		$ python3 client.py ip puerto register luke@polismassa.com
     \end{verbatim}
 
 \finejercicio
@@ -206,7 +206,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 2 de noviembre de 2015 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 24 de octubre de 2016 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitHub con:
@@ -229,14 +229,14 @@ La entrega de práctica se deberá hacer antes del lunes 2 de noviembre de 2015 
 
 Se han de tener en cuenta las siguientes consideraciones:
 \begin{itemize}
-  \item Se valorará que al menos haya diez \texttt{commits} realizados.
+  \item Se valorará que al menos haya diez \texttt{commits} realizados, en dos días diferentes.
   \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
 \end{itemize}
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p4.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p4.py login
+	$ python3 check-p4.py login
 \end{verbatim}
 
 donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
