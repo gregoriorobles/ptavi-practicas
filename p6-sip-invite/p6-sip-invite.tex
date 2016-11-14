@@ -79,7 +79,7 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 
 Esta práctica tiene como objetivo implementar dos programas Python,
 de manera que se pueda realizar una sesión SIP como la que se
-muestra en la figura\footnote{Nota que en la figura los métodos SIP están en 
+muestra en la figura\footnote{Nota que en la figura las respuestas SIP están en 
 mayúsculas para mejorar su lectura; en tu implementación deberían seguir el 
 estándar con sólo la primera letra mayúscula}:
 
@@ -190,7 +190,7 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
 
    \begin{itemize}
      \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE.
-     \item \texttt{SIP/2.0 180 Ring}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 180 Ringing}: al recibir un INVITE.
      \item \texttt{SIP/2.0 200 OK}: en caso de éxito.
      \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
@@ -225,7 +225,7 @@ no sean las ``correctas" y nos dé un error. Tenlo en cuenta.}:
   # aEjecutar es un string con lo que se ha de ejecutar en la shell
   aEjecutar = 'mp32rtp -i 127.0.0.1 -p 23032 < ' + fichero_audio 
 
-  print "Vamos a ejecutar", aEjecutar
+  print("Vamos a ejecutar", aEjecutar)
   os.system(aEjecutar)
 \end{verbatim}
 
