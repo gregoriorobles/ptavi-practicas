@@ -28,7 +28,7 @@
 
 \title{Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 7.0 – 14.10.2016}
+\date{Versión 8.0 – 18.10.2017}
 
 
 \maketitle
@@ -37,7 +37,7 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 
 \section{Introducción}
 
-\texttt{socketserver} es un módulo en Python que simplifica la tarea de implementar servicios en Internet. Aunque hay cuatro tipos diferentes de servidores básicos, nosotros en esta práctica utilizaremos solamente \texttt{UDPServer} que utiliza datagramas, son paquetes discretos que pueden llegar desordenados – incluso se pueden perder por el camino (nótese que esto es en contraposición con \texttt{TCPServer} que trabaja con flujos TCP). \texttt{UDPServer} trabaja de manera secuencial, lo que significa que las peticiones serán atendidas de una en una, por lo que tendrán que esperar si hay una petición en proceso.
+\texttt{socketserver} es un módulo en Python que simplifica la tarea de implementar servicios en Internet. Aunque hay cuatro tipos diferentes de servidores básicos, nosotros en esta práctica utilizaremos solamente \texttt{UDPServer}, que utiliza datagramas -- paquetes discretos que pueden llegar desordenados, incluso se pueden perder por el camino (nótese que esto es en contraposición con \texttt{TCPServer} que trabaja con flujos TCP). \texttt{UDPServer} trabaja de manera secuencial, lo que significa que las peticiones serán atendidas de una en una, por lo que tendrán que esperar si hay una petición en proceso.
 
 \section{Objetivos de la práctica}
 
@@ -64,13 +64,12 @@ Tiempo estimado (para un alumno medio): 10 horas
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
     \item Importa el módulo \texttt{socket}.
-    \item Inicializa varias \emph{variables} constantes (nota que al ser constantes, vienen en mayúsculas, como marca la convención).
+    \item Inicializa varias \emph{variables} constantes (nota que al ser constantes, vienen en mayúsculas, como marca la convención correspondiene en PEP8).
     \item Crea un \texttt{socket}.
-    \item Especifica opciones para el \texttt{socket}.
     \item Se conecta con un servidor.
     \item Envía una {\bf secuencia de bytes} por el \texttt{socket} con el método \texttt{send()} y lee del \texttt{socket} con \texttt{recv()}.
     \item Al recibir con \texttt{recv()}, indicamos el valor del \emph{buffer} en bytes.
-    \item Cerramos la conexión con el método \texttt{close()}.
+    \item No hace falta cerrar explícitamente la conexión, ya que se hace automáticamente al salir del contexto del \texttt{with}.
   \end{enumerate}
 
 
@@ -78,17 +77,17 @@ Tiempo estimado (para un alumno medio): 10 horas
   \begin{enumerate}
     \item Importa el módulo \texttt{socketserver}\footnote{\url{https://docs.python.org/3/library/socketserver.html}}.
     \item Tenemos una única clase que manejará las peticiones.
-    \item Esta clase hereda de una clase \texttt{DatagramRequestHandler} que hay en el módulo \ texttt{socketserver}.
+    \item Esta clase hereda de una clase \texttt{DatagramRequestHandler} que hay en el módulo \texttt{socketserver}.
     \item La clase no tiene constructor \texttt{\_\_init\_\_}; utiliza el de la clase padre.
     \item La clase sólo tiene un método, llamado \texttt{handle()}.
-    \item El método \texttt{handle()} se ejecuta cada vez que recibimos una petición al servidor.
+    \item El método \texttt{handle()} se ejecuta cada vez que recibimos una petición en el servidor.
     \item \texttt{self.wfile} y \texttt{self.rfile} son los atributos que abstraen el \texttt{socket} (como si fuera un fichero):
     \begin{itemize}
-      \item Podemos leer del mismo con \texttt{self.rfile.read()}.
+      \item Podemos leer del mismo, iterando sobre \texttt{self.rfile} como si fuera un fichero de lectura.
       \item Podemos escribir en el mismo con \texttt{self.wfile.write()}.
     \end{itemize}
-    \item Envíamos y recibimos {\bf secuencias de bytes}. 
-    \item Un programa principal, donde se instancia la clase \texttt{EchoHandler}, indicando la IP y el puerto donde se deja al servidor escuchando en un bucle infinito.
+    \item Enviamos y recibimos {\bf secuencias de bytes}. 
+    \item Un programa principal, donde se instancia la clase \texttt{EchoHandler}, indicando la IP y el puerto donde se deja al servidor escuchando en un bucle infinito (del que sólo se puede salir desde el terminal con \texttt{Ctrl+C}, que lanza una excepción \texttt{KeyboardInterrupt}.
   \end{enumerate}
 
   \item Cambia el \emph{script} del cliente para que:
@@ -114,7 +113,7 @@ python3 client.py 127.0.0.1 5060 eco eco, soy yo
 
 \finejercicio
 
-  \item Modifica los \emph{scripts} anteriores para tener un cliente que envíe mensajes de registro SIP y un servidor \texttt{Registrar} SIP. Cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario\footnote{Este diccionario ha de ser un atributo de clase no de la instancia, véase \url{http://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide}}. Cambia el nombre de la clase del servidor de \texttt{EchoHandler} a \texttt{SIPRegisterHandler}. La petición SIP del cliente tendrá esta pinta:
+  \item Modifica los \emph{scripts} anteriores para tener un cliente que envíe mensajes de registro SIP y un servidor \texttt{Registrar} SIP. Cada vez que el cliente le mande una línea con el método \texttt{REGISTER} (en mayúsculas), el servidor guardará la dirección registrada y la IP en un diccionario\footnote{Este diccionario ha de ser un atributo de clase no de la instancia, véase \url{http://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide}}. Cambia el nombre de la clase del servidor de \texttt{EchoHandler} a \texttt{SIPRegisterHandler}. La petición SIP del cliente tendrá una pinta parecido a lo siguiente:
     \begin{verbatim}
 REGISTER sip:luke@polismassa.com SIP/2.0\r\n\r\n
     \end{verbatim}
@@ -150,7 +149,7 @@ Usage: client.py ip puerto register sip_address expires_value
 
 \finejercicio
 
-  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de expiración. A continuación, se puede ver un ejemplo:
+  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de expiración. A continuación, se puede ver un ejemplo\footnote{Tu fichero JSON no tiene que ser \emph{igual} que lo mostrado; simplemente ha de ser un fichero JSON válido con los datos de usuarios registrados.}:
 \begin{verbatim}
 [
     [
@@ -206,7 +205,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 24 de octubre de 2016 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 29 de octubre de 2017 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitHub con:
