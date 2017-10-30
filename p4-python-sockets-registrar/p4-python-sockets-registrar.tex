@@ -31,7 +31,7 @@
 \vspace{-3.2cm}\hspace{-1.5cm}\includegraphics[height=2cm]{img/urjc.png}\hspace{3.9cm}\includegraphics[height=2.4cm]{img/gsyc.png}\vspace{2.05cm} \\
 Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0 – 18.10.2017}
+\date{Versión 8.0.1 – 30.10.2017}
 
 
 
@@ -162,9 +162,9 @@ Usage: client.py ip puerto register sip_address expires_value
 
 \finejercicio
 
-  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de expiración. A continuación, se puede ver un ejemplo\footnote{Tu fichero JSON no tiene que ser \emph{igual} que lo mostrado; simplemente ha de ser un fichero JSON válido con los datos de usuarios registrados.}:
+  \item  Modifica el servidor para añadir el método \texttt{register2json} en el que se implemente la siguiente funcionalidad: cada vez que un usuario se registre o se dé de baja, se imprimirá en el fichero \texttt{registered.json} con información sobre el usuario, su dirección y la hora de expiración. A continuación, se puede ver un ejemplo\footnote{Tu fichero JSON no tiene que ser \emph{igual} que lo mostrado; simplemente ha de ser un fichero JSON válido con los datos de usuarios registrados legible por humanos (i.e., la fecha ha de ser entendible).}:
 \begin{verbatim}
-[
+{
     [
         "luke@polismassa.com",
         {
@@ -172,7 +172,7 @@ Usage: client.py ip puerto register sip_address expires_value
             "expires": "2013-10-23 10:37:12 +0000"
         }
     ]
-]
+}
 \end{verbatim}
 	Para los formatos de tiempo, se recomienda utilizar el módulo time, en particular:
 \texttt{time()}, que devuelve los segundos desde el 1 de enero de 1970,
