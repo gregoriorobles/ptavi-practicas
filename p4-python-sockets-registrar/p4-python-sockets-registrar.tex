@@ -67,6 +67,11 @@ Tiempo estimado (para un alumno medio): 10 horas
 
 \begin{enumerate}
 
+  \item Esta práctica requiere hacer capturas con \texttt{wireshark}. Para que el administrador de sistemas te incluya en el grupo con permisos para poder hacerlo en las máquinas del laboratorio, abre una \emph{shell} e introduce esta instrucción\footnote{Esta instrucción crea un archivo vacío en tu cuenta. El administrador de sistema buscará por este archivo para incluir a los usuarios en el grupo con permisos para capturar con \texttt{wireshark}.}:
+    \begin{verbatim}
+	$ touch $HOME/.ptavi1819
+    \end{verbatim}
+
   \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (haciendo commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
