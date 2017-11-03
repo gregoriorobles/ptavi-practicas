@@ -54,7 +54,7 @@
 
 \title{Práctica 6 - Sesión SIP \emph{peer-to-peer}}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 7.0 – 12.11.2016}
+\date{Versión 8.0 – 3.11.2017}
 
 %\author{Gregorio Robles y Jesús M. González Barahona \\
 %  grex@gsyc.urjc.es \\
@@ -122,7 +122,7 @@ Con el navegador, dirígete al repositorio \texttt{ptavi-p6} en la cuenta del pr
 
 El cliente ha de ejecutarse de la siguiente manera:
 \begin{verbatim}
-  $ python client.py metodo receptor@IPreceptor:puertoSIP
+  $ python3 client.py metodo receptor@IPreceptor:puertoSIP
 \end{verbatim}
 
 donde \emph{metodo} será un método SIP, \texttt{receptor@IPreceptor:puertoSIP}
@@ -135,13 +135,14 @@ al que se dirige el mensaje.
 
 Por ejemplo:
 \begin{verbatim}
-  $ python client.py INVITE batman@193.147.73.20:5555
-  $ python client.py BYE robin@193.147.73.20:5555
+  $ python3 client.py INVITE batman@193.147.73.20:5555
+  $ python3 client.py BYE robin@193.147.73.20:5555
 \end{verbatim}
 
 En caso de no introducir el número de parámetros correctos o de error en los mismos, el programa debería imprimir siempre por pantalla:
+
 \begin{verbatim}
-  Usage: python client.py method receiver@IP:SIPport
+  Usage: python3 client.py method receiver@IP:SIPport
 \end{verbatim}
 
 \subsection*{Peticiones SIP}
@@ -150,7 +151,6 @@ En caso de no introducir el número de parámetros correctos o de error en los m
     \item INVITE sip:receptor@IP SIP/2.0
 
     Mediante este método, se indica que queremos iniciar una conversación con el receptor con dirección receptor en la máquina dada por la IP (que puede ser 127.0.0.1).
-
 
     \item ACK sip:receptor@IP SIP/2.0
 
@@ -168,17 +168,17 @@ la \texttt{shell}, ya que se enviará de manera automática una vez se hayan rec
 
 El servidor ha de ejecutarse de la siguiente manera:
 \begin{verbatim}
-  $ python server.py IP puerto fichero_audio
+  $ python3 server.py IP puerto fichero_audio
 \end{verbatim}
 
 Por ejemplo:
 \begin{verbatim}
-  $ python server.py 127.0.0.1 5555 cancion.mp3
+  $ python3 server.py 127.0.0.1 5555 cancion.mp3
 \end{verbatim}
 
 En caso de no introducir el número de parámetros correctos o de error en los mismos (se ha de comprobar si existe el fichero de audio), el programa debería imprimir:
 \begin{verbatim}
-  Usage: python server.py IP port audio_file
+  Usage: python3 server.py IP port audio_file
 \end{verbatim}
 
 En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
@@ -196,11 +196,11 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
 
-Nota: Para simplificar la práctica, se enviará en un único mensaje la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ring} y \texttt{SIP/2.0 200 OK}.
+Nota: Para simplificar la práctica, se enviará en un único mensaje la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
 
 \subsection*{Envío RTP}
 
-El envío RTP se realizará mediante el programa \texttt{mp32rtp}. La forma de ejecutar el programa \texttt{mp32rtp}, una vez se le haya dado permisos de ejecución con \emph{chmod}, es indicando la dirección IP y el puerto del receptor y redirigirle una canción MP3:
+El envío RTP se realizará mediante el programa \texttt{mp32rtp}\footnote{En el repositorio se encuentra un binario precompilado para entornos Debian GNU/Linux, entre los que se encuentran Ubuntu, el sistema operativo utilizado en los laboratorios docentes.}. La forma de ejecutar el programa \texttt{mp32rtp}, una vez se le haya dado permisos de ejecución con \emph{chmod}, es indicando la dirección IP y el puerto del receptor y redirigirle una canción en formato MP3:
 
 \begin{verbatim}
   ./mp32rtp -i direccionIP -p puerto < cancion.mp3
@@ -217,7 +217,7 @@ es lo que se ejecutaría como si fuera la \texttt{shell}.
 
 Un ejemplo del código sería el siguiente\footnote{Cuando se copia de un PDF
 a un editor de texto, puede que algunos caracteres, en especial las comillas
-no sean las ``correctas" y nos dé un error. Tenlo en cuenta.}:
+no sean las ``correctas'' y nos dé un error. Tenlo en cuenta.}:
 
 \begin{verbatim}
   import os
@@ -248,7 +248,7 @@ y se subirá al repositorio.
 
 \section*{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 21 de noviembre de 2016 a las 23:55. Para entonces, se debe tener un repositorio git en GitHub con: 
+La entrega de práctica se deberá hacer antes del lunes 27 de noviembre de 2017 a las 23:55. Para entonces, se debe tener un repositorio git en GitHub con: 
 
     \begin{itemize}
         \item 2 módulos Python y la captura realizada con \texttt{wireshark}:
@@ -270,7 +270,7 @@ Se han de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p6.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-  $ python check-p6.py login_github
+  $ python3 check-p6.py login_github
 \end{verbatim}
 
 
