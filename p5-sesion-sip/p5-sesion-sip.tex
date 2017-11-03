@@ -28,7 +28,7 @@
 
 \title{Práctica 5 - Sesión SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 7.0 - 27.10.2016}
+\date{Versión 8.0 - 3.11.2017}
 
 
 \maketitle
@@ -76,7 +76,7 @@ Tiempo estimado (para un alumno medio): 8 horas
 
 \subsection*{Análisis de una sesión SIP}
 
-Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
+Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
 
   \item Observa que las tramas capturadas corresponden a una sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
   \begin{itemize}
@@ -88,7 +88,7 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
   \item Antes de analizar las tramas, mira las estadísticas generales que aparecen en el menú de \texttt{Statistics}. En el apartado de jerarquía de protocolos (\texttt{Protocol Hierarchy}) se puede ver el porcentaje del tráfico correspondiente al protocolo TCP y UDP.
   \begin{itemize}
     \item ¿Cuál de los dos es mayor? ¿Es esto consistente con una aplicación que transmite en tiempo real? 
-    \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos?
+    \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos? ¿Cuales son señal y cuales ruido?
   \end{itemize}
 
   \item Observa por encima el flujo de tramas en el menú de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias. 
@@ -99,12 +99,11 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
 
   \finejercicio
 
-  \item Analiza las primeras cuatro tramas de la captura nada más arrancar Ekiga. 
+  \item Analiza las dos primeras tramas de la captura. 
   \begin{itemize}
     \item ¿Qué servicio es el utilizado en estas tramas?
     \item ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 
     \item ¿Qué dirección IP (de \texttt{ekiga.net}) devuelve el servicio de nombres? 
-    \item ¿Por qué se pide también para \texttt{35.162.64.86.in-addr.arpa}?
   \end{itemize}
 
   \item A continuación, hay más de una docena de tramas TCP/HTTP.
@@ -117,8 +116,8 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
 
   \item Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
   \begin{itemize}
-    \item ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia.
-    \item ¿Estamos tras un \texttt{NAT}?
+    \item ¿Por qué se hace uso de este protocolo?
+    \item ¿Podrías decir si estamos tras un \texttt{NAT}?
   \end{itemize}
 
   \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor \texttt{Registrar}. El \texttt{Registrar} guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
@@ -126,7 +125,7 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
     \item ¿Qué dirección IP tiene el servidor \texttt{Registrar}?
     \item ¿A qué puerto (del servidor \texttt{Registrar}) se envían los paquetes SIP?
     \item ¿Qué método SIP utiliza el UA para registrarse?
-    \item Además de \texttt{REGISTER}, ¿qué instrucciones SIP entiende el UA?
+    \item Además de \texttt{REGISTER}, ¿podrías decir qué instrucciones SIP entiende el UA?
   \end{itemize}
 
   \finejercicio
@@ -202,9 +201,12 @@ Se ha capturado una sesión SIP (archivo \texttt{sip.cap.gz}), que se puede abri
 
 \subsection*{Captura de una sesión SIP}
 
-Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qxip.net}\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}. Tendrás que dar de alta una cuenta en \texttt{www.ekiga.net} con el navegador. Recuerda también que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberás crearte una cuenta en \texttt{ekiga.net} y darte de alta la lanzar la aplicación.
 
-  \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
+  \item Dirígete a la web \url{http://www.ekiga.net} con el navegador y créate una cuenta. Lanza Ekiga, y configúralo con los datos de la cuenta que te acabas de crear. Comprueba que estás conectado (En la barra al final de la ventana podrás ver ``Connected''). Al terminar, cierra completamente Ekiga.
+
+  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qxip.net}. Recuerda que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso.
+
+  \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}:
   \begin{itemize}
     \item ¿Es necesario el uso de DNS y STUN? ¿Por qué?
     \item ¿Son diferentes el registro y la descripción de la sesión?
@@ -231,7 +233,7 @@ Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999
 
 \section{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 7 de noviembre de 2016 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 13 de noviembre de 2017 a las 23:55. Para entonces, se debe: 
 
 \begin{itemize}
   \item Tener un repositorio git en GitHub con:
@@ -251,15 +253,15 @@ Se ha de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p5.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python check-p5.py login_lab
+	$ python check-p5.py login
 \end{verbatim}
 
 
 donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos). 
 
 
-\vspace{1cm}
+%\vspace{1cm}
 
-\footnotesize{Para el final: Si a estas alturas todavía tienes ganas, puedes indicar en el Moodle el tiempo que te ha llevado realizar esta práctica. Esto te lleva menos de un minuto y nos sirve a los profesores para hacernos una idea del esfuerzo que os lleva. ¡Gracias!}
+%\footnotesize{Para el final: Si a estas alturas todavía tienes ganas, puedes indicar en el Moodle el tiempo que te ha llevado realizar esta práctica. Esto te lleva menos de un minuto y nos sirve a los profesores para hacernos una idea del esfuerzo que os lleva. ¡Gracias!}
 
 \end{document}
