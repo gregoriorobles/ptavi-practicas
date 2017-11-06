@@ -28,7 +28,7 @@
 
 \title{Práctica 5 - Sesión SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0 - 3.11.2017}
+\date{Versión 8.0.1 - 6.11.2017}
 
 
 \maketitle
@@ -87,8 +87,8 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
 
   \item Antes de analizar las tramas, mira las estadísticas generales que aparecen en el menú de \texttt{Statistics}. En el apartado de jerarquía de protocolos (\texttt{Protocol Hierarchy}) se puede ver el porcentaje del tráfico correspondiente al protocolo TCP y UDP.
   \begin{itemize}
-    \item ¿Cuál de los dos es mayor? ¿Es esto consistente con una aplicación que transmite en tiempo real? 
-    \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos? ¿Cuales son señal y cuales ruido?
+    \item ¿Cuál de los dos es mayor? ¿Tiene esto sentido si estamos hablando de una aplicación que transmite en tiempo real? 
+    \item ¿Qué otros protocolos podemos ver en la jerarquía de protocolos? ¿Cuales crees que son señal y cuales ruido?
   \end{itemize}
 
   \item Observa por encima el flujo de tramas en el menú de \texttt{Statistics} en \texttt{IO Graphs}. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias. 
@@ -117,7 +117,7 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
   \item Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
   \begin{itemize}
     \item ¿Por qué se hace uso de este protocolo?
-    \item ¿Podrías decir si estamos tras un \texttt{NAT}?
+    \item ¿Podrías decir si estamos tras un \texttt{NAT} o no?
   \end{itemize}
 
   \item La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor \texttt{Registrar}. El \texttt{Registrar} guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
@@ -152,8 +152,8 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
     \item ¿Qué protocolo(s) se utiliza(n)? ¿Para qué sirven estos protocolos?
     \item ¿Cuál es el tamaño de paquete de los mismos?
     \item ¿Se utilizan bits de \texttt{padding}?
-    \item ¿Cuál es la periodicidad de los paquetes que se envían?
-    \item ¿Cuántos bits/segundo estamos enviando?
+    \item ¿Cuál es la periodicidad de los paquetes (en origen; nota que la captura es en destino)?
+    \item ¿Cuántos bits/segundo se envían?
   \end{itemize}
 
   \finejercicio
@@ -163,7 +163,7 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
     \item ¿Cuántos flujos hay? ¿por qué?
     \item ¿Cuántos paquetes se pierden?
     \item ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el valor de \texttt{delta}?
-    \item ¿Cuáles son los valores de \texttt{jitter} (medio y máximo)? ¿Qué quiere decir eso? ¿Estamos ante una conversación de calidad?
+    \item ¿Cuáles son los valores de \texttt{jitter} (medio y máximo)? ¿Qué quiere decir eso? ¿Crees que estamos ante una conversación de calidad?
   \end{itemize}
 
   \item Elige un paquete RTP de audio. Analiza el flujo de audio en \texttt{Telephony -> RTP -> Stream Analysis}.
@@ -172,8 +172,7 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
     \item ¿Podemos saber si éste es el primer paquete que nos han enviado?
     \item Los valores de \texttt{jitter} son menores de 10ms hasta un paquete dado. ¿Cuál?
     \item ¿A qué se debe el cambio tan brusco del \texttt{jitter}?
-    \item ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué? 
-    \item ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de \texttt{jitter}?
+    \item ¿Es comparable el cambio en el valor de \texttt{jitter} con el del \texttt{delta}? ¿Cual es más grande? 
   \end{itemize}
 
   \item En \texttt{Telephony} selecciona el menú \texttt{VoIP calls}. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón \texttt{Graph}.
@@ -204,11 +203,11 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
 
   \item Dirígete a la web \url{http://www.ekiga.net} con el navegador y créate una cuenta. Lanza Ekiga, y configúralo con los datos de la cuenta que te acabas de crear. Comprueba que estás conectado (En la barra al final de la ventana podrás ver ``Connected''). Al terminar, cierra completamente Ekiga.
 
-  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:9999@qxip.net}. Recuerda que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso.
+  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:500@ekigan.net}. Recuerda que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso\footnote{Puedes \emph{matar} ekiga desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
 
   \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}:
   \begin{itemize}
-    \item ¿Es necesario el uso de DNS y STUN? ¿Por qué?
+    \item ¿Se utilizan DNS y STUN? ¿Por qué?
     \item ¿Son diferentes el registro y la descripción de la sesión?
   \end{itemize}
 
@@ -218,12 +217,12 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
     \item ¿Cuál es su periodicidad?
     \item ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
     \item ¿Podrías reproducir la conversación desde \texttt{Wireshark}? ¿Cómo? Comprueba que poniendo un valor demasiado pequeño para el \texttt{buffer} de \texttt{jitter}, la conversación puede no tener la calidad necesaria.
-    \item ¿Sabrías decir qué tipo de servicio ofrece \texttt{sip:9999@qxip.net}?
+    \item ¿Sabrías decir qué tipo de servicio ofrece \texttt{sip:500@ekiga.net}?
   \end{itemize}
 
   \finejercicio
 
-  \item Filtra por los paquetes SIP de la captura y guarda {\bf únicamente} los paquetes SIP como \texttt{p5.pcapng}. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás guardarlo en un archivo de nombre \texttt{p5.pcapng} y añadirlo al repositorio.
+  \item Filtra por los paquetes SIP de la captura y guarda {\bf únicamente} los paquetes SIP como \texttt{p5.pcapng}. Abre el fichero guardado para cerciorarte de que lo has hecho bien. Deberás añadirlo al repositorio.
 
   \finejercicio
   
