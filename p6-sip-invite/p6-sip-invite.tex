@@ -54,7 +54,7 @@
 
 \title{Práctica 6 - Sesión SIP \emph{peer-to-peer}}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0 – 3.11.2017}
+\date{Versión 8.0.1 – 14.11.2017}
 
 %\author{Gregorio Robles y Jesús M. González Barahona \\
 %  grex@gsyc.urjc.es \\
@@ -79,9 +79,9 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 
 Esta práctica tiene como objetivo implementar dos programas Python,
 de manera que se pueda realizar una sesión SIP como la que se
-muestra en la figura\footnote{Nota que en la figura las respuestas SIP están en 
+muestra en la siguiente figura\footnote{En la figura las respuestas SIP están en 
 mayúsculas para mejorar su lectura; en tu implementación deberían seguir el 
-estándar con sólo la primera letra mayúscula}:
+estándar con sólo la primera letra en mayúscula}:
 
 \begin{center}
 \includegraphics{figs/sip-invite.png}
@@ -90,7 +90,7 @@ estándar con sólo la primera letra mayúscula}:
 En esta sesión:
 
 \begin{itemize}
-  \item No habrá ni servidor de registro ni \emph{proxy}. La comunicación será \emph{peer-to-peer} (directa entre dos UAs\footnote{UA: User Agent. Un UA se compone de un cliente y un servidor, aunque en esta práctica -por simplificación- cada UA tendrá sólo uno de los dos.}).
+  \item No habrá ni servidor de registro ni \emph{proxy}. La comunicación será \emph{peer-to-peer} (directa entre dos UAs\footnote{UA: User Agent. Un UA se compone de un cliente y un servidor, aunque en esta práctica -por simplificación- cada UA tendrá sólo una de las dos partes.}).
   \item El UA de la izquierda constará exclusivamente de la parte cliente. Esta parte será la que inicie la sesión con un \texttt{INVITE} y la cierre con un \texttt{BYE}.
   \item El UA de la derecha constará exclusivamente de la parte servidora. Esta parte será la que envíe el audio vía RTP al cliente.
 \end{itemize}
@@ -147,19 +147,21 @@ En caso de no introducir el número de parámetros correctos o de error en los m
 
 \subsection*{Peticiones SIP}
 
+El cliente debería poder enviar las siguientes peticiones SIP:
+
   \begin{itemize}
     \item INVITE sip:receptor@IP SIP/2.0
 
-    Mediante este método, se indica que queremos iniciar una conversación con el receptor con dirección receptor en la máquina dada por la IP (que puede ser 127.0.0.1).
+    Mediante este método, el UA indica que quiere iniciar una conversación con el receptor con dirección \emph{receptor} en la máquina dada por la \emph{IP}\footnote{La IP puede ser 127.0.0.1.}.
 
     \item ACK sip:receptor@IP SIP/2.0
 
     Método de asentimiento. No se pasará al programa \texttt{client.py} como parámetro desde
-la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ring} y \texttt{200 OK} de la parte servidora tras hacerle un INVITE.
+la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ring} y \texttt{200 OK} de la parte servidora después de haberle enviado un INVITE.
 
     \item BYE sip:receptor@IP SIP/2.0
 
-    Mediante este método se indica que queremos terminar una conversación con el receptor con dirección receptor en la máquina dada por la IP (que puede ser 127.0.0.1). Se deberá llamar, una vez haya acabado el \emph{streaming} de audio vía RTP desde el lado servidor.
+    Mediante este método se indica que queremos terminar una conversación con el receptor con dirección \emph{receptor} en la máquina dada por la IP. Se deberá llamar, una vez haya acabado el \emph{streaming} de audio (vía RTP) desde el servidor.
 
   \end{itemize}
 
@@ -196,7 +198,7 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
 
-Nota: Para simplificar la práctica, se enviará en un único mensaje la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
+Para simplificar la práctica, se enviará \bf{en un único mensaje} la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
 
 \subsection*{Envío RTP}
 
@@ -213,11 +215,11 @@ De esta manera, para enviar un \emph{stream} a \emph{localhost} al puerto 23032,
 \end{verbatim}
 
 Para ejecutar instrucciones de \texttt{shell} desde Python, se puede utilizar algunos métodos del módulo \texttt{os}, en particular \texttt{system()}. El parámetro que se le pasa a \texttt{system} 
-es lo que se ejecutaría como si fuera la \texttt{shell}.
+es lo que se ejecutaría en la \texttt{shell}.
 
 Un ejemplo del código sería el siguiente\footnote{Cuando se copia de un PDF
 a un editor de texto, puede que algunos caracteres, en especial las comillas
-no sean las ``correctas'' y nos dé un error. Tenlo en cuenta.}:
+no sean las ``correctas'' y nos dé un error.}:
 
 \begin{verbatim}
   import os
@@ -229,8 +231,7 @@ no sean las ``correctas'' y nos dé un error. Tenlo en cuenta.}:
   os.system(aEjecutar)
 \end{verbatim}
 
-Nótese que \texttt{fichero\_audio} es uno de los parámetros que se le pasa al servidor al ejecutarse. {\bf Nota: Como en esta práctica no se hace uso de SDP para 
-describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como
+Nótese que \texttt{fichero\_audio} es uno de los parámetros que se le pasa al servidor al ejecutarse. {\bf Como en esta práctica no se hace uso de SDP para describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como
 destino del envío}.
 
 \section*{Captura}
