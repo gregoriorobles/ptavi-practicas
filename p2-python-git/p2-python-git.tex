@@ -31,7 +31,7 @@
 
 \title{Práctica 2 - Python avanzado}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0.1 – 1.10.2017}
+\date{Versión 9.0 – 16.9.2018}
 
 
 \maketitle
@@ -84,12 +84,12 @@ donde operación podrá ser \texttt{suma} o \texttt{resta}. Para tomar los pará
   \end{itemize}
 
 
-  \item Crea en el archivo \texttt{calcoo.py} un programa Python que implemente la misma funcionalidad (y se ejecute de la misma manera) que \texttt{calc.py}, pero orientada a objetos. Para tal fin, crea un clase \texttt{Calculadora} (las mayúsculas son importantes), que tenga los métodos suma y resta (suma y resta han de devolver el resultado, pero no imprimirlo por pantalla). A su vez, el programa principal deberá tomar los parámetros que el usuario ha dado en la línea de comandos (con \texttt{sys.argv}), instanciar un objeto de la clase Calculadora, y llamar al método correspondiente e imprimir por pantalla el resultado.
+  \item Crea en el archivo \texttt{calcoo.py} un programa Python que implemente la misma funcionalidad (y se ejecute de la misma manera) que \texttt{calc.py}, pero orientada a objetos. Para tal fin, crea una clase llamada \texttt{Calculadora} (las mayúsculas son importantes), que tenga los métodos suma y resta (suma y resta han de devolver el resultado, ¡pero no imprimirlo por pantalla!). A su vez, el programa principal deberá tomar los parámetros que el usuario ha dado en la línea de comandos (con \texttt{sys.argv}), instanciar un objeto de la clase Calculadora, llamar al método correspondiente e imprimir por pantalla el resultado.
 
 \finejercicio
 
-  \item Crea en el archivo \texttt{calcoohija.py} un programa Python que además de la misma funcionalidad de \texttt{calcoo.py}, pueda multiplicar y dividir. Para tal fin, crea un clase \texttt{CalculadoraHija} (las mayúsculas son importantes) que herede de \texttt{Calculadora}, y que además tenga los métodos multiplicar y dividir. En el caso de dividir, ha de capturar la excepción si \texttt{operando2} es cero, imprimiendo el siguiente mensaje de error por pantalla \texttt{Division by zero is not allowed}.
-El programa será llamado de la siguiente manera por línea de instrucciones (shell):
+  \item Crea en el archivo \texttt{calcoohija.py} un programa Python que además de la misma funcionalidad de \texttt{calcoo.py}, pueda multiplicar y dividir. Para tal fin, crea una clase \texttt{CalculadoraHija} (las mayúsculas son importantes) que herede de \texttt{Calculadora}, y que además tenga los métodos multiplicar y dividir. En el caso de dividir, ha de capturar la excepción que saltará si \texttt{operando2} es cero, imprimiendo el siguiente mensaje de error por pantalla: \texttt{Division by zero is not allowed}.
+El programa será llamado de la siguiente manera desde la línea de instrucciones (shell):
     \begin{verbatim}
     $ python3 calcoohija.py operando1 operación operando2
     \end{verbatim}
@@ -97,11 +97,11 @@ donde operación podrá ser \texttt{suma}, \texttt{resta}, \texttt{multiplica} o
 
 \finejercicio
 
-  \item Crea el archivo \texttt{calcplus.py} que será llamado de la siguiente manera por línea de instrucciones (shell):
+  \item Crea el archivo \texttt{calcplus.py} que será llamado de la siguiente manera desde la línea de instrucciones (shell):
     \begin{verbatim}
     $ python3 calcplus.py fichero
     \end{verbatim}
-donde fichero será un fichero de texto posiblemente multilínea con formato \texttt{CSV} (\texttt{comma-separated-value}), esto es, cada línea del mismo tendrá la siguiente forma:
+donde \texttt{fichero} es un fichero de texto posiblemente multilínea con formato \texttt{CSV} (\texttt{comma-separated-value}), esto es, cada línea del mismo tendrá la siguiente forma:
     \begin{verbatim}
     operación,operando1,operando2,operando3,...,operandoN
     \end{verbatim}
@@ -129,7 +129,7 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
 
   \item Aunque el intérprete de Python admite ciertas libertades a la hora de programar, los programadores de Python con la finalidad de mejorar principalmente la legibilidad del código han acordado seguir una guía de estilo. Esta guía de estilo se encuentra en el \texttt{Python Enhancement Proposal 8} (PEP 8), y contiene instrucciones sobre cómo situar los espacios en blanco, cómo nombrar las variables, etc. Puedes encontrar la guía (original, en inglés, y una versión parcial en castellano) en el Moodle de la asignatura.
 
-  Existe un programa de ayuda de línea de comandos llamado \texttt{pep8} que te permite comprobar si se siguen la mayoría de las indicaciones de PEP8. Pásale la herramienta a tus programas de Python hasta que no dé ningún error.
+  Existe un programa de ayuda de línea de comandos llamado \texttt{pycodestyle}\footnote{Antiguamente este programa se llamaba \texttt{pep8}, pero se cambió el nombre para no dar a enteder que el programa es equivalente a la guía de estilo.} que te permite comprobar si se siguen la mayoría de las indicaciones de PEP8. Pásale la herramienta a tus programas de Python3 hasta que no dé ningún error.
 
 \finejercicio
 
@@ -139,7 +139,7 @@ donde fichero será un fichero de texto posiblemente multilínea con formato \te
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 2 de octubre de 2017 a las 23:55. Para ello, se deberá contar a esa fecha con
+La entrega de práctica se deberá hacer antes del lunes 1 de octubre de 2018 a las 23:55. Para ello, se deberá contar a esa fecha con
 
 
 \begin{enumerate}
