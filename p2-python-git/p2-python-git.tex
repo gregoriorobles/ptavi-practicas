@@ -13,7 +13,7 @@
 
 \newcommand{\finpractica}{
   \begin{footnotesize}
-    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitLab]
   \end{footnotesize}
 }
 
@@ -31,7 +31,7 @@
 
 \title{Práctica 2 - Python avanzado}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 9.0 – 16.9.2018}
+\date{Versión 10.0 – 23.9.2019}
 
 
 \maketitle
@@ -43,7 +43,7 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 
 La programación orientada a objetos en un paradigma de programación muy utilizado en la actualidad y que conviene conocer para la realización de las prácticas de la asignatura. En esta práctica se pretenden ver los conceptos más importantes de este paradigma, implementando funcionalidad en Python.
 
-%Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitHub es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
+%Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitLab es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
 
 \section{Objetivos de la práctica}
 
@@ -51,7 +51,7 @@ La programación orientada a objetos en un paradigma de programación muy utiliz
   \item Conocer y practicar la programación orientada a objetos (con conceptos como clase, objeto, herencia, instanciación).
   \item Usar varios módulos Python, importando funcionalidad creada en otros módulos.
   \item Conocer y seguir la guía de estilo de programación recomendada para Python (ver PEP8).
-  \item Utilizar el sistema de control de versiones git en GitHub.
+  \item Utilizar el sistema de control de versiones git en GitLab.
 \end{itemize}
 
 \section{Conocimientos previos necesarios}
@@ -66,11 +66,11 @@ Tiempo estimado: 10 horas
 
 \begin{enumerate}
 
-  \item Crea una cuenta en GitHub (\url{http://www.github.com}).
+  \item Comprueba que puedes entrar en tu cuenta del GitLab de la ETSIT (\url{https://gitlab.etsit.urjc.es}).
 
-    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p2} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p2}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
+    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p2} en la cuenta del profesor en GitLab\footnote{\url{http://gitlab.etsit.urjc.es/grex/ptavi-p2}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://gitlab.etsit.urjc.es/help/gitlab-basics/fork-project.md}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitLab. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
-  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub.
+  Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitLab.
 
   \item Investiga el archivo \texttt{calc.py}. Comprueba que en él se implementa una calculadora sencilla que permite sumar y restar. El programa tiene las siguientes características:
   \begin{itemize}
@@ -139,11 +139,11 @@ donde \texttt{fichero} es un fichero de texto posiblemente multilínea con forma
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 1 de octubre de 2018 a las 23:55. Para ello, se deberá contar a esa fecha con
+La entrega de práctica se deberá hacer antes del lunes 30 de septiembre de 2019 a las 23:55. Para ello, se deberá contar a esa fecha con
 
 
 \begin{enumerate}
-  \item Tener un repositorio git en GitHub con:
+  \item Tener un repositorio git en GitLab con:
   \begin{itemize}
       \item 5 módulos Python: \texttt{calc.py}, \texttt{calcoo.py}, \texttt{calcoohija.py}, \texttt{calcplus.py}, \texttt{calcplusplus.py}.
       \item 2 clases: \texttt{Calculadora} y \texttt{CalculadoraHija}.
@@ -161,9 +161,9 @@ Se han de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p2.py} incluido en el repositorio de la práctica. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-	$ python3 check-p2.py login_github
+	$ python3 check-p2.py login_gitLab
 \end{verbatim}
 
-donde \texttt{login\_github} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
+donde \texttt{login\_gitLab} es tu nombre de usuario en gitLab. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y parcialmente si se sigue la guía de estilo PEP8.
 
 \end{document}
