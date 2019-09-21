@@ -303,7 +303,7 @@ Nótese que en el ejmplo anterior 34543 es el puerto donde esperamos que el otro
 
     \item ACK sip:receptor SIP/2.0
 
-    Método de asentimiento. No se pasará al programa uaclient.py como parámetro, ya que se enviará una vez se hayan recibido las respuestas \emph{100 Trying}, \emph{180 Ring} y \emph{200 OK} de la parte servidora tras hacerle un INVITE.
+    Método de asentimiento. No se pasará al programa uaclient.py como parámetro, ya que se enviará una vez se hayan recibido las respuestas \emph{100 Trying}, \emph{180 Ringing} y \emph{200 OK} de la parte servidora tras hacerle un INVITE.
 
     \item BYE sip:receptor SIP/2.0
 
@@ -346,7 +346,7 @@ Los códigos de respuesta que el UA maneja han de ser, al menos, los siguientes:
 
    \begin{itemize}
      \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE.
-     \item \texttt{SIP/2.0 180 Ring}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 180 Ringing}: al recibir un INVITE.
      \item \texttt{SIP/2.0 200 OK}: Deberá incluir SDP en el cuerpo (con su correspondiente cabecera de Content-Type).
      \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
      \item \texttt{SIP/2.0 401 Unauthorized}: cuando un usuario se intenta registrar en el servidor de registro sin autenticarse.
