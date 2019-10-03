@@ -13,7 +13,7 @@
 
 \newcommand{\finpractica}{
   \begin{footnotesize}
-    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitLab]
   \end{footnotesize}
 }
 
@@ -26,28 +26,28 @@
 \begin{document}
 
 
-\title{Práctica 3 - SMIL, XML en Python}
+\title{Práctica 3 - SMIL, XML y JSON en Python}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 9.0 – 6.10.2017}
+\date{Versión 10.0 – 3.10.2019}
 
 
 \maketitle
 
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas, pudiendo obtener el estudiante hasta un punto. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitLab.
 
 \section{Introducción}
 
 Python ofrece una serie de bibliotecas para manipular ficheros en XML (como SMIL). En esta práctica, veremos cómo utilizar la biblioteca SAX.
 
-Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitHub es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
+Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitLab es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
 
 \section{Objetivos de la práctica}
 
 \begin{itemize}
-  \item Profundizar en el uso de SMIL y XML
-  \item Aprender a utilizar la biblioteca SAX para el manejo de XML, en particular con Python
-  \item Utilizar el sistema de control de versiones git en GitHub.
+  \item Profundizar en el uso de SMIL, XML y JSON.
+  \item Aprender a utilizar la biblioteca SAX para el manejo de XML, en particular con Python.
+  \item Utilizar el sistema de control de versiones git en GitLab.
 \end{itemize}
 
 \section{Conocimientos previos necesarios}
@@ -62,9 +62,9 @@ Tiempo estimado (para un alumno medio): 10 horas
 \section{Ejercicios}
 
 \begin{enumerate}
-    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p3} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p3}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://guides.github.com/activities/forking/}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos.
+    \item Con el navegador, dirígete al repositorio \texttt{ptavi-p3} en la cuenta del profesor en GitLab\footnote{\url{https://gitlab.etsit.urjc.es/ptavi/ptavi-p3}} y realiza un \texttt{fork}\footnote{Tienes instrucciones de cómo realizar un \texttt{fork} en \url{https://docs.gitlab.com/ee/workflow/forking_workflow.html#creating-a-fork}.}, de manera que consigas tener una copia del repositorio en tu cuenta de GitLab. Clona en tu ordenador local el repositorio que acabas de crear a local para poder editar los archivos.
 
-  Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitHub (con \texttt{push}).
+  Trabaja a partir de ahora en la práctica, sincronizando (\texttt{commit}) los cambios que vayas realizando al hacer los próximos ejercicios. Recuerda que al final del todo tendrás que \emph{empujar} estos cambios al repositorio en GitLab (con \texttt{push}).
 
 %\finejercicio
 
@@ -154,12 +154,12 @@ Nótese que el programa sólo deberá imprimir por pantalla las salidas que se i
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 15 de octubre de 2018 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 14 de octubre de 2019 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
-  \item Tener un repositorio git en GitHub con:
+  \item Tener un repositorio git en GitLab con:
   \begin{itemize}
-    \item Los ficheros \texttt{.gitignore}, \texttt{LICENSE} y \texttt{README.md} que hay en (casi) todo repositorio GitHub.
+    \item Los ficheros \texttt{.gitignore}, \texttt{LICENSE} y \texttt{README.md} que hay en (casi) todo repositorio GitLab.
     \item 2 módulos Python (y únicamente estos dos ficheros):
     \begin{itemize}
       \item \texttt{smallsmilhandler.py}
@@ -185,7 +185,7 @@ Se puede comprobar la correcta entrega de la práctica utilizando el programa ch
 	$ python3 check-p3.py login
 \end{verbatim}
 
-donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
+donde \texttt{login} es tu nombre de usuario en los laboratorios docentes de la ETSIT. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
 
 Si has modificado tu código para corregir errores de PEP8, comprueba una última vez que la práctica sigue funcionando correctamente.
 
