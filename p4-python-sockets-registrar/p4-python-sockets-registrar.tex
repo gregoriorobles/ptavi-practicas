@@ -13,7 +13,7 @@
 
 \newcommand{\finpractica}{
   \begin{footnotesize}
-    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitLab]
   \end{footnotesize}
 }
 
@@ -31,7 +31,7 @@
 \vspace{-3.2cm}\hspace{-1.5cm}\includegraphics[height=2cm]{img/urjc.png}\hspace{3.9cm}\includegraphics[height=2.4cm]{img/gsyc.png}\vspace{2.05cm} \\
 Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0.1 – 30.10.2017}
+\date{Versión 9.0 – 18.10.2019}
 
 
 
@@ -40,7 +40,7 @@ Práctica 4 - Python, sockets UDP y Registrar SIP}
 
 
 
-Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitHub.
+Nota: Esta práctica se puede entregar para su evaluación como parte de la nota de prácticas. Para las instrucciones de entrega, mira al final del documento. Para la evaluación de esta entrega se valorará el correcto funcionamiento de lo que se pide, el seguimiento de la guía de estilo de Python y el correcto uso (y entrega) con git en GitLab.
 
 
 \section{Introducción}
@@ -69,10 +69,10 @@ Tiempo estimado (para un alumno medio): 10 horas
 
   \item Esta práctica requiere hacer capturas con \texttt{wireshark}. Para que el administrador de sistemas te incluya en el grupo con permisos para poder hacerlo en las máquinas del laboratorio, abre una \emph{shell} e introduce esta instrucción\footnote{Esta instrucción crea un archivo vacío en tu cuenta. El administrador de sistema buscará por este archivo para incluir a los usuarios en el grupo con permisos para capturar con \texttt{wireshark}.}:
     \begin{verbatim}
-	$ touch $HOME/.ptavi1819
+	$ touch $HOME/.ptavi1920
     \end{verbatim}
 
-  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p4}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (haciendo commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
+  \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta de la asignatura en GitLab\footnote{\url{http://gitlab.etsit.urjc.es/ptavi/ptavi-p4}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitLab. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (haciendo commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
 
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
@@ -169,7 +169,7 @@ Usage: client.py ip puerto register sip_address expires_value
         "luke@polismassa.com",
         {
             "address": "localhost",
-            "expires": "2013-10-23 10:37:12 +0000"
+            "expires": "2019-10-16 10:37:12 +0000"
         }
     ]
 }
@@ -200,7 +200,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \finejercicio
 
-  \item Realiza una captura con \texttt{wireshark} (interfaz \texttt{lo}) con las siguientes interacciones:
+  \item Realiza una captura con \texttt{wireshark} (interfaz \texttt{localhost}) con las siguientes interacciones:
   \begin{enumerate}
     \item El cliente \texttt{marty.mcfly@sk8ing.com} se registra. Tiempo de expiración: 5.
     \item El cliente \texttt{doc@delorean.com} se registra. Tiempo de expiración: 3600.
@@ -218,10 +218,10 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 29 de octubre de 2017 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del lunes 28 de octubre de 2019 a las 23:55. Para entonces, se debe: 
 
 \begin{enumerate}
-  \item Tener un repositorio git en GitHub con:
+  \item Tener un repositorio git en GitLab con:
   \begin{itemize}
     \item 2 módulos Python y la captura realizada con \texttt{wireshark} (y únicamente estos tres ficheros):
     \begin{itemize}
@@ -251,7 +251,7 @@ Se puede comprobar la correcta entrega de la práctica utilizando el programa \t
 	$ python3 check-p4.py login
 \end{verbatim}
 
-donde \texttt{login} es tu nombre de usuario en GitHub. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
+donde \texttt{login} es tu nombre de usuario en el laboratorio. El programa comprueba que se han entregado los ficheros que se solicitan (y sólo esos), y si se sigue la guía de estilo PEP8. 
 
 \vspace{1cm}
 
