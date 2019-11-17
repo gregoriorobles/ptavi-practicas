@@ -17,7 +17,7 @@
 
 \newcommand{\finpractica}{
   \begin{footnotesize}
-    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitHub]
+    [Al terminar la práctica, realiza un \texttt{push} para sincronizar tu repositorio GitLab]
   \end{footnotesize}
 }
 
@@ -54,7 +54,7 @@
 
 \title{Práctica 6 - Sesión SIP \emph{peer-to-peer}}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 8.0.1 – 14.11.2017}
+\date{Versión 10.0 -- 17.11.2019}
 
 %\author{Gregorio Robles y Jesús M. González Barahona \\
 %  grex@gsyc.urjc.es \\
@@ -81,7 +81,7 @@ Esta práctica tiene como objetivo implementar dos programas Python,
 de manera que se pueda realizar una sesión SIP como la que se
 muestra en la siguiente figura\footnote{En la figura las respuestas SIP están en 
 mayúsculas para mejorar su lectura; en tu implementación deberían seguir el 
-estándar con sólo la primera letra en mayúscula}:
+estándar, en el que sólo la primera letra es mayúscula}:
 
 \begin{center}
 \includegraphics{figs/sip-invite.png}
@@ -113,9 +113,9 @@ Tiempo estimado: 10 horas
 
 \section*{Creación de repositorio para la práctica}
 
-Con el navegador, dirígete al repositorio \texttt{ptavi-p6} en la cuenta del profesor en GitHub\footnote{\url{http://github.com/gregoriorobles/ptavi-p6}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitHub. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
+Con el navegador, dirígete al repositorio \texttt{ptavi-p6} en la cuenta del profesor en GitLab\footnote{\url{http://gitlab.etsit.urjc.es/ptavi/ptavi-p6}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitLab. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando los cambios que vayas realizando.
 
- Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitHub. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
+ Como tarde al final de la práctica, deberás realizar un \texttt{push} para subir tus cambios a tu repositorio en GitLab. En esta práctica, al contrario que con las demás, se recomienda hacer frecuentes \texttt{commits}, pero el \texttt{push} al final.
 
 
 \section*{Parte cliente}
@@ -198,7 +198,7 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
 
-Para simplificar la práctica, se enviará \bf{en un único mensaje} la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
+Para simplificar la práctica, se enviará {\bf en un único mensaje} (i.e., un único paquete) la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
 
 \subsection*{Envío RTP}
 
@@ -241,7 +241,7 @@ establecimiento de llamada, el envío RTP de audio y la finalización de
 la llamada. 
 
 La captura original se filtrará para que sólo incluya los paquetes
-SIP y los tres primeros y tres últimos paquetes RTP con audio.
+SIP y los tres primeros y tres últimos {\bf paquetes RTP con audio}\footnote{Nota que los heurísticos de Wireshark identifican los paquetes RTP de mp32rtp como paquetes UDP, por lo que no hace falta que te preocupes si ves que no los identifica como RTP.}.
 
 La captura filtrada resultante se guardará en el fichero \texttt{invite.libpcap}
 y se subirá al repositorio.
@@ -249,7 +249,7 @@ y se subirá al repositorio.
 
 \section*{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 27 de noviembre de 2017 a las 23:55. Para entonces, se debe tener un repositorio git en GitHub con: 
+La entrega de práctica se deberá hacer antes del lunes 25 de noviembre de 2019 a las 23:55. Para entonces, se debe tener un repositorio git en GitLab con: 
 
     \begin{itemize}
         \item 2 módulos Python y la captura realizada con \texttt{wireshark}:
@@ -271,12 +271,11 @@ Se han de tener en cuenta las siguientes consideraciones:
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p6.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
-  $ python3 check-p6.py login_github
+  $ python3 check-p6.py login_gitlab
 \end{verbatim}
 
 
-donde \texttt{login\_github} es tu nombre de usuario en GitHub.
-
+donde \texttt{login\_gitlab} es tu nombre de usuario en GitLab.
 
 
 %-------------------------------------------------------------------------
