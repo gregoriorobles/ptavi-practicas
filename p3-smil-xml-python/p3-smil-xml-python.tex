@@ -28,7 +28,7 @@
 
 \title{Práctica 3 - SMIL, XML y JSON en Python}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 10.0 – 3.10.2019}
+\date{Versión 11.0 – 26.10.2020}
 
 
 \maketitle
@@ -39,8 +39,6 @@ Nota: Esta práctica se puede entregar para su evaluación como parte de la nota
 \section{Introducción}
 
 Python ofrece una serie de bibliotecas para manipular ficheros en XML (como SMIL). En esta práctica, veremos cómo utilizar la biblioteca SAX.
-
-Además, el desarrollo contemporáneo se realiza utilizando herramientas de control de versiones como git. GitLab es un sitio web que ofrece repositorios git públicos, por lo que es ampliamente utilizado para todo tipo de desarrollos, en particular de programas de software libre.
 
 \section{Objetivos de la práctica}
 
@@ -102,7 +100,7 @@ El \emph{script} en Python guarda el contenido de los elementos en un atributo d
 
   Para realizar pruebas, se puede utilizar el fichero \texttt{karaoke.smil}. Nota que \texttt{file.smil} es un argumento que se pasa al programa, por lo que se podría pasar cualquier fichero, tenga o no extensión .smil.
 
-    \item Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación\footnote{Fíjate en los tabuladores y los saltos de línea. Puedes utilizar la función \texttt{format} de la biblioteca estándar de Python 3. Nota que, como se comentaba antes, los \emph{elementos} han de seguir el orden del SMIL, mientras que los \emph{atributos} dentro de los elementos no hace falta que guarden el orden.}:
+    \item Mostrar por pantalla un listado ordenado de las etiquetas y de los pares atributo-valor (para aquéllos que tengan un valor asignado), cada uno en una línea, separados por tabuladores y sin espacios antes y después del signo igual, tal y como se muestra a continuación\footnote{Fíjate en los tabuladores (\textbackslash{}t) y los saltos de línea (\textbackslash{}n). Puedes utilizar la función \texttt{format} de la biblioteca estándar de Python 3. Nota que, como se comentaba antes, los \emph{elementos} han de seguir el orden del SMIL, mientras que los \emph{atributos} dentro de los elementos no hace falta que guarden el orden.}:
 \begin{verbatim}
 Elemento1\tAtributo11="Valor11"\tAtributo12="Valor12"\t...\n
 Elemento2\tAtributo21="Valor21"\tAtributo22="Valor22"\t...\n
@@ -154,7 +152,7 @@ Nótese que el programa sólo deberá imprimir por pantalla las salidas que se i
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 14 de octubre de 2019 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del miércoles 4 de noviembre de 2020 a las 23:59. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitLab con:
@@ -180,7 +178,7 @@ Se ha de tener en cuenta las siguientes consideraciones:
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
 \end{itemize}
 
-Se puede comprobar la correcta entrega de la práctica utilizando el programa check-p3.py, incluido en el repositorio. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
+{\bf Se puede comprobar la correcta entrega de la práctica} utilizando el programa check-p3.py, incluido en el repositorio. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
 \begin{verbatim}
 	$ python3 check-p3.py login
 \end{verbatim}
