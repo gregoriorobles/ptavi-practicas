@@ -31,7 +31,7 @@
 \vspace{-3.2cm}\hspace{-1.5cm}\includegraphics[height=2cm]{img/urjc.png}\hspace{3.9cm}\includegraphics[height=2.4cm]{img/gsyc.png}\vspace{2.05cm} \\
 Práctica 4 - Python, sockets UDP y Registrar SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 9.0 – 18.10.2019}
+\date{Versión 10.0 – 9.11.2020}
 
 
 
@@ -69,7 +69,7 @@ Tiempo estimado (para un alumno medio): 10 horas
 
   \item Esta práctica requiere hacer capturas con \texttt{wireshark}. Para que el administrador de sistemas te incluya en el grupo con permisos para poder hacerlo en las máquinas del laboratorio, abre una \emph{shell} e introduce esta instrucción\footnote{Esta instrucción crea un archivo vacío en tu cuenta. El administrador de sistema buscará por este archivo para incluir a los usuarios en el grupo con permisos para capturar con \texttt{wireshark}.}:
     \begin{verbatim}
-	$ touch $HOME/.ptavi1920
+	$ touch $HOME/.ptavi2021
     \end{verbatim}
 
   \item Con el navegador, dirígete al repositorio \texttt{ptavi-p4} en la cuenta de la asignatura en GitLab\footnote{\url{http://gitlab.etsit.urjc.es/ptavi/ptavi-p4}} y realiza un \texttt{fork}, de manera que consigas tener una copia del repositorio en tu cuenta de GitLab. Clona el repositorio que acabas de crear a local para poder editar los archivos. Trabaja a partir de ahora en ese repositorio, sincronizando (haciendo commit) los cambios que vayas realizando según los ejercicios que se comentan a continuación.
@@ -77,7 +77,7 @@ Tiempo estimado (para un alumno medio): 10 horas
   \item Estudia el código de un sencillo cliente UDP en \texttt{client.py} que encontrarás en tu repositorio local. Fíjate en que:
   \begin{enumerate}
     \item Importa el módulo \texttt{socket}.
-    \item Inicializa varias \emph{variables} constantes (nota que al ser constantes, vienen en mayúsculas, como marca la convención correspondiene en PEP8).
+    \item Inicializa varias \emph{variables} constantes (nota que al ser constantes, vienen en mayúsculas, como marca la convención correspondiente en PEP8).
     \item Crea un \texttt{socket}.
     \item Se conecta con un servidor.
     \item Envía una {\bf secuencia de bytes} por el \texttt{socket} con el método \texttt{send()} y lee del \texttt{socket} con \texttt{recv()}.
@@ -208,7 +208,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
     \item El cliente \texttt{doc@delorean.com} se da de baja.
     \item El cliente \texttt{marty.mcfly@sk8ing.com} se da de baja.
   \end{enumerate}
-	Investiga tu captura. Comprueba, en particular, que puedes ver el intercambio de mensajes y que todo va en texto claro por la red. Guarda la captura como \texttt{register.libpcap} y añádela al repositorio.
+	Investiga tu captura. Comprueba, en particular, que puedes ver el intercambio de mensajes y que todo va en texto claro por la red. Guarda la captura en un fichero de nombre \texttt{register.libpcap} y súbelo al repositorio.
 
 \finejercicio
 
@@ -218,7 +218,7 @@ En este ejercicio, se ha de implementar funcionalidad para que el servidor \text
 
 \section{¿Qué deberías tener al finalizar la práctica?}
 
-La entrega de práctica se deberá hacer antes del lunes 28 de octubre de 2019 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del miércoles 18 de noviembre de 2020 a las 23:59. Para entonces, se debe: 
 
 \begin{enumerate}
   \item Tener un repositorio git en GitLab con:
