@@ -30,7 +30,7 @@
 
 \title{Práctica 5 - Sesión SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 9.1 - 1.11.2019}
+\date{Versión 10.0 - 23.11.2020}
 
 
 \maketitle
@@ -51,7 +51,7 @@ El protocolo de iniciación de sesión (SIP) es un protocolo que se limita solam
 \section{Objetivos de la práctica}
 
 \begin{enumerate}
-  \item Conocer el protocolo SIP y otros protocolos utilizados en una sesión con \texttt{Ekiga}.
+  \item Conocer el protocolo SIP y otros protocolos utilizados en una sesión con clientes SIP (como \texttt{Ekiga} o \texttt{linphone}).
   \item Profundizar en el uso de \texttt{Wireshark}: análisis, captura y filtrado.
 \end{enumerate}
 
@@ -78,7 +78,7 @@ Tiempo estimado (para un alumno medio): 8 horas
 
 \subsection*{Análisis de una sesión SIP}
 
-Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
+Se ha capturado una sesión SIP con el cliene SIP Ekiga (archivo \texttt{sip.cap.gz}), que se puede abrir con \texttt{Wireshark}\footnote{Desde la shell: \texttt{\$ wireshark sip.cap.gz} - recuerda que puedes utilizar el tabulador en la shell para autocompletar.}. Se pide rellenar las cuestiones que se plantean en este guión en el fichero \texttt{p5.txt} que encontrarás también en el repositorio. 
 
   \item Observa que las tramas capturadas corresponden a una sesión SIP con \texttt{Ekiga}, un cliente de VoIP para \texttt{GNOME}. Responde a las siguientes cuestiones:
   \begin{itemize}
@@ -203,16 +203,18 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
 \subsection*{Captura de una sesión SIP}
 
 
-  \item Dirígete a la web de IPTel\footnote{\url{https://serweb.iptel.org/user/reg/index.php}} con el navegador y créate una cuenta SIP.  Recibirás un correo electrónico de confirmación en la dirección que has indicado al registrarte.
+  \item Dirígete a la web de Linphone\footnote{\url{https://www.linphone.org/freesip/home}} con el navegador y créate una cuenta SIP.  Recibirás un correo electrónico de confirmación en la dirección que has indicado al registrarte (mira en tu carpeta de \emph{spam} si no es así).
   
-  \item Lanza Ekiga, y configúralo con los datos de la cuenta que te acabas de crear. Para ello, puedes ir al menú ``Editar'' y seleccionar ``Cuentas''. Tendrás que rellenar los campos de manera similar a lo que se puede ver en la imagen a continuación (recuerda poner tu nombre de usuario en lugar de ``grex''). Comprueba que estás conectado (En la barra al final de la ventana podrás ver ``Registrado''). Al terminar, cierra completamente Ekiga.
-  
-\begin{center}
-\includegraphics[width=0.5\textwidth]{figs/editarcuenta.png}
-\end{center}
+  \item Lanza \texttt{linphone}, y configúralo con los datos de la cuenta que te acabas de crear. Para ello, puedes ir al menú ``Ayuda'' y seleccionar ``Asistente de Configuración de Cuenta''. Al terminar, cierra completamente \texttt{linphone}.
+
+% Comprueba que estás conectado (En la barra al final de la ventana podrás ver ``Registrado'').
+%Tendrás que rellenar los campos de manera similar a lo que se puede ver en la imagen a continuación (recuerda poner tu nombre de usuario en lugar de ``grex'').
+%\begin{center}
+%\includegraphics[width=0.5\textwidth]{figs/editarcuenta.png}
+%\end{center}
   
 
-  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso\footnote{Puedes \emph{matar} ekiga desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
+  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar linphone para ver todo el proceso\footnote{Puedes \emph{matar} linphone desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
 
   \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}:
   \begin{itemize}
@@ -241,7 +243,7 @@ Se ha capturado una sesión SIP con Ekiga (archivo \texttt{sip.cap.gz}), que se 
 
 \section{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 11 de noviembre de 2019 a las 23:55. Para entonces, se debe: 
+La entrega de práctica se deberá hacer antes del miércoles 2 de diciembre de 2020 a las 23:59. Para entonces, se debe: 
 
 \begin{itemize}
   \item Tener un repositorio git en GitLab con:
