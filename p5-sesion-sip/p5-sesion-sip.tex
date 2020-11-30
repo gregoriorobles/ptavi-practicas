@@ -30,7 +30,7 @@
 
 \title{Práctica 5 - Sesión SIP}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 10.0 - 23.11.2020}
+\date{Versión 10.1 - 30.11.2020}
 
 
 \maketitle
@@ -205,16 +205,33 @@ Se ha capturado una sesión SIP con el cliene SIP Ekiga (archivo \texttt{sip.cap
 
   \item Dirígete a la web de Linphone\footnote{\url{https://www.linphone.org/freesip/home}} con el navegador y créate una cuenta SIP.  Recibirás un correo electrónico de confirmación en la dirección que has indicado al registrarte (mira en tu carpeta de \emph{spam} si no es así).
   
-  \item Lanza \texttt{linphone}, y configúralo con los datos de la cuenta que te acabas de crear. Para ello, puedes ir al menú ``Ayuda'' y seleccionar ``Asistente de Configuración de Cuenta''. Al terminar, cierra completamente \texttt{linphone}.
+  \item Lanza \texttt{linphone}, y configúralo con los datos de la cuenta que te acabas de crear. Para ello, puedes ir al menú ``Opciones'' y seleccionar ``Preferencias'' (o pulsando ``Ctrl+P'').
+
+  \item Verás una ventana similar a la que se muestra en la figura~\ref{fig:preferencias}. En la parte superior, verás tus credenciales del laboratorio. Necesitamos crear una \emph{cuenta proxy}, para lo que pulsaremos sobre el botón de ``+ Añadir'' en la parte derecha.
 
 % Comprueba que estás conectado (En la barra al final de la ventana podrás ver ``Registrado'').
 %Tendrás que rellenar los campos de manera similar a lo que se puede ver en la imagen a continuación (recuerda poner tu nombre de usuario en lugar de ``grex'').
-%\begin{center}
-%\includegraphics[width=0.5\textwidth]{figs/editarcuenta.png}
-%\end{center}
+\begin{center}
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/preferencias.png}
+\caption{Ventana de preferencias de Linphone.}
+\label{fig:preferencias}
+\end{figure}
+\end{center}
   
+   \item Rellena con tus datos en el menú de la ventana emergente, similar a la figura~\ref{fig:configuracion}. Si introduces tus datos de manera correcta, te pedirá la contraseña de tu cuenta SIP en linphone.org que hemos creado en un apartado anterior.
 
-  \item Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar linphone para ver todo el proceso\footnote{Puedes \emph{matar} linphone desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
+\begin{center}
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/configuracion.png}
+\caption{Configuración de cuenta SIP proxy en Linphone.}
+\label{fig:configuracion}
+\end{figure}
+\end{center}
+
+  \item Cierra completamente linphone. Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar linphone para ver todo el proceso\footnote{Puedes \emph{matar} linphone desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
 
   \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}:
   \begin{itemize}
