@@ -231,7 +231,7 @@ Se ha capturado una sesión SIP con el cliene SIP Ekiga (archivo \texttt{sip.cap
 \end{figure}
 \end{center}
 
-  \item Cierra completamente linphone. Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar linphone para ver todo el proceso\footnote{Puedes \emph{matar} linphone desde la línea de \texttt{shell} buscando el identificador del proceso con \$ ps aux y terminándolo con \$ kill -9 \emph{pid}, donde \emph{pid} es el identificador del proceso.}.
+  \item Cierra completamente linphone. Captura una sesión SIP de una conversación con el número SIP \texttt{sip:music@sip.iptel.org}. Recuerda que has de comenzar a capturar tramas antes de arrancar linphone para ver todo el proceso\footnote{Linphone corre en \emph{background} una vez abierto, por lo que simplemente ``cerrar'' su ventana no lo termina. Puedes \emph{matar} todos los procesos de linphone desde la línea de \texttt{shell}, puedes hacer \$ killall linphone.}.
 
   \item Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior\footnote{Si estás utilizando tu portátil en vez de una máquina del laboratorio, ten en cuenta que la captura puede ser diferente, porque con el portátil estarás conectado a la red \emph{wifi}, mientras que los ordenadores de los laboratorios lo están a una LAN.}:
   \begin{itemize}
