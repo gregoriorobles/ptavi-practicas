@@ -54,7 +54,7 @@
 
 \title{Práctica 6 - Sesión SIP \emph{peer-to-peer}}
 \author{Protocolos para la Transmisión de Audio y Vídeo en Internet}
-\date{Versión 10.0 -- 17.11.2019}
+\date{Versión 11.0 -- 2.12.2020}
 
 %\author{Gregorio Robles y Jesús M. González Barahona \\
 %  grex@gsyc.urjc.es \\
@@ -202,37 +202,17 @@ Para simplificar la práctica, se enviará {\bf en un único mensaje} (i.e., un 
 
 \subsection*{Envío RTP}
 
-El envío RTP se realizará mediante el programa \texttt{mp32rtp}\footnote{En el repositorio se encuentra un binario precompilado para entornos Debian GNU/Linux, entre los que se encuentran Ubuntu, el sistema operativo utilizado en los laboratorios docentes.}. La forma de ejecutar el programa \texttt{mp32rtp}, una vez se le haya dado permisos de ejecución con \emph{chmod}, es indicando la dirección IP y el puerto del receptor y redirigirle una canción en formato MP3:
+El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python \texttt{simplertp.py}}. {\bf Como en esta práctica no se hace uso de SDP para describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como destino del envío}. Un ejemplo del código Python de envío de paquetes RTP sería el siguiente:
 
 \begin{verbatim}
-  ./mp32rtp -i direccionIP -p puerto < cancion.mp3
+  import simplertp
+
+  RTP_header = simplertp.RtpHeader()
+  audio = simplertp.RtpPayloadMp3(audio_file)
+  simplertp.send_rtp_packet(RTP_header, audio, ip, port)
 \end{verbatim}
 
-De esta manera, para enviar un \emph{stream} a \emph{localhost} al puerto 23032, la línea de \texttt{shell} que se ha de ejecutar es:
-
-\begin{verbatim}
-  ./mp32rtp -i 127.0.0.1 -p 23032 < cancion.mp3
-\end{verbatim}
-
-Para ejecutar instrucciones de \texttt{shell} desde Python, se puede utilizar algunos métodos del módulo \texttt{os}, en particular \texttt{system()}. El parámetro que se le pasa a \texttt{system} 
-es lo que se ejecutaría en la \texttt{shell}.
-
-Un ejemplo del código sería el siguiente\footnote{Cuando se copia de un PDF
-a un editor de texto, puede que algunos caracteres, en especial las comillas
-no sean las ``correctas'' y nos dé un error.}:
-
-\begin{verbatim}
-  import os
-
-  # aEjecutar es un string con lo que se ha de ejecutar en la shell
-  aEjecutar = 'mp32rtp -i 127.0.0.1 -p 23032 < ' + fichero_audio 
-
-  print("Vamos a ejecutar", aEjecutar)
-  os.system(aEjecutar)
-\end{verbatim}
-
-Nótese que \texttt{fichero\_audio} es uno de los parámetros que se le pasa al servidor al ejecutarse. {\bf Como en esta práctica no se hace uso de SDP para describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como
-destino del envío}.
+Nótese que \texttt{audio\_file} es uno de los parámetros que se le pasa al servidor al ejecutarse desde la línea de shell como parámetro. También ha de notarse que si sale el aviso {\bf Warning: Connection refused. Probably there is nothing listening on the other end.} es porque no hay ningún servicio \emph{escuchando} al otro lado; esto no es un error.
 
 \section*{Captura}
 
@@ -241,7 +221,7 @@ establecimiento de llamada, el envío RTP de audio y la finalización de
 la llamada. 
 
 La captura original se filtrará para que sólo incluya los paquetes
-SIP y los tres primeros y tres últimos {\bf paquetes RTP con audio}\footnote{Nota que los heurísticos de Wireshark identifican los paquetes RTP de mp32rtp como paquetes UDP, por lo que no hace falta que te preocupes si ves que no los identifica como RTP.}.
+SIP y los tres primeros y tres últimos paquetes RTP con audio\footnote{Los heurísticos de Wireshark puede que no identifiquen los paquetes RTP como tales, sino como paquetes UDP. La solución es la siguiente: en el menú de ``Analyze'', selecciona ``Enabled protocols'' y ahí busca por RTP para activar ``rtp\_udp''.}.
 
 La captura filtrada resultante se guardará en el fichero \texttt{invite.libpcap}
 y se subirá al repositorio.
@@ -249,7 +229,7 @@ y se subirá al repositorio.
 
 \section*{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del lunes 25 de noviembre de 2019 a las 23:55. Para entonces, se debe tener un repositorio git en GitLab con: 
+La entrega de práctica se deberá hacer antes del miércoles 16 de diciembre de 2020 a las 23:59. Para entonces, se debe tener un repositorio git en GitLab con: 
 
     \begin{itemize}
         \item 2 módulos Python y la captura realizada con \texttt{wireshark}:
@@ -258,7 +238,6 @@ La entrega de práctica se deberá hacer antes del lunes 25 de noviembre de 2019
       \item \texttt{client.py}
       \item \texttt{invite.libpcap}
     \end{itemize}
-    \item 5 ficheros adicionales (además de \texttt{.git}): \texttt{README.md}, \texttt{LICENSE}, \texttt{check-p6.py}, \texttt{mp32rtp} y \texttt{.gitignore}.
 \end{itemize}
 
 Se han de tener en cuenta las siguientes consideraciones:
