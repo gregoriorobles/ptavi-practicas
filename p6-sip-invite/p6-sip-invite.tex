@@ -128,8 +128,8 @@ El cliente ha de ejecutarse de la siguiente manera:
 donde \emph{metodo} será un método SIP, \texttt{receptor@IPreceptor:puertoSIP}
 será el login, la IP y el puerto\footnote{En el mundo ``real'', el puerto sería 
 el puerto de SIP por defecto, el 5060, ya que sólo puede haber un UA activo
-por máquina - si arrancas otro Ekiga cuando hay uno ya lanzado, no podrás.
-Sin embargo, como tenemos dos UAs en la
+por máquina - si arrancas otro UA SIP cuando hay uno ya lanzado, no te dejará.
+Como en la práctica final tendremos dos UAs en la
 misma máquina, hemos de especificar un puerto para que no se ``pisen''.}
 al que se dirige el mensaje.
 
@@ -157,11 +157,11 @@ El cliente debería poder enviar las siguientes peticiones SIP:
     \item ACK sip:receptor@IP SIP/2.0
 
     Método de asentimiento. No se pasará al programa \texttt{client.py} como parámetro desde
-la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ring} y \texttt{200 OK} de la parte servidora después de haberle enviado un INVITE.
+la \texttt{shell}, ya que se enviará de manera automática una vez se hayan recibido las respuestas \texttt {100 Trying}, \texttt{180 Ring} y \texttt{200 OK} de la parte servidora.
 
     \item BYE sip:receptor@IP SIP/2.0
 
-    Mediante este método se indica que queremos terminar una conversación con el receptor con dirección \emph{receptor} en la máquina dada por la IP. Se deberá llamar, una vez haya acabado el \emph{streaming} de audio (vía RTP) desde el servidor.
+    Mediante este método se indica que queremos terminar una conversación con el receptor con dirección \emph{receptor} en la máquina dada por la IP. Se deberá enviar una vez haya acabado de recibir \emph{streaming} de audio (vía RTP) enviado desde el servidor.
 
   \end{itemize}
 
