@@ -200,19 +200,162 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
 
 Para simplificar la práctica, se enviará {\bf en un único mensaje} (i.e., un único paquete) la respuesta \texttt{SIP/2.0 100 Trying}, \texttt{SIP/2.0 180 Ringing} y \texttt{SIP/2.0 200 OK}.
 
-\subsection*{Envío RTP}
 
-El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python \texttt{simplertp.py}}. {\bf Como en esta práctica no se hace uso de SDP para describir la sesión, se utilizará la IP 127.0.0.1 y el puerto 23032 como destino del envío}. Un ejemplo del código Python de envío de paquetes RTP sería el siguiente:
+\section*{Ejercicios alternativos}
+
+Dependiendo de tu último número de tu DNI / NIE, deberás realizar los siguientes ejercicios que se describen en la Tabla~\ref{tab:ejercicios}.
+
+\begin{center}
+  \begin{table}
+    \center
+    \begin{tabular}{| c | c | c | c | c | c | c |} \hline
+    Último número DNI/NIE & Ej. A & Ej. B & Ej. C & Ej. D & Ej. E & Ej. F \\ \hline \hline
+    0 & X &   &   & X &   & X \\ \hline
+    1 & X &   &   & X & X &  \\ \hline
+    2 & X &   & X &   &   & X \\ \hline
+    3 & X &   & X &   & X &  \\ \hline
+    4 & X &   &   & X &   & X \\ \hline
+    5 &   & X & X &   &   & X \\ \hline
+    6 &   & X & X &   & X & \\ \hline
+    7 &   & X &   & X & X & \\ \hline
+    8 &   & X &   & X &   & X  \\ \hline
+    9 &   & X &   & X & X &  \\ \hline
+    \end{tabular}
+  \caption{Tabla de ejercicios alternativos a realizar según el último número de DNI/NIE del estudiante.}
+  \label{tab:ejercicios}
+  \end{table}
+\end{center}
+
+
+\subsection*{Ejercicio A}
+
+El cuerpo del INVITE debe incluir la descripción de sesión en formato SDP (\emph{Session Description Protocol}). Contará con los siguientes parámetros:
+
+\begin{itemize}
+  \item v (versión, por defecto la ``0''),
+  \item o (origen e identificador de sesión: la dirección del origen y su IP),
+  \item s (nombre de la sesión, que puede ser el que se desee),
+  \item t (tiempo que la sesión lleva activa, en nuestro caso, siempre 0), y
+  \item m (tipo de elemento multimedia y puerto de escucha y protocolo de transporte utilizados, en esta práctica ``audio'', el número de puerto pasado al programa principal como parámetro y ``RTP'').
+\end{itemize}
+
+Así, un ejemplo de descripción de sesión dentro de un INVITE podría ser:
+
+\begin{verbatim}
+INVITE sip:INVITE batman@193.147.73.20 SIP/2.0
+
+v=0
+o=batman@gotham.com 127.0.0.1
+s=misesion
+t=0
+m=audio 34543 RTP
+\end{verbatim}
+
+Nótese que en el ejemplo anterior 34543 es el puerto donde esperamos que el otro participante en la conversación nos envíe los paquetes RTP con audio. También se ha de tener en cuenta que entre las cabeceras (en este caso la línea de INVITE) y el cuerpo (la descripción de la sesión) ha de haber obligatoriamente una línea en blanco.
+
+\subsection*{Ejercicio B}
+
+El cuerpo de la respuesta 200 OK debe incluir la descripción de sesión en formato SDP (\emph{Session Description Protocol}). Contará con los siguientes parámetros:
+
+\begin{itemize}
+  \item v (versión, por defecto la ``0''),
+  \item o (origen e identificador de sesión: la dirección del origen y su IP),
+  \item s (nombre de la sesión, que puede ser el que se desee),
+  \item t (tiempo que la sesión lleva activa, en nuestro caso, siempre 0), y
+  \item m (tipo de elemento multimedia y puerto de escucha y protocolo de transporte utilizados, en esta práctica ``audio'', el número de puerto pasado al programa principal como parámetro y ``RTP'').
+\end{itemize}
+
+Así, un ejemplo de descripción de sesión dentro de un INVITE podría ser:
+
+\begin{verbatim}
+SIP/2.0 200 OK
+
+v=0
+o=robin@gotham.com 127.0.0.1
+s=misesion
+t=0
+m=audio 67876 RTP
+\end{verbatim}
+
+Se ha de tener en cuenta que entre las cabeceras (en este caso la línea de INVITE) y el cuerpo (la descripción de la sesión) ha de haber obligatoriamente una línea en blanco. Nótese que como el UA que inicia la conversación no envía paquetes RTP, la información en el SDP no se utilizará.
+
+
+\subsection*{Ejercicio C}
+
+El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python \texttt{simplertp.py}}. Un ejemplo del código Python de envío de paquetes RTP sería el siguiente:
 
 \begin{verbatim}
   import simplertp
 
   RTP_header = simplertp.RtpHeader()
+  RTP_header.set_header(pad_flag=0, ext_flag=0, cc=0, marker=0, ssrc=ALEAT)
   audio = simplertp.RtpPayloadMp3(audio_file)
   simplertp.send_rtp_packet(RTP_header, audio, ip, port)
 \end{verbatim}
 
-Nótese que \texttt{audio\_file} es uno de los parámetros que se le pasa al servidor al ejecutarse desde la línea de shell como parámetro. También ha de notarse que si sale el aviso {\bf Warning: Connection refused. Probably there is nothing listening on the other end.} es porque no hay ningún servicio \emph{escuchando} al otro lado; esto no es un error.
+Donde ALEAT será un número entero aleatorio obtenido a partir de la biblioteca \texttt{random} de Python3\footnote{https://docs.python.org/3.8/library/random.html}.
+
+La IP y puerto a la que se ha de enviar el RTP vendrá dada en el SDP (Ejercicio A). En el caso de que el estudiante no tenga que realizar ese ejercicio, utilizará la IP 127.0.0.1 y el puerto 23032 como destino del envío.
+
+Nótese que \texttt{audio\_file} es uno de los parámetros que se le pasa al servidor al ejecutarse desde la línea de shell como parámetro. También ha de notarse que si sale el aviso {\bf Warning: Connection refused. Probably there is nothing listening on the other end.} es porque no hay ningún servicio \emph{escuchando} al otro lado; no es un error, indica que los paquetes han llegado al destino final, pero que no han sido gestionados.
+
+\subsection*{Ejercicio D}
+
+El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python \texttt{simplertp.py}}. Un ejemplo del código Python de envío de paquetes RTP sería el siguiente:
+
+\begin{verbatim}
+  import simplertp
+
+  RTP_header = simplertp.RtpHeader()
+  RTP_header.set_header(version=2, marker=BIT, payload_type=14, ssrc=200002)
+  audio = simplertp.RtpPayloadMp3(audio_file)
+  simplertp.send_rtp_packet(RTP_header, audio, ip, port)
+\end{verbatim}
+
+Donde BIT será un bit aleatorio obtenido a partir de la biblioteca \texttt{secrets} de Python3\footnote{https://docs.python.org/3/library/secrets.html}.
+
+La IP y puerto a la que se ha de enviar el RTP vendrá dada en el SDP (Ejercicio A). En el caso de que el estudiante no tenga que realizar ese ejercicio, utilizará la IP 127.0.0.1 y el puerto 23032 como destino del envío.
+
+Nótese que \texttt{audio\_file} es uno de los parámetros que se le pasa al servidor al ejecutarse desde la línea de shell como parámetro. También ha de notarse que si sale el aviso {\bf Warning: Connection refused. Probably there is nothing listening on the other end.} es porque no hay ningún servicio \emph{escuchando} al otro lado; no es un error, indica que los paquetes han llegado al destino final, pero que no han sido gestionados.
+
+
+\subsection*{Ejercicio E}
+
+Se ha de añadir la cabecera \texttt{Content-Type: application/sdp} a {\bf todos} los paquetes SIP que contengan SDP.
+
+Así, un ejemplo de descripción de sesión dentro de un INVITE podría ser:
+
+\begin{verbatim}
+INVITE sip:INVITE batman@193.147.73.20 SIP/2.0
+Content-Type: application/sdp
+
+v=0
+o=batman@gotham.com 127.0.0.1
+s=misesion
+t=0
+m=audio 34543 RTP
+\end{verbatim}
+
+
+\subsection*{Ejercicio F}
+
+Se ha de añadir la cabecera \texttt{Content-Length}, cuyo valor será la longitud (en bytes) del cuerpo del paquete, a {\bf todos} los paquetes SIP que contengan SDP.
+
+Así, un ejemplo de descripción de sesión dentro de un INVITE podría ser:
+
+\begin{verbatim}
+INVITE sip:INVITE batman@193.147.73.20 SIP/2.0
+Content-Length: 66
+
+v=0
+o=batman@gotham.com 127.0.0.1
+s=misesion
+t=0
+m=audio 34543 RTP
+\end{verbatim}
+
+
+
 
 \section*{Captura}
 
@@ -229,7 +372,7 @@ y se subirá al repositorio.
 
 \section*{Fecha y modo de entrega}
 
-La entrega de práctica se deberá hacer antes del miércoles 16 de diciembre de 2020 a las 23:59. Para entonces, se debe tener un repositorio git en GitLab con: 
+La entrega de práctica se deberá hacer antes del miércoles 16 de diciembre de 2020 a las 23:59. Para entonces, se debe tener un repositorio \texttt{git} en GitLab con: 
 
     \begin{itemize}
         \item 2 módulos Python y la captura realizada con \texttt{wireshark}:
