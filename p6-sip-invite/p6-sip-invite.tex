@@ -251,7 +251,7 @@ t=0
 m=audio 34543 RTP
 \end{verbatim}
 
-El servidor guardará la dirección de origen y la dirección IP en un diccionario\footnote{Este diccionario ha de ser un atributo de clase no de la instancia, véase \url{http://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide}} para utilizarlo posteriormente en el envío de RTP.
+El servidor guardará la dirección de origen y la dirección IP recibida por SDP en un diccionario\footnote{Este diccionario ha de ser un atributo de clase no de la instancia, véase \url{http://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide}} para utilizarlo posteriormente en el envío de RTP.
 
 Nótese que en el ejemplo anterior 34543 es el puerto donde esperamos que el otro participante en la conversación nos envíe los paquetes RTP con audio. También se ha de tener en cuenta que entre las cabeceras (en este caso la línea de INVITE) y el cuerpo (la descripción de la sesión) ha de haber obligatoriamente una línea en blanco.
 
