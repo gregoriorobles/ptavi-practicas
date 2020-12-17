@@ -191,8 +191,9 @@ En caso de no haber error al arrancar, el servidor imprimirá por pantalla:
 \subsection*{Códigos de respuesta}
 
    \begin{itemize}
-     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE.
-     \item \texttt{SIP/2.0 180 Ringing}: al recibir un INVITE.
+     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE. Puede enviarse en un mismo paquete con las respuestas 180 y 200; 
+ en ese caso, no hace falta dejar una línea en blanco después del ``100 Trying''.
+     \item \texttt{SIP/2.0 180 Ringing}: al recibir un INVITE. Puede enviarse en un mismo paquete con las respuestas 100 y 200; en ese caso, no hace falta dejar una línea en blanco después del ``180 Ringing''.
      \item \texttt{SIP/2.0 200 OK}: en caso de éxito.
      \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
@@ -391,6 +392,7 @@ Se han de tener en cuenta las siguientes consideraciones:
   \item Se valorará que la captura esté bien filtrada y sólo contenga los paquetes que se indican en el guión.
   \item Se valorará que el código entregado siga la guía de estilo de Python (véanse PEP8 y PEP257).
   \item Se valorará que los programas se invoquen correctamente y que muestren los errores correctamente, según se indica en el enunciado de la práctica.
+  \item Se proporciona un script de comprobación de entrega correcta, \emph{check-p6.py}. Es responsabilidad del alumno comprobar la correcta entrega mediante este script.
 \end{itemize}
 
 Se puede comprobar la correcta entrega de la práctica utilizando el programa \texttt{check-p6.py}. Este programa se ejecuta desde la línea de comandos de la siguiente manera:
