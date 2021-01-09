@@ -55,7 +55,7 @@ Parte Obligatoria \\
 
 \section{Introducción}
 
-Esta práctica tiene como objetivo implementar los programas en Python 
+Esta práctica tiene como objetivo implementar los programas en Python3 
 necesarios para realizar una sesión SIP de intercambio de audio vía RTP
 como la que se muestra en la siguiente figura\footnote{Las respuestas SIP
 aparecen en mayúsculas en la figura, por claridad. En la práctica, siguiendo
@@ -106,7 +106,7 @@ La entrega de la parte obligatoria de la práctica final se deberá hacer antes 
 Otras consideraciones:
 \begin{itemize}
   \item Se tendrá en cuenta para la nota de la práctica la adecuación de los
-programas Python a las guías de estilo de Python PEP8 y PEP257.
+programas Python3 a las guías de estilo de Python PEP8 y PEP257.
   \item Se valorará el uso de git (frecuencia de commits y adecuación de los comentarios de cada commit).
   \item Se valorará que la práctica siga las convenciones indicadas en este documento, en particular que el intercambio de mensajes, los parámetros de los programas y los mensajes en el fichero de \emph{log} sean los que especifican. En la \texttt{shell} pueden incluirse las trazas que el alumno desee y en el formato que le parezca más conveniente.
   \item Se valorará que las capturas estén bien filtradas y sólo contengan los paquetes que se indican en el guión.
@@ -118,7 +118,7 @@ programas Python a las guías de estilo de Python PEP8 y PEP257.
 
 \section{User Agent}
 
-Cada \emph{User Agent} deberá constar de una parte cliente y otra servidora, que podrán estar ubicados en programas Python diferentes (y, por tanto, requerirán de dos terminales para ser ejecutados).
+Cada \emph{User Agent} deberá constar de una parte cliente y otra servidora, que podrán estar ubicados en programas Python3 diferentes (y, por tanto, requerirán de dos terminales para ser ejecutados).
 
 \subsection{Configuración}
 
@@ -161,7 +161,7 @@ Los ficheros de log deben tener la estructura dada en los ejercicios alternativo
 
 El cliente ha de ejecutarse de la siguiente manera:
 \begin{verbatim}
-  $ python uaclient.py config metodo opcion
+  $ python3 uaclient.py config metodo opcion
 \end{verbatim}
 
 donde \emph{config} será un fichero XML con la configuración,
@@ -170,15 +170,15 @@ opcional dependiendo del método utilizado.
 
 Por ejemplo:
 \begin{verbatim}
-  $ python uaclient.py ua1.xml REGISTER 3600
-  $ python uaclient.py ua1.xml INVITE penny@girlnextdoor.com
-  $ python uaclient.py ua1.xml BYE penny@girlnextdoor.com
-  $ python uaclient.py ua1.xml REGISTER 0
+  $ python3 uaclient.py ua1.xml REGISTER 3600
+  $ python3 uaclient.py ua1.xml INVITE penny@girlnextdoor.com
+  $ python3 uaclient.py ua1.xml BYE penny@girlnextdoor.com
+  $ python3 uaclient.py ua1.xml REGISTER 0
 \end{verbatim}
 
 En caso de no introducir el número de parámetros correctos o de error en los mismos, el programa debería imprimir:
 \begin{verbatim}
-Usage: python uaclient.py config method option
+Usage: python3 uaclient.py config method option
 \end{verbatim}
 
 En caso de que se intentara establecer una conexión con un puerto no abierto
@@ -251,19 +251,19 @@ Nótese que en el ejemplo anterior 34543 es el puerto donde esperamos que el otr
 
 El servidor ha de ejecutarse de la siguiente manera:
 \begin{verbatim}
-  $ python uaserver.py config
+  $ python3 uaserver.py config
 \end{verbatim}
 
 donde \emph{config} será un fichero XML con los parámetros de configuración.
 
 Por ejemplo:
 \begin{verbatim}
-  $ python uaserver.py ua1.xml
+  $ python3 uaserver.py ua1.xml
 \end{verbatim}
 
 En caso de no ejecutarse correctamente, el programa debería imprimir:
 \begin{verbatim}
-Usage: python uaserver.py config
+Usage: python3 uaserver.py config
 \end{verbatim}
 
 En caso contrario, el servidor imprimirá por pantalla:
@@ -284,10 +284,11 @@ El servidor guardará la dirección de origen y la dirección IP recibida por SD
 Los códigos de respuesta que el UA maneja han de ser, al menos, los siguientes:
 
    \begin{itemize}
-     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE. Puede enviarse en un mismo paquete con las respuestas 180 y 200; en ese caso, no hace falta dejar una línea en blanco después del ``100 Trying''.
+     \item \texttt{SIP/2.0 100 Trying}: al recibir un INVITE. Puede enviarse en un mismo paquete con las respuestas 180 y 200; 
+ en ese caso, no hace falta dejar una línea en blanco después del ``100 Trying''.
      \item \texttt{SIP/2.0 180 Ringing}: al recibir un INVITE. Puede enviarse en un mismo paquete con las respuestas 100 y 200; en ese caso, no hace falta dejar una línea en blanco después del ``180 Ringing''.
      \item \texttt{SIP/2.0 200 OK}: Deberá incluir SDP en el cuerpo (con su correspondiente cabecera de Content-Type y Content-Length) si es en respuesta a un INVITE, pero no cuando sea a un BYE.
-     \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada.
+     \item \texttt{SIP/2.0 400 Bad Request}: si la petición está mal formada. Por ejemplo, si en la cabecera no vienen el número de palabras, separadas por espacios, que deberían venir.
      \item \texttt{SIP/2.0 404 User Not Found}: cuando el usuario no se ha encontrado en el servidor de registro.
      \item \texttt{SIP/2.0 405 Method Not Allowed}: si se manda en la petición cualquier otro método diferente de INVITE, BYE o ACK.
    \end{itemize}
@@ -296,7 +297,7 @@ Los códigos de respuesta que el UA maneja han de ser, al menos, los siguientes:
 \subsubsection{Envío RTP}
 
 
-El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python \texttt{simplertp.py}}. Un ejemplo del código Python de envío de paquetes RTP sería el siguiente:
+El envío RTP se realizará mediante la biblioteca \texttt{simplertp}\footnote{En el repositorio se encuentra el módulo Python3 \texttt{simplertp.py}}. Un ejemplo del código Python3 de envío de paquetes RTP sería el siguiente:
 
 \begin{verbatim}
 import simplertp
@@ -317,19 +318,19 @@ Debe implementarse un servidor con capacidad de registro de usuarios y que pueda
 
 El servidor ha de ejecutarse de la siguiente manera:
 \begin{verbatim}
-  $ python proxy_registrar.py config
+  $ python3 proxy_registrar.py config
 \end{verbatim}
 
 donde \emph{config} será un fichero XML con la configuración.
 
 Por ejemplo:
 \begin{verbatim}
-  $ python proxy_registrar.py pr.xml
+  $ python3 proxy_registrar.py pr.xml
 \end{verbatim}
 
 En caso de no ejecutarse correctamente, el programa debería imprimir:
 \begin{verbatim}
-Usage: python proxy_registrar.py config
+Usage: python3 proxy_registrar.py config
 \end{verbatim}
 
 En caso contrario, el servidor imprimirá por pantalla algo parecido a la siguiente línea:
@@ -615,7 +616,7 @@ La segunda captura consiste en el registro y la baja de un \emph{User Agent}, qu
 \begin{enumerate}
   \item Registro de UA1
   \item Intento de establecimiento de llamada de UA1 (llamando a UA2, que no está registrado)
-  \item La captura resultante, convenientemente filtrada, se guardará en el fichero error.libpcap
+  \item La captura resultante, convenientemente filtrada (esto es, sólo deberán aparecer los paquetes SIP), se guardará en el fichero error.libpcap
 y se subirá al repositorio.
 \end{enumerate}
 
